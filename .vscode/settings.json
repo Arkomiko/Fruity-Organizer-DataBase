@@ -24,7 +24,7 @@
   },
   "search.exclude": {
     "dist": true,
-    "docs/*.gif": true,
+    "GiDo/*.gif": true,
     "src/assets_data.py": true
   }
 }

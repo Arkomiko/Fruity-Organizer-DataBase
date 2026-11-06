@@ -1,6 +1,6 @@
 """Записывает демо для документации из настоящей программы на выдуманной базе плагинов.
 
-Запуск: make_demo.py <en|ru> (нужен Pillow; пишет docs/demo-<язык>.gif и docs/screenshot-*-<язык>.png)
+Запуск: make_demo.py <en|ru> (нужен Pillow; пишет GiDo/demo-<язык>.gif и GiDo/screenshot-*-<язык>.png)
 """
 import ctypes
 import os
@@ -145,7 +145,7 @@ def main() -> None:
 
     settle(500)
     first = capture(root)
-    first.save(os.path.join(ROOT, "docs", f"screenshot-options-{LANG}.png"), optimize=True)
+    first.save(os.path.join(ROOT, "GiDo", f"screenshot-options-{LANG}.png"), optimize=True)
     hold(first, 1600)
 
     # Окно предпросмотра поверх главного, затем отмена.
@@ -224,7 +224,7 @@ def main() -> None:
     grid.c.event_generate("<ButtonRelease-1>", x=200, y=y)
     app.show_page("plugin")
     plugin_page = capture(root)
-    plugin_page.save(os.path.join(ROOT, "docs", f"screenshot-plugin-{LANG}.png"), optimize=True)
+    plugin_page.save(os.path.join(ROOT, "GiDo", f"screenshot-plugin-{LANG}.png"), optimize=True)
     fade(organized, plugin_page, 3)
     hold(plugin_page, 1800)
     app.show_page("options")
@@ -237,7 +237,7 @@ def main() -> None:
         app.apply_theme()
         themed = capture(root)
         if name == "mint":
-            themed.save(os.path.join(ROOT, "docs", f"screenshot-theme-{LANG}.png"), optimize=True)
+            themed.save(os.path.join(ROOT, "GiDo", f"screenshot-theme-{LANG}.png"), optimize=True)
         fade(previous, themed)
         hold(themed, 1300)
         previous = themed
@@ -246,7 +246,7 @@ def main() -> None:
     fade(previous, capture(root))
 
     app.close()
-    write_gif(frames, os.path.join(ROOT, "docs", f"demo-{LANG}.gif"))
+    write_gif(frames, os.path.join(ROOT, "GiDo", f"demo-{LANG}.gif"))
     shutil.rmtree(work, ignore_errors=True)
 
 

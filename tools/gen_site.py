@@ -1,4 +1,4 @@
-"""Создаёт сайт для GitHub Pages в папке docs: главную и вики на всех языках проекта.
+"""Создаёт сайт для GitHub Pages в папке GiDo: главную и вики на всех языках проекта.
 
 Тексты берутся из docs_text.py и language/*.json, поэтому отдельно переводить сайт не нужно.
 Запуск: python tools/gen_site.py
@@ -214,10 +214,9 @@ class Site:
             write(os.path.join(folder, "wiki", slug + ".html"), self.wiki_page("../../", slug, key))
 
 
-def main(out: str = os.path.join(ROOT, "docs")) -> int:
+def main(out: str = os.path.join(ROOT, "GiDo")) -> int:
     """Создаёт сайт и возвращает число языков."""
     write(os.path.join(out, "site.css"), STYLE)
-    write(os.path.join(out, ".nojekyll"), "")  # GitHub Pages отдаёт файлы как есть
     for code in LANGUAGES:
         Site(code, out).build()
     write(os.path.join(out, "index.html"), Site("EN-en", out).home(""))

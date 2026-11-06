@@ -211,9 +211,9 @@ def main():
     os.makedirs(os.path.join(ROOT, "assets"), exist_ok=True)
     icon = app_icon()
     icon.save(os.path.join(ROOT, "assets", "app.ico"), sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
-    os.makedirs(os.path.join(ROOT, "docs"), exist_ok=True)
+    os.makedirs(os.path.join(ROOT, "GiDo"), exist_ok=True)
     for name, with_text in (("logo.svg", True), ("logo-mark.svg", False)):
-        with open(os.path.join(ROOT, "docs", name), "w", encoding="ascii", newline="\n") as f:
+        with open(os.path.join(ROOT, "GiDo", name), "w", encoding="ascii", newline="\n") as f:
             f.write(logo_svg(with_text))
     print("assets written:", os.path.getsize(target), "bytes")
 

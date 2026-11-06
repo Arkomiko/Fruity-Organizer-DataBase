@@ -199,7 +199,7 @@ def switcher(current, to_root):
     for code, lang in LANGUAGES.items():
         suffix = "on" if code == current else "off"
         target = f"{to_root}README.md" if code == "EN-en" else f"{to_root}GiDo/{code}/README.md"
-        links.append(f'<a href="{target}"><img src="{to_root}docs/lang/{code}-{suffix}.svg" height="26" alt="{escape(lang["name"])}"></a>')
+        links.append(f'<a href="{target}"><img src="{to_root}GiDo/lang/{code}-{suffix}.svg" height="26" alt="{escape(lang["name"])}"></a>')
     return "\n".join(links)
 
 
@@ -228,7 +228,7 @@ def readme(code, lang, to_root, art):
 
 {lang["intro"]}
 
-<p align="center"><img src="{to_root}docs/{demo}" alt="FODB" width="100%"></p>
+<p align="center"><img src="{to_root}GiDo/{demo}" alt="FODB" width="100%"></p>
 
 ## {lang["features"]}
 
@@ -321,7 +321,7 @@ def main():
         write(os.path.join(folder, "themes.svg"), themes_svg(lang))
         write(os.path.join(folder, "README.md"), readme(code, lang, "../../", ""))
         for suffix, active in (("on", True), ("off", False)):
-            write(os.path.join(ROOT, "docs", "lang", f"{code}-{suffix}.svg"), pill_svg(lang, active))
+            write(os.path.join(ROOT, "GiDo", "lang", f"{code}-{suffix}.svg"), pill_svg(lang, active))
     write(os.path.join(ROOT, "README.md"), readme("EN-en", LANGUAGES["EN-en"], "", "GiDo/EN-en/"))
     print("languages:", len(LANGUAGES))
 
