@@ -104,7 +104,7 @@ FODB は現在のテーマを読み取り、FL Studio で変更すると配色�
 Windows と Python 3.13 が必要です。本体は標準ライブラリのみを使用します。
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## クレジット

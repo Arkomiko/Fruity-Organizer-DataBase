@@ -1,7 +1,7 @@
 # Рецепт PyInstaller для портативного exe из одного файла. Запускается через build.ps1.
 import os
 
-ROOT = os.path.abspath(SPECPATH)
+ROOT = os.path.dirname(os.path.abspath(SPECPATH))  # рецепт лежит в папке packaging
 
 # Модули Python, которые программа не использует: без них файл меньше, а запуск быстрее.
 EXCLUDES = [

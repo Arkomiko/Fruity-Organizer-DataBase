@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import base64
 import colorsys
+import functools
+import math
 import os
 import re
 import struct
@@ -228,10 +230,16 @@ def rgba_png(width: int, height: int, pixels: bytes) -> str:
     return base64.b64encode(png).decode("ascii")
 
 
-def tint_mask(side: int, mask: bytes, color: str) -> str:
+def tint_mask(side: int, mask: bytes, color: str, under: str | None = None) -> str:
     """Заливает сохранённую маску прозрачности одним цветом."""
     r, g, b = rgb(color)
     pixels = bytearray(side * side * 4)
+    if under:
+        # Края заранее смешаны с фоном. Полупрозрачные картинки Tk рисует очень медленно.
+        for channel, (ink, back) in enumerate(zip((r, g, b), rgb(under))):
+            pixels[channel::4] = mask.translate(bytes(round(back + (ink - back) * alpha / 255) for alpha in range(256)))
+        pixels[3::4] = mask.translate(bytes([0] + [255] * 255))
+        return rgba_png(side, side, bytes(pixels))
     pixels[0::4] = bytes([r]) * (side * side)
     pixels[1::4] = bytes([g]) * (side * side)
     pixels[2::4] = bytes([b]) * (side * side)
@@ -260,7 +268,7 @@ def _lerp3(a, b, t):
     return tuple(a[i] + (b[i] - a[i]) * t for i in range(3))
 
 
-def led_image(side: int, color: str, rim: str, lit: bool = True) -> str:
+def led_image(side: int, color: str, rim: str, lit: bool = True, under: str | None = None) -> str:
     """Рисует индикатор слоями: светлый ободок, тёмное кольцо, диск с бликом и свечением."""
     rim_rgb = rgb(rim)
     if lit:
@@ -302,22 +310,56 @@ def led_image(side: int, color: str, rim: str, lit: bool = True) -> str:
             pixels[offset + 1] = round(tone[1])
             pixels[offset + 2] = round(tone[2])
             pixels[offset + 3] = round(255 * alpha)
+            if under and alpha < 1.0:  # край смешан с фоном заранее: непрозрачные картинки рисуются быстрее
+                back = rgb(under)
+                for channel in range(3):
+                    pixels[offset + channel] = round(back[channel] + (pixels[offset + channel] - back[channel]) * alpha)
+                pixels[offset + 3] = 255
     return rgba_png(side, side, bytes(pixels))
 
 
-def button_image(width: int, height: int, top: str, bottom: str, border: str) -> str:
-    """Лицо кнопки: контур 1px со смягчёнными углами, лёгкая фаска и вертикальный градиент."""
+@functools.lru_cache(maxsize=8)
+def _corner_cover(radius: int) -> dict[tuple[int, int], tuple[float, float]]:
+    """Сколько каждого пикселя угла занимает кнопка целиком и её внутренность без контура."""
+    samples = 4
+    cover = {}
+    for y in range(radius):
+        for x in range(radius):
+            outer = inner = 0
+            for sy in range(samples):
+                for sx in range(samples):
+                    distance = math.hypot(radius - x - (sx + 0.5) / samples, radius - y - (sy + 0.5) / samples)
+                    outer += distance <= radius
+                    inner += distance <= radius - 1
+            cover[x, y] = outer / samples ** 2, inner / samples ** 2
+    return cover
+
+
+def _corner_pixel(cover: tuple[float, float], face: tuple, edge: tuple, under: tuple | None) -> bytes:
+    """Один пиксель скруглённого угла: заливка, контур и фон в нужных долях."""
+    outer, inner = cover
+    ring = outer - inner
+    if under:  # края смешаны с фоном заранее: непрозрачные картинки рисуются быстрее
+        return bytes((*(round(f * inner + e * ring + u * (1 - outer)) for f, e, u in zip(face, edge, under)), 255))
+    if not outer:
+        return bytes((*edge, 0))
+    return bytes((*(round((f * inner + e * ring) / outer) for f, e in zip(face, edge)), round(255 * outer)))
+
+
+def button_image(width: int, height: int, top: str, bottom: str, border: str, under: str | None = None, radius: int = 2) -> str:
+    """Лицо кнопки: контур 1px, скруглённые углы, лёгкая фаска и вертикальный градиент."""
     edge = rgb(border)
+    back = rgb(under) if under else None
+    cover = _corner_cover(radius)
     rows = []
     for y in range(height):
-        t = y / max(1, height - 1)
-        body = rgb(mix(top, bottom, t))
-        side = rgb(mix(mix(top, bottom, t), "#FFFFFF", 0.05))
-        if y == 0 or y == height - 1:
-            row = bytes((*edge, 70)) + bytes((*edge, 225)) + bytes((*edge, 255)) * (width - 4) + bytes((*edge, 225)) + bytes((*edge, 70))
-        elif y == 1 or y == height - 2:
-            light = rgb(mix(mix(top, bottom, t), "#FFFFFF", 0.055 if y == 1 else 0.03))
-            row = bytes((*edge, 225)) + bytes((*light, 255)) * (width - 2) + bytes((*edge, 225))
+        color = mix(top, bottom, y / max(1, height - 1))
+        body, side = rgb(color), rgb(mix(color, "#FFFFFF", 0.05))
+        fill = edge if y in (0, height - 1) else rgb(mix(color, "#FFFFFF", 0.055)) if y == 1 else rgb(mix(color, "#FFFFFF", 0.03)) if y == height - 2 else body
+        from_edge = min(y, height - 1 - y)
+        if from_edge < radius:
+            corner = [_corner_pixel(cover[x, from_edge], fill, edge, back) for x in range(radius)]
+            row = b"".join(corner) + bytes((*fill, 255)) * (width - 2 * radius) + b"".join(reversed(corner))
         else:
             row = bytes((*edge, 255)) + bytes((*side, 255)) + bytes((*body, 255)) * (width - 4) + bytes((*side, 255)) + bytes((*edge, 255))
         rows.append(row)

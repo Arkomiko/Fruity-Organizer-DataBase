@@ -104,7 +104,7 @@ FODB อ่านธีมที่ใช้งานอยู่และอั
 ต้องใช้ Windows และ Python 3.13 ตัวโปรแกรมใช้เฉพาะไลบรารีมาตรฐาน
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## เครดิต

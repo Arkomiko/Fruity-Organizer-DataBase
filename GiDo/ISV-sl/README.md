@@ -104,7 +104,7 @@ Dodajte pravila na karte «Nastavjenja» ili v FODB.json, da byste regularnymi i
 Trěbuje Windows i Python 3.13. Sama programa koristi samo standardnu biblioteku.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Blagodarnosti

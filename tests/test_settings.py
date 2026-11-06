@@ -128,6 +128,7 @@ class OtherTests(unittest.TestCase):
 
     def test_version_comparison(self):
         self.assertGreater(core.version_tuple("v1.1.0.0612"), core.version_tuple("1.1.0.0611"))
+        self.assertGreater(core.version_tuple("v1.1.0.0611-a2"), core.version_tuple("v1.1.0.0611"))
 
     def test_custom_palette_uses_the_picked_panel(self):
         palette = theme.custom_palette({"PANEL": "#334455"})

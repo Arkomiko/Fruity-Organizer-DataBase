@@ -12,6 +12,7 @@ import base64
 import ctypes
 import os
 import dataclasses
+import math
 import queue
 import sys
 import threading
@@ -34,9 +35,13 @@ from i18n import plural, tr
 from theme import mix as lerp
 
 APP_TITLE = "Fruity Organizer DataBase"
-VERSION = "1.1.0.0611"
+VERSION = "1.1.0.0611-a2"
 PROJECT_REPO = "Arkomiko/Fruity-Organizer-DataBase"
 PROJECT_URL = "https://github.com/" + PROJECT_REPO
+SITE_URL = "https://arkomiko.github.io/Fruity-Organizer-DataBase/"
+# Цвета статуса по умолчанию. Настройки могут их заменить.
+STANDARD_STATUS_OK, STANDARD_STATUS_ERROR = "#5FC46E", "#E8554E"
+STATUS_OK, STATUS_ERROR, STATUS_ICONS = STANDARD_STATUS_OK, STANDARD_STATUS_ERROR, False
 
 # Цвета интерфейса: заменяются все сразу при смене темы.
 globals().update(fltheme.DEFAULT_PALETTE)
@@ -46,7 +51,7 @@ globals().update(fltheme.DEFAULT_PALETTE)
 def columns() -> tuple:
     """Колонки списка: ключ, заголовок, ширина."""
     return (
-        ("fav", "F", 24), ("name", tr("Название"), 150), ("status", tr("Статус"), 52), ("format", tr("Формат"), 72),
+        ("fav", "F", 24), ("name", tr("Название"), 150), ("status", tr("Статус"), 72), ("format", tr("Формат"), 72),
         ("bits", tr("Бит"), 36), ("type", tr("Тип"), 60), ("purpose", tr("Назначение"), 118), ("vendor", tr("Вендор"), 130),
         ("file", tr("Файл"), 170), ("path", tr("Путь"), 80),
     )
@@ -91,8 +96,15 @@ user32.SetWindowLongPtrW.restype = ctypes.c_ssize_t
 user32.SetWindowLongPtrW.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_ssize_t]
 user32.SendMessageW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
 user32.ShowWindow.argtypes = [wintypes.HWND, ctypes.c_int]
+user32.ShowWindowAsync.argtypes = [wintypes.HWND, ctypes.c_int]
+user32.PostMessageW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
 user32.MonitorFromWindow.restype = wintypes.HMONITOR
 user32.MonitorFromWindow.argtypes = [wintypes.HWND, wintypes.DWORD]
+user32.MonitorFromPoint.restype = wintypes.HMONITOR
+user32.MonitorFromPoint.argtypes = [wintypes.POINT, wintypes.DWORD]
+ctypes.windll.gdi32.CreateRoundRectRgn.restype = wintypes.HRGN
+ctypes.windll.gdi32.CreateRoundRectRgn.argtypes = [ctypes.c_int] * 6
+user32.SetForegroundWindow.argtypes = [wintypes.HWND]
 
 
 class MONITORINFO(ctypes.Structure):
@@ -114,6 +126,10 @@ user32.UpdateWindow.argtypes = [wintypes.HWND]
 ctypes.windll.gdi32.CreateSolidBrush.restype = wintypes.HBRUSH
 ctypes.windll.gdi32.CreateSolidBrush.argtypes = [wintypes.COLORREF]
 ctypes.windll.gdi32.DeleteObject.argtypes = [wintypes.HGDIOBJ]
+ctypes.windll.gdi32.CreateRectRgn.restype = wintypes.HRGN
+ctypes.windll.gdi32.CreateRectRgn.argtypes = [ctypes.c_int] * 4
+ctypes.windll.gdi32.CombineRgn.argtypes = [wintypes.HRGN, wintypes.HRGN, wintypes.HRGN, ctypes.c_int]
+user32.SetWindowRgn.argtypes = [wintypes.HWND, wintypes.HRGN, wintypes.BOOL]
 ctypes.windll.kernel32.GetModuleHandleW.restype = wintypes.HMODULE
 ctypes.windll.kernel32.GetModuleHandleW.argtypes = [wintypes.LPCWSTR]
 ctypes.windll.kernel32.WaitForSingleObject.argtypes = [wintypes.HANDLE, wintypes.DWORD]
@@ -131,18 +147,19 @@ class Curtain:
     Пропускает клики и не забирает фокус. Накрывает любые виджеты, чего не могут элементы холста.
     """
 
-    def __init__(self):
-        """Само окно создаётся при первом показе."""
+    def __init__(self, class_name: str = "FODBCurtain"):
+        """Само окно создаётся при первом показе. У каждого цвета своё имя: цвет фона хранит класс окна."""
         self.window = None
         self.brush = None
+        self.class_name = class_name
 
     def show(self, owner: int, x: int, y: int, w: int, h: int, color: str) -> None:
         """Показывает непрозрачную панель заданного цвета."""
         if self.window is None:
             instance = ctypes.windll.kernel32.GetModuleHandleW(None)
             proc = ctypes.cast(user32.DefWindowProcW, ctypes.c_void_p)
-            user32.RegisterClassW(ctypes.byref(_WindowClass(proc=proc, instance=instance, name="FODBCurtain")))
-            self.window = user32.CreateWindowExW(0x80000 | 0x20 | 0x8000000 | 0x80, "FODBCurtain", None, 0x80000000, x, y, w, h, owner, None, instance, None)
+            user32.RegisterClassW(ctypes.byref(_WindowClass(proc=proc, instance=instance, name=self.class_name)))
+            self.window = user32.CreateWindowExW(0x80000 | 0x20 | 0x8000000 | 0x80, self.class_name, None, 0x80000000, x, y, w, h, owner, None, instance, None)
         r, g, b = fltheme.rgb(color)
         brush = ctypes.windll.gdi32.CreateSolidBrush(r | g << 8 | b << 16)
         user32.SetClassLongPtrW(self.window, -10, brush)
@@ -153,6 +170,19 @@ class Curtain:
         user32.SetWindowPos(self.window, 0, x, y, w, h, 0x10 | 0x40)  # показать, не забирая фокус
         user32.InvalidateRect(self.window, None, True)
         user32.UpdateWindow(self.window)
+
+    def shape(self, outer: tuple[int, int, int, int] | None, hole: tuple[int, int, int, int] | None) -> None:
+        """Оставляет от окна только прямоугольник outer без прямоугольника hole. Координаты внутри окна."""
+        if outer is None:
+            user32.SetWindowRgn(self.window, None, True)
+            return
+        gdi32 = ctypes.windll.gdi32
+        region = gdi32.CreateRectRgn(*outer)
+        if hole:
+            cut = gdi32.CreateRectRgn(*hole)
+            gdi32.CombineRgn(region, region, cut, 4)  # RGN_DIFF: вычитание
+            gdi32.DeleteObject(cut)
+        user32.SetWindowRgn(self.window, region, True)  # теперь областью владеет Windows
 
     def alpha(self, value: float) -> None:
         """Задаёт непрозрачность от 0 до 1."""
@@ -184,6 +214,10 @@ class Motion:
             self.running = True
             self.root.after(15, self._tick)
 
+    def stop(self, key) -> None:
+        """Отменяет переход, если он ещё идёт."""
+        self.jobs.pop(key, None)
+
     def _tick(self) -> None:
         """Один кадр всех активных переходов."""
         now = time.perf_counter()
@@ -197,7 +231,7 @@ class Motion:
             except tk.TclError:  # виджет исчез во время перехода
                 share = 1.0
             if share >= 1.0 and self.jobs.get(key, (start,))[0] == start:
-                del self.jobs[key]
+                self.jobs.pop(key, None)
         if self.jobs:
             self.root.after(15, self._tick)
         else:
@@ -236,28 +270,116 @@ def hwnd_of(window: tk.Misc) -> int:
 
 
 def make_app_window(window: tk.Misc) -> None:
-    """Даёт окну без рамки кнопку на панели задач и обычное сворачивание."""
+    """Даёт окну кнопку на панели задач."""
     hwnd = hwnd_of(window)
     ex = user32.GetWindowLongPtrW(hwnd, -20)
-    user32.SetWindowLongPtrW(hwnd, -20, (ex & ~0x80) | 0x40000)  # обычное окно с кнопкой на панели задач
-    style = user32.GetWindowLongPtrW(hwnd, -16)
-    user32.SetWindowLongPtrW(hwnd, -16, style | 0x20000 | 0x80000)  # разрешить сворачивание
+    user32.SetWindowLongPtrW(hwnd, -20, (ex & ~0x80) | 0x40000)  # обычное окно, не панель инструментов
 
 
-def begin_native_move(window: tk.Misc) -> None:
-    """Передаёт перетаскивание окна системе Windows."""
-    hwnd = hwnd_of(window)
+class _MinMaxInfo(ctypes.Structure):
+    """Структура Windows MINMAXINFO."""
+
+    _fields_ = [("reserved", wintypes.POINT), ("max_size", wintypes.POINT), ("max_position", wintypes.POINT),
+                ("min_track", wintypes.POINT), ("max_track", wintypes.POINT)]
+
+
+_WNDPROC = ctypes.WINFUNCTYPE(ctypes.c_ssize_t, wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM)
+user32.CallWindowProcW.restype = ctypes.c_ssize_t
+user32.CallWindowProcW.argtypes = [ctypes.c_ssize_t, wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
+user32.IsZoomed.argtypes = [wintypes.HWND]
+user32.GetClassLongPtrW.restype = ctypes.c_size_t
+user32.GetClassLongPtrW.argtypes = [wintypes.HWND, ctypes.c_int]
+user32.SetClassLongPtrW.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_ssize_t]
+user32.IsIconic.argtypes = [wintypes.HWND]
+_WINDOW_STYLE = 0xC00000 | 0x40000 | 0x20000 | 0x10000 | 0x80000  # заголовок, рамка, развернуть, свернуть, меню окна
+_WM_NCCALCSIZE, _WM_GETMINMAXINFO, _WM_NCLBUTTONDOWN = 0x83, 0x24, 0xA1
+_HT_CAPTION = 2
+EDGE_HITS = {"n": 12, "s": 15, "w": 10, "e": 11, "nw": 13, "ne": 14, "sw": 16, "se": 17}
+EDGE_CURSORS = {"n": "sb_v_double_arrow", "s": "sb_v_double_arrow", "e": "sb_h_double_arrow", "w": "sb_h_double_arrow",
+                "se": "size_nw_se", "nw": "size_nw_se", "sw": "size_ne_sw", "ne": "size_ne_sw"}
+
+
+class NativeFrame:
+    """Настоящее окно Windows без видимой рамки: прилипание к краям, родные размер и разворачивание.
+
+    Для Windows у окна есть заголовок и рамка, поэтому работают все её привычные функции. А ответ на
+    WM_NCCALCSIZE отдаёт всю площадь окна программе, поэтому системной рамки не видно.
+    Обработчик ничего не вызывает в Tk: он работает внутри обработки сообщений Windows.
+    """
+
+    def __init__(self, window: tk.Misc, min_size):
+        """min_size: функция, возвращающая наименьшие ширину и высоту окна."""
+        self.window, self.min_size = window, min_size
+        self.hwnd = hwnd_of(window)
+        self._proc = _WNDPROC(self._message)  # держим ссылку: Windows вызывает функцию, пока живо окно
+        self.original = user32.SetWindowLongPtrW(self.hwnd, -4, ctypes.cast(self._proc, ctypes.c_void_p).value)
+        style = user32.GetWindowLongPtrW(self.hwnd, -16)
+        user32.SetWindowLongPtrW(self.hwnd, -16, style | _WINDOW_STYLE)
+        # Тень: сама рамка Windows теперь скрыта, поэтому тень просим отдельно.
+        user32.SetClassLongPtrW(self.hwnd, -26, user32.GetClassLongPtrW(self.hwnd, -26) | 0x20000)
+        user32.SetWindowPos(self.hwnd, None, 0, 0, 0, 0, 0x1 | 0x2 | 0x4 | 0x10 | 0x20)  # пересчитать рамку, ничего не двигая
+
+    def _message(self, hwnd, message, wparam, lparam):
+        """Меняет ответы на два сообщения, остальное передаёт Tk."""
+        if message == _WM_NCCALCSIZE and wparam:
+            return 0  # вся площадь окна принадлежит программе
+        result = user32.CallWindowProcW(self.original, hwnd, message, wparam, lparam)
+        if message == _WM_GETMINMAXINFO:
+            _MinMaxInfo.from_address(lparam).min_track = wintypes.POINT(*self.min_size())
+        return result
+
+
+def begin_native_drag(window: tk.Misc, hit: int = _HT_CAPTION) -> None:
+    """Передаёт перетаскивание окна или его края системе Windows.
+
+    Сообщение именно отправляется в очередь (Post, а не Send). При Send цикл перетаскивания шёл бы внутри
+    этого вызова, таймеры Tk срабатывали бы там же, и Python аварийно завершался бы.
+    """
+    point = wintypes.POINT()
+    user32.GetCursorPos(ctypes.byref(point))
     user32.ReleaseCapture()
-    user32.SendMessageW(hwnd, 0xA1, 2, 0)  # как будто нажат заголовок окна
+    user32.PostMessageW(hwnd_of(window), _WM_NCLBUTTONDOWN, hit, (point.x & 0xFFFF) | (point.y & 0xFFFF) << 16)
 
 
-def work_area(window: tk.Misc) -> tuple[int, int, int, int]:
+def normal_geometry(window: tk.Misc) -> str:
+    """Положение и размер окна в обычном состоянии, даже если сейчас оно развёрнуто или свёрнуто."""
+    placement = _Placement()
+    placement.length = ctypes.sizeof(_Placement)
+    user32.GetWindowPlacement(hwnd_of(window), ctypes.byref(placement))
+    r = placement.normal
+    return f"{r.right - r.left}x{r.bottom - r.top}+{r.left}+{r.top}"
+
+
+class _Placement(ctypes.Structure):
+    """Структура Windows WINDOWPLACEMENT."""
+
+    _fields_ = [("length", wintypes.UINT), ("flags", wintypes.UINT), ("show", wintypes.UINT), ("minimized", wintypes.POINT),
+                ("maximized", wintypes.POINT), ("normal", wintypes.RECT)]
+
+
+def _monitor_work(monitor) -> tuple[int, int, int, int]:
     """Рабочая область монитора без панели задач: x, y, ширина, высота."""
     info = MONITORINFO()
     info.cbSize = ctypes.sizeof(MONITORINFO)
-    user32.GetMonitorInfoW(user32.MonitorFromWindow(hwnd_of(window), 2), ctypes.byref(info))
+    user32.GetMonitorInfoW(monitor, ctypes.byref(info))
     r = info.rcWork
     return r.left, r.top, r.right - r.left, r.bottom - r.top
+
+
+def work_area(window: tk.Misc) -> tuple[int, int, int, int]:
+    """Рабочая область монитора, на котором окно."""
+    return _monitor_work(user32.MonitorFromWindow(hwnd_of(window), 2))
+
+
+def work_area_at(x: int, y: int) -> tuple[int, int, int, int]:
+    """Рабочая область монитора, на котором точка."""
+    return _monitor_work(user32.MonitorFromPoint(wintypes.POINT(x, y), 2))
+
+
+def round_window(window: tk.Misc, width: int, height: int, radius: int) -> None:
+    """Скругляет углы окна."""
+    region = ctypes.windll.gdi32.CreateRoundRectRgn(0, 0, width + 1, height + 1, radius * 2, radius * 2)
+    user32.SetWindowRgn(hwnd_of(window), region, True)  # теперь областью владеет Windows
 
 
 # --------------------------------------------------------------------------------------------
@@ -278,6 +400,7 @@ class Theme:
                                       weight="normal" if family == "Segoe UI" else "bold")
         self.font_big = self._font(12)
         self.images = self._make_images()
+        self._led_frames: dict = {}
         self._gradients: dict = {}
         self._fit = lru_cache(maxsize=16384)(self._fit_uncached)
 
@@ -286,17 +409,35 @@ class Theme:
         bucket = min(assets_data.DATA, key=lambda s: abs(s - self.scale))
         colors = {"star_on": STAR, "star_off": lerp(ROW_B, TEXT, 0.28), "up": THUMB, "down": THUMB, "win_min": TEXT_BRIGHT, "win_max": TEXT_BRIGHT,
                   "win_close": TEXT_BRIGHT, "folder": TEXT_BRIGHT, "folder_plus": TEXT_BRIGHT, "folder_x": TEXT_BRIGHT, "filter": TEXT_BRIGHT}
+        # На каком фоне лежат значки. Края смешиваются с ним заранее, и Tk рисует их намного быстрее.
+        button_face = lerp(BTN_TOP, BTN_BOTTOM, 0.5)
+        unders = {"up": ROW_B, "down": ROW_B, "check": BOX, "folder_plus": GROUP, "folder_x": GROUP}
         images = {}
+        self.bucket = bucket
+        self._tinted: dict = {}
         for name, (side, packed) in assets_data.DATA[bucket].items():
+            if name.startswith(("fx_", "ic_")):
+                continue  # окрашиваются по запросу
             mask = zlib.decompress(base64.b64decode(packed))
-            images[name] = tk.PhotoImage(master=self.root, data=fltheme.tint_mask(side, mask, colors.get(name, TEXT)))
-        images["filter_on"] = tk.PhotoImage(master=self.root, data=fltheme.tint_mask(*self._mask(bucket, "filter"), ORANGE))
-        images["caret"] = tk.PhotoImage(master=self.root, data=fltheme.tint_mask(*self._mask(bucket, "down"), TEXT_DIM))
+            images[name] = tk.PhotoImage(master=self.root, data=fltheme.tint_mask(side, mask, colors.get(name, TEXT), unders.get(name)))
+        images["status_ok"] = tk.PhotoImage(master=self.root, data=fltheme.tint_mask(*self._mask(bucket, "check"), STATUS_OK))
+        images["status_error"] = tk.PhotoImage(master=self.root, data=fltheme.tint_mask(*self._mask(bucket, "win_close"), STATUS_ERROR))
+        images["caret"] = tk.PhotoImage(master=self.root, data=fltheme.tint_mask(*self._mask(bucket, "down"), TEXT_DIM, button_face))
         side = self.p(15)
         rim = lerp(GROUP, "#FFFFFF", 0.28)
-        images["led_on"] = tk.PhotoImage(master=self.root, data=fltheme.led_image(side, LED, rim))
-        images["led_off"] = tk.PhotoImage(master=self.root, data=fltheme.led_image(side, lerp(GROUP, TEXT, 0.14), rim, lit=False))
+        off = lerp(GROUP, TEXT, 0.14)
+        images["led_on"] = tk.PhotoImage(master=self.root, data=fltheme.led_image(side, LED, rim, under=GROUP))
+        images["led_off"] = tk.PhotoImage(master=self.root, data=fltheme.led_image(side, off, rim, lit=False, under=GROUP))
+        images["led_on_panel"] = tk.PhotoImage(master=self.root, data=fltheme.led_image(side, LED, rim, under=PANEL))
+        images["led_off_panel"] = tk.PhotoImage(master=self.root, data=fltheme.led_image(side, off, rim, lit=False, under=PANEL))
         return images
+
+    def tinted(self, name: str, color: str, under: str | None = None) -> tk.PhotoImage:
+        """Значок нужного цвета. under: фон, с которым заранее смешать края. Созданный значок остаётся в кэше."""
+        key = (name, color, under)
+        if key not in self._tinted:
+            self._tinted[key] = tk.PhotoImage(master=self.root, data=fltheme.tint_mask(*self._mask(self.bucket, name), color, under))
+        return self._tinted[key]
 
     @staticmethod
     def _mask(bucket: float, name: str) -> tuple[int, bytes]:
@@ -308,25 +449,28 @@ class Theme:
         """Шрифт заданного размера с учётом масштаба."""
         return tkfont.Font(root=self.root, family=self.family, size=-self.p(size + self.grow), weight="bold" if bold else "normal")
 
-    def led_frames(self) -> list[tk.PhotoImage]:
-        """Промежуточные кадры индикатора. Рисуются при первом переключении."""
-        if not hasattr(self, "_led_frames"):
+    def led_frames(self, suffix: str = "") -> list[tk.PhotoImage]:
+        """Промежуточные кадры индикатора. Рисуются при первом переключении. suffix: "_panel" для фона панели."""
+        if suffix not in self._led_frames:
             side, rim = self.p(15), lerp(GROUP, "#FFFFFF", 0.28)
             dim = lerp(GROUP, TEXT, 0.14)
-            middle = [tk.PhotoImage(master=self.root, data=fltheme.led_image(side, lerp(dim, LED, share), rim)) for share in (0.35, 0.7)]
-            self._led_frames = [self.images["led_off"], *middle, self.images["led_on"]]
-        return self._led_frames
+            under = PANEL if suffix else GROUP
+            middle = [tk.PhotoImage(master=self.root, data=fltheme.led_image(side, lerp(dim, LED, share), rim, under=under)) for share in (0.35, 0.7)]
+            self._led_frames[suffix] = [self.images["led_off" + suffix], *middle, self.images["led_on" + suffix]]
+        return self._led_frames[suffix]
 
     def p(self, value: float) -> int:
         """Переводит размер из макета в экранные пиксели."""
         return round(value * self.scale)
 
-    def gradient(self, width: int, height: int, top: str, bottom: str, border: str = "#000000") -> tk.PhotoImage:
-        """Лицо кнопки из кэша."""
-        key = (width, height, top, bottom, border)
+    def gradient(self, width: int, height: int, top: str, bottom: str, border: str = "#000000", under: str | None = None) -> tk.PhotoImage:
+        """Лицо кнопки из кэша. under: фон под кнопкой, по умолчанию цвет панели."""
+        under = under or PANEL
+        radius = self.p(2)
+        key = (width, height, top, bottom, border, under, radius)
         image = self._gradients.get(key)
         if image is None:
-            image = tk.PhotoImage(master=self.root, data=fltheme.button_image(width, height, top, bottom, border))
+            image = tk.PhotoImage(master=self.root, data=fltheme.button_image(width, height, top, bottom, border, under, radius))
             self._gradients[key] = image
         return image
 
@@ -378,9 +522,9 @@ class Theme:
 class Button:
     """Плоская кнопка с градиентом на холсте: картинка и подпись поверх неё."""
 
-    def __init__(self, canvas: tk.Canvas, theme: Theme, x, y, w, h, text, command, tags=(), font=None):
+    def __init__(self, canvas: tk.Canvas, theme: Theme, x, y, w, h, text, command, tags=(), font=None, under=None):
         """Рисует кнопку и подключает мышь."""
-        self.canvas, self.theme, self.command = canvas, theme, command
+        self.canvas, self.theme, self.command, self.under = canvas, theme, command, under
         self.w, self.h = w, h
         self.enabled = True
         self.glow = 0.0
@@ -406,7 +550,7 @@ class Button:
             top, bottom = lerp(BTN_TOP, BTN_HOVER_TOP, glow), lerp(BTN_BOTTOM, BTN_HOVER_BOTTOM, glow)
         else:
             top, bottom = BTN_OFF_TOP, BTN_OFF_BOTTOM
-        image = self.theme.gradient(self.w, self.h, top, bottom, BTN_BORDER if self.enabled else BTN_OFF_BORDER)
+        image = self.theme.gradient(self.w, self.h, top, bottom, BTN_BORDER if self.enabled else BTN_OFF_BORDER, self.under)
         self.canvas.itemconfigure(self.image, image=image)
 
     def _hover(self, hover: bool) -> None:
@@ -436,6 +580,337 @@ class Button:
         self.canvas.itemconfigure(self.label, text=text)
 
 
+class IconButton:
+    """Значок без рамки: при наведении загорается оранжевым. Подпись не нужна, переводить нечего."""
+
+    def __init__(self, canvas: tk.Canvas, theme: Theme, x, y, icon: str, command, under=None, tags=()):
+        """x, y: центр значка. under: цвет фона под ним."""
+        self.canvas, self.theme, self.icon, self.command = canvas, theme, icon, command
+        self.under = under or PANEL
+        self.enabled, self.active = True, False
+        self.glow = 0.0
+        self.half = theme.p(13)  # мышь попадает и рядом со значком, не только точно в него
+        self.tag = f"icon{id(self)}"
+        self.hit = canvas.create_rectangle(x - self.half, y - self.half, x + self.half, y + self.half, fill=self.under, outline="", tags=(self.tag, *tags))
+        self.image = canvas.create_image(x, y, tags=(self.tag, *tags))
+        self._paint()
+        canvas.tag_bind(self.tag, "<Enter>", lambda e: self._hover(True))
+        canvas.tag_bind(self.tag, "<Leave>", lambda e: self._hover(False))
+        canvas.tag_bind(self.tag, "<Button-1>", lambda e: self._paint(pressed=True))
+        canvas.tag_bind(self.tag, "<ButtonRelease-1>", self._release)
+
+    def _paint(self, pressed: bool = False) -> None:
+        """Красит значок по его состоянию."""
+        if self.active:
+            color = ORANGE
+        elif not self.enabled:
+            color = TEXT_OFF
+        elif pressed:
+            color = lerp(ORANGE, self.under, 0.35)
+        else:
+            color = lerp(TEXT_BRIGHT, ORANGE, round(self.glow * 4) / 4)
+        self.canvas.itemconfigure(self.image, image=self.theme.tinted(self.icon, color, self.under))
+
+    def _hover(self, hover: bool) -> None:
+        """Плавно меняет цвет при наведении."""
+        start, target = self.glow, 1.0 if hover else 0.0
+
+        def step(share):
+            """Один шаг перехода."""
+            self.glow = start + (target - start) * share
+            self._paint()
+        self.theme.motion.run(self.tag, 110, step)
+
+    def _release(self, _event) -> None:
+        """Клик по значку."""
+        self._paint()
+        if self.enabled:
+            self.command()
+
+    def set_enabled(self, enabled: bool) -> None:
+        """Включает или выключает значок."""
+        self.enabled = enabled
+        self._paint()
+
+    def set_active(self, active: bool) -> None:
+        """Постоянная подсветка: звук выключен, фильтр работает."""
+        self.active = active
+        self._paint()
+
+    def set_icon(self, icon: str) -> None:
+        """Меняет значок."""
+        self.icon = icon
+        self._paint()
+
+    def set_visible(self, visible: bool) -> None:
+        """Показывает или прячет значок."""
+        self.glow = 0.0
+        self._paint()
+        self.canvas.itemconfigure(self.tag, state="normal" if visible else "hidden")
+
+    def move_to(self, x, y) -> None:
+        """Переносит значок в новую точку."""
+        self.canvas.coords(self.hit, x - self.half, y - self.half, x + self.half, y + self.half)
+        self.canvas.coords(self.image, x, y)
+
+
+class PopupMenu:
+    """Всплывающее меню в стиле программы вместо системного с его белой рамкой."""
+
+    def __init__(self, theme: Theme):
+        """Меню пустое, пункты добавляются методами add_."""
+        self.t = theme
+        self.items: list[dict] = []
+        self.top = None
+        self.parent = None
+        self.child = None
+        self.hover = None
+        self.timer = None
+        self.restore = None
+
+    def add_command(self, label: str, command=None) -> None:
+        """Обычный пункт."""
+        self.items.append({"kind": "command", "label": label, "command": command})
+
+    def add_checkbutton(self, label: str, checked: bool, command=None) -> None:
+        """Пункт с галочкой."""
+        self.items.append({"kind": "check", "label": label, "checked": checked, "command": command})
+
+    def add_cascade(self, label: str, menu: "PopupMenu") -> None:
+        """Пункт с вложенным меню."""
+        self.items.append({"kind": "cascade", "label": label, "menu": menu})
+
+    def add_separator(self) -> None:
+        """Разделитель."""
+        self.items.append({"kind": "separator"})
+
+    def popup(self, x: int, y: int, width: int = 0, parent: "PopupMenu | None" = None) -> None:
+        """Показывает меню, левый верхний угол в точке x, y. width: наименьшая ширина."""
+        t, p = self.t, self.t.p
+        self.parent, self.child, self.hover = parent, None, None
+        self.start = (t.root.winfo_pointerx(), t.root.winfo_pointery())
+        self.armed = self.pressed_outside = False
+        if parent is None:
+            self.restore = (t.root.grab_current(), t.root.focus_get())
+        top = self.top = tk.Toplevel(parent.top if parent else t.root, bg=BTN_BORDER)
+        top.withdraw()
+        top.overrideredirect(True)
+        top.attributes("-topmost", True)
+        c = self.c = tk.Canvas(top, bg=GROUP, highlightthickness=0, bd=0)
+        c.pack(padx=1, pady=1)
+        left, up, area_w, area_h = work_area_at(x, y)
+        w, h = self._draw(width, area_h)
+        w, h = w + 2, h + 2
+        if x + w > left + area_w:  # не влезает справа: влево от родителя или к краю экрана
+            x = parent.top.winfo_rootx() - w + p(2) if parent else left + area_w - w
+        y = max(up, min(y, up + area_h - h))
+        top.geometry(f"{w}x{h}+{x}+{y}")
+        fade_in_window(top, t.motion, 90)
+        top.deiconify()
+        top.lift()
+        top.update_idletasks()
+        round_window(top, w, h, p(2))
+        c.bind("<Motion>", self._motion)
+        c.bind("<Leave>", self._leave)
+        c.bind("<ButtonRelease-1>", self._release)
+        c.bind("<ButtonRelease-3>", self._release)
+        if parent is None:
+            user32.SetForegroundWindow(hwnd_of(top))
+            top.focus_force()
+            top.grab_set()
+            top.bind("<ButtonPress>", self._press)
+            top.bind("<ButtonRelease>", self._press_end)
+            top.bind("<FocusOut>", lambda e: t.root.after(60, self._check_focus))
+            top.bind("<Escape>", lambda e: self.close())
+            top.bind("<Up>", lambda e: self._deepest()._step(-1))
+            top.bind("<Down>", lambda e: self._deepest()._step(1))
+            top.bind("<Return>", lambda e: self._deepest()._activate_hover())
+            top.bind("<Right>", lambda e: self._deepest()._open_hover())
+            top.bind("<Left>", lambda e: self._close_deepest())
+
+    def _draw(self, least: int, room: int) -> tuple[int, int]:
+        """Рисует пункты и возвращает размер. Если пункты не влезают по высоте, идут вторым столбцом."""
+        c, t, p = self.c, self.t, self.t.p
+        rows = [item for item in self.items if item["kind"] != "separator"]
+        row_h = max(p(22), t.font.metrics("linespace") + p(6))
+        gap, pad = p(7), p(3)
+        left = p(28) if any(item["kind"] == "check" for item in rows) else p(12)
+        right = p(26) if any(item["kind"] == "cascade" for item in rows) else p(14)
+        item_w = max(least - 2 - 2 * pad, left + max((t.font.measure(item["label"]) for item in rows), default=0) + right)
+        self.mark = c.create_rectangle(0, 0, 0, 0, fill=SELECT, outline="", state="hidden")
+        x, y, bottom = pad, pad, pad
+        limit = room - p(12)
+        for item in self.items:
+            height = gap if item["kind"] == "separator" else row_h
+            if y + height + pad > limit and y > pad:
+                x, y = x + item_w, pad
+            item["box"] = (x, y, x + item_w, y + height)
+            middle = y + height // 2
+            if item["kind"] == "separator":
+                c.create_line(x + p(6), middle, x + item_w - p(6), middle, fill=lerp(GROUP, TEXT, 0.18))
+            else:
+                item["text"] = c.create_text(x + left, middle, text=item["label"], anchor="w", fill=TEXT, font=t.font)
+            if item["kind"] == "cascade":
+                c.create_text(x + item_w - p(11), middle, text="\u203a", fill=TEXT_SOFT, font=t.font)
+            if item.get("checked"):
+                item["tick"] = c.create_image(x + p(14), middle, image=t.tinted("check", TEXT))
+            y += height
+            bottom = max(bottom, y)
+        width, height = x + item_w + pad, bottom + pad
+        c.configure(width=width, height=height)
+        return width, height
+
+    def _row_at(self, x: int, y: int) -> int | None:
+        """Номер пункта под мышью."""
+        for index, item in enumerate(self.items):
+            box = item["box"]
+            if item["kind"] != "separator" and box[0] <= x < box[2] and box[1] <= y < box[3]:
+                return index
+        return None
+
+    def _set_hover(self, index: int | None) -> None:
+        """Подсвечивает пункт."""
+        if index == self.hover:
+            return
+        for number, color in ((self.hover, TEXT), (index, WHITE)):
+            if number is not None:
+                item = self.items[number]
+                self.c.itemconfigure(item["text"], fill=color)
+                if "tick" in item:
+                    self.c.itemconfigure(item["tick"], image=self.t.tinted("check", color))
+        self.hover = index
+        if index is None:
+            self.c.itemconfigure(self.mark, state="hidden")
+        else:
+            self.c.coords(self.mark, *self.items[index]["box"])
+            self.c.itemconfigure(self.mark, state="normal")
+
+    def _motion(self, event) -> None:
+        """Мышь над меню: подсветка и вложенное меню. Заметное движение разрешает выбор пункта."""
+        if max(abs(event.x_root - self.start[0]), abs(event.y_root - self.start[1])) >= self.t.p(4):
+            self.armed = True
+        index = self._row_at(event.x, event.y)
+        if index is None or index == self.hover:
+            return
+        self._set_hover(index)
+        self._cancel_timer()
+        item = self.items[index]
+        if self.child and self.child is not item.get("menu"):
+            self.child.close()
+        if item["kind"] == "cascade":
+            self.timer = self.t.root.after(140, self._open_hover)
+
+    def _leave(self, _event) -> None:
+        """Мышь ушла: подсветка гаснет, если не открыто вложенное меню."""
+        self._cancel_timer()
+        if not self.child:
+            self._set_hover(None)
+
+    def _release(self, event) -> None:
+        """Кнопка отпущена над меню. Отпускание после щелчка, открывшего меню, ничего не выбирает."""
+        if not self.armed:
+            self.armed = True
+            return
+        index = self._row_at(event.x, event.y)
+        if index is not None:
+            self._set_hover(index)
+            self._activate_hover()
+
+    def _activate_hover(self) -> None:
+        """Выполняет подсвеченный пункт."""
+        if self.hover is None:
+            return
+        item = self.items[self.hover]
+        if item["kind"] == "cascade":
+            self._open_hover()
+            return
+        root = self
+        while root.parent:
+            root = root.parent
+        root.close()
+        if item["command"]:
+            self.t.root.after(1, item["command"])
+
+    def _open_hover(self) -> None:
+        """Открывает вложенное меню подсвеченного пункта."""
+        self._cancel_timer()
+        if self.hover is None or self.items[self.hover]["kind"] != "cascade":
+            return
+        menu = self.items[self.hover]["menu"]
+        if self.child is not menu:
+            box = self.items[self.hover]["box"]
+            self.child = menu
+            menu.popup(self.c.winfo_rootx() + box[2] - self.t.p(1), self.c.winfo_rooty() + box[1] - 1, parent=self)
+
+    def _deepest(self) -> "PopupMenu":
+        """Самое вложенное открытое меню."""
+        menu = self
+        while menu.child:
+            menu = menu.child
+        return menu
+
+    def _close_deepest(self) -> None:
+        """Стрелка влево закрывает вложенное меню."""
+        menu = self._deepest()
+        if menu.parent:
+            menu.close()
+
+    def _step(self, delta: int) -> None:
+        """Стрелки вверх и вниз."""
+        rows = [i for i, item in enumerate(self.items) if item["kind"] != "separator"]
+        if rows:
+            place = rows.index(self.hover) + delta if self.hover in rows else (0 if delta > 0 else -1)
+            self._set_hover(rows[place % len(rows)])
+
+    def _contains(self, x: int, y: int) -> bool:
+        """Точка над этим меню или над вложенным."""
+        top = self.top
+        if top.winfo_rootx() <= x < top.winfo_rootx() + top.winfo_width() and top.winfo_rooty() <= y < top.winfo_rooty() + top.winfo_height():
+            return True
+        return bool(self.child and self.child._contains(x, y))
+
+    def _press(self, event) -> None:
+        """Нажатие вне меню запоминается, а само меню закроется при отпускании: иначе кнопка под ним сработает."""
+        if self._contains(event.x_root, event.y_root):
+            self.armed = True
+        else:
+            self.pressed_outside = True
+
+    def _press_end(self, _event) -> None:
+        """Кнопка отпущена после нажатия вне меню."""
+        if self.pressed_outside:
+            self.close()
+
+    def _check_focus(self) -> None:
+        """Пользователь перешёл в другую программу: меню закрывается."""
+        if self.top and self.top.winfo_exists() and self.top.focus_displayof() is None:
+            self.close(restore_focus=False)
+
+    def _cancel_timer(self) -> None:
+        """Отменяет отложенное открытие вложенного меню."""
+        if self.timer:
+            self.t.root.after_cancel(self.timer)
+            self.timer = None
+
+    def close(self, restore_focus: bool = True) -> None:
+        """Закрывает меню и возвращает фокус и захват мыши окну, которое их держало."""
+        self._cancel_timer()
+        if self.child:
+            self.child.close()
+        if self.parent:
+            self.parent.child = None
+        if self.top:
+            self.top.destroy()
+            self.top = None
+        if self.restore:
+            grab, focus = self.restore
+            self.restore = None
+            if grab and grab.winfo_exists():
+                grab.grab_set()
+            if restore_focus and focus and focus.winfo_exists():
+                focus.focus_force()
+
+
 # --------------------------------------------------------------------------------------------
 # Таблица плагинов: на холсте существуют только видимые строки
 # --------------------------------------------------------------------------------------------
@@ -447,6 +922,9 @@ class Grid:
         self.t = theme
         self.on_select, self.on_star, self.on_menu = on_select, on_star, on_menu
         self.on_double = lambda plugin: None
+        self.loading = False
+        self.skeleton: list = []
+        self.skeleton_running = False
         self.on_header_menu = lambda event: None
         p = theme.p
         self.row_h = max(p(19), theme.font.metrics("linespace") + p(2))
@@ -499,12 +977,47 @@ class Grid:
         return max(1, (self.size[1] - self.head_h) // self.row_h)
 
     def _configure(self, event) -> None:
-        """Размер изменился: перестраиваем."""
+        """Размер изменился: двигаем готовые элементы. Пересоздавать их при каждом шаге слишком медленно."""
         size = (event.width, event.height)
         if size == self.size:
             return
         self.size = size
-        self.rebuild()
+        if self.pool and len(self.pool) >= self.visible_rows() + 2:
+            self._resize()
+        else:
+            self.rebuild()
+
+    def _resize(self) -> None:
+        """Подгоняет заголовок, строки и полосу прокрутки под новый размер."""
+        c = self.c
+        self.cols = self._col_x()
+        right = self.size[0] - self.scroll_w - 1
+        c.coords(self.head_rect, 1, 1, right, self.head_h)
+        self._draw_header()
+        for r, row in enumerate(self.pool):
+            y = 1 + self.head_h + r * self.row_h
+            c.coords(row["bg"], 1, y, right, y + self.row_h)
+        c.delete("sb")
+        self._build_scrollbar()
+        self._draw_frame()
+        self.top = min(self.top, max(0, len(self.items) - self.visible_rows()))
+        self.draw()
+        if self.loading:
+            self.show_skeleton()
+
+    def _draw_header(self) -> None:
+        """Подписи колонок."""
+        c, t = self.c, self.t
+        c.delete("head_text")
+        right = self.size[0] - self.scroll_w - 1
+        for key, label, x, w in self.cols:
+            pad = t.p(6) if key != "fav" else t.p(5)
+            if x + pad < right:
+                caption = label
+                if key == self.sort_key and key != "fav":
+                    caption = f"{label} {'▼' if self.sort_reverse else '▲'}"
+                c.create_text(x + pad, 1 + self.head_h // 2, text=t.fit(caption, min(w, right - x) - pad), anchor="w",
+                              fill=TEXT_DIM, font=t.font, tags=("head", "head_text"))
 
     def _col_x(self) -> list[tuple[str, str, int, int]]:
         """Положение колонок: последняя занимает всю оставшуюся ширину."""
@@ -527,16 +1040,10 @@ class Grid:
         self.cols = self._col_x()
         W, H = self.size
         right = W - self.scroll_w - 1
-        c.create_rectangle(1, 1, right, self.head_h, fill=HEADER, outline="", tags="head")
-        for key, label, x, w in self.cols:
-            pad = t.p(6) if key != "fav" else t.p(5)
-            if x + pad < right:
-                caption = label
-                if key == self.sort_key and key != "fav":
-                    caption = f"{label} {'▼' if self.sort_reverse else '▲'}"
-                c.create_text(x + pad, 1 + self.head_h // 2, text=t.fit(caption, min(w, right - x) - pad), anchor="w",
-                              fill=TEXT_DIM, font=t.font, tags="head")
-        rows = (H - self.head_h) // self.row_h + 2
+        self.head_rect = c.create_rectangle(1, 1, right, self.head_h, fill=HEADER, outline="", tags="head")
+        self._draw_header()
+        # Строк хватит на весь экран: при увеличении окна новые создавать не придётся.
+        rows = max(H, c.winfo_screenheight()) // self.row_h + 2
         for r in range(rows):
             y = 1 + self.head_h + r * self.row_h
             row = {"bg": c.create_rectangle(1, y, right, y + self.row_h, fill=ROW_A, outline=""), "cells": {}, "values": {},
@@ -544,7 +1051,9 @@ class Grid:
             for key, _, x, w in self.cols:
                 if key == "fav":
                     row["star"] = c.create_image(x + w // 2 + t.p(1), y + self.row_h // 2, image=t.images["star_off"], state="hidden")
-                elif x + t.p(6) < right:
+                elif key == "status" and STATUS_ICONS:
+                    row["status_image"] = c.create_image(x + w // 2, y + self.row_h // 2, image=t.images["status_ok"], state="hidden")
+                else:
                     row["cells"][key] = c.create_text(x + t.p(6), y + self.row_h // 2, text="", anchor="w", fill=TEXT,
                                                       font=t.font)
             self.pool.append(row)
@@ -554,6 +1063,8 @@ class Grid:
         self._draw_frame()
         self.top = min(self.top, max(0, len(self.items) - self.visible_rows()))
         self.draw()
+        if self.loading:
+            self.show_skeleton()
 
     def _draw_frame(self) -> None:
         """Рамка: синяя при фокусе."""
@@ -581,6 +1092,90 @@ class Grid:
         c.tag_bind("sb_up", "<Button-1>", lambda e: self.scroll(-1))
         c.tag_bind("sb_down", "<Button-1>", lambda e: self.scroll(1))
 
+    # загрузка ---------------------------------------------------------------------------------
+    def show_skeleton(self) -> None:
+        """Заглушки вместо строк, пока база читается: по ним пробегает мягкая волна."""
+        c, t = self.c, self.t
+        self.loading = True
+        c.delete("skeleton")
+        self.skeleton = []
+        for r in range(min(self.visible_rows() + 1, len(self.pool))):
+            y = 1 + self.head_h + r * self.row_h
+            for number, (key, _label, x, w) in enumerate(self.cols[1:]):
+                share = 0.45 + ((r * 7 + number * 13) % 10) / 22
+                length = min(w - t.p(14), t.p(150)) * share
+                if length > 2 and x + length < self.size[0] - self.scroll_w:
+                    item = c.create_rectangle(x + t.p(6), y + self.row_h // 2 - t.p(3), x + t.p(6) + length, y + self.row_h // 2 + t.p(3),
+                                              fill=lerp(ROW_A, TEXT, 0.1), outline="", tags="skeleton")
+                    self.skeleton.append((item, r, x, -1))
+        c.tag_raise("head")
+        c.tag_raise("sb")
+        c.tag_raise("gframe")
+        if not self.skeleton_running and t.motion.enabled:
+            self.skeleton_running = True
+            self._skeleton_tick()
+
+    def _skeleton_tick(self) -> None:
+        """Один кадр волны. Обновляются только заглушки, сменившие яркость."""
+        if not self.loading or not self.c.winfo_exists():
+            self.skeleton_running = False
+            return
+        phase = time.perf_counter() * 1.6
+        width = max(1, self.size[0])
+        low, high = lerp(ROW_A, TEXT, 0.08), lerp(ROW_A, TEXT, 0.26)
+        for index, (item, row, x, level) in enumerate(self.skeleton):
+            wave = (math.sin((x / width - phase + row * 0.03) * 2 * math.pi) + 1) / 2
+            step = round(wave * 5)
+            if step != level:
+                self.c.itemconfigure(item, fill=lerp(low, high, step / 5))
+                self.skeleton[index] = (item, row, x, step)
+        self.c.after(40, self._skeleton_tick)
+
+    def hide_skeleton(self) -> None:
+        """Убирает заглушки."""
+        self.loading = False
+        self.c.delete("skeleton")
+        self.skeleton = []
+
+    def reveal(self) -> None:
+        """Строки проявляются сверху вниз: текст выходит из цвета своей строки."""
+        rows = self.pool[:self.visible_rows() + 1]
+        count = len(rows)
+        span = 7  # сколько строк проявляется одновременно
+        c = self.c
+
+        def target(row, key):
+            selected = row["fill"] == SELECT
+            if key == "status" and row.get("status_value") in (True, False):
+                return STATUS_OK if row["status_value"] else STATUS_ERROR
+            if selected:
+                return WHITE
+            return TEXT_BRIGHT if key == "name" else TEXT
+
+        def step(share):
+            position = share * (count + span)
+            for r, row in enumerate(rows):
+                amount = max(0.0, min(1.0, (position - r) / span))
+                level = round(amount * 5)
+                if row.get("level") != level:
+                    row["level"] = level
+                    for key, item in row["cells"].items():
+                        c.itemconfigure(item, fill=lerp(row["fill"], target(row, key), level / 5))
+                    state = "normal" if level >= 3 and row.get("star_value") else "hidden"
+                    c.itemconfigure(row["star"], state=state)
+                    if "status_image" in row:
+                        c.itemconfigure(row["status_image"], state="normal" if level >= 3 and row.get("status_value") is not None else "hidden")
+
+        def finish():
+            for row in rows:
+                row.pop("level", None)
+                row["ink"] = None
+                row["status_value"] = ""
+                row["star_value"] = ""
+            self.draw()
+
+        self.t.motion.run("grid_reveal", 420, step, finish)
+
     # данные -----------------------------------------------------------------------------------
     def set_items(self, items: list[core.Plugin]) -> None:
         """Новый список плагинов."""
@@ -598,7 +1193,7 @@ class Grid:
         if key == "name":
             return p.name
         if key == "status":
-            return "ok" if p.ok else tr("ошибка")
+            return tr("Работает") if p.ok else tr("Ошибка")
         if key == "format":
             return p.formats
         if key == "bits":
@@ -625,7 +1220,7 @@ class Grid:
         positions = {key: x for key, _, x, _ in self.cols}
         pad = t.p(6)
         count = len(self.items)
-        for r, row in enumerate(self.pool):
+        for r, row in enumerate(self.pool[:self.visible_rows() + 2]):
             index = self.top + r
             plugin = self.items[index] if index < count else None
             selected = plugin is not None and plugin.key in self.selected
@@ -633,18 +1228,31 @@ class Grid:
             if row["fill"] != fill:
                 c.itemconfigure(row["bg"], fill=fill)
                 row["fill"] = fill
-            star = None if plugin is None else ("star_on" if plugin.organized_in else "star_off")
+            star = None if plugin is None else ("star_on" if plugin.organized_in else "star_off", fill)
             if row.get("star_value") != star:
                 if star:
-                    c.itemconfigure(row["star"], image=t.images[star], state="normal")
+                    ink_color = STAR if plugin.organized_in else lerp(ROW_B, TEXT, 0.28)
+                    c.itemconfigure(row["star"], image=t.tinted(star[0], ink_color, fill), state="normal")
                 else:
                     c.itemconfigure(row["star"], state="hidden")
                 row["star_value"] = star
             ink = WHITE if selected else TEXT
             if row.get("ink") != ink:
                 for key, item in row["cells"].items():
-                    c.itemconfigure(item, fill=(TEXT_BRIGHT if key == "name" and not selected else ink))
+                    if key != "status":
+                        c.itemconfigure(item, fill=(TEXT_BRIGHT if key == "name" and not selected else ink))
                 row["ink"] = ink
+            status = None if plugin is None else plugin.ok
+            if row.get("status_value", "") != status or row.get("status_fill") != fill:
+                row["status_value"], row["status_fill"] = status, fill
+                if "status_image" in row:
+                    if status is None:
+                        c.itemconfigure(row["status_image"], state="hidden")
+                    else:
+                        image = t.tinted("check", STATUS_OK, fill) if status else t.tinted("win_close", STATUS_ERROR, fill)
+                        c.itemconfigure(row["status_image"], image=image, state="normal")
+                elif "status" in row["cells"] and status is not None:
+                    c.itemconfigure(row["cells"]["status"], fill=STATUS_OK if status else STATUS_ERROR)
             for key, item in row["cells"].items():
                 value = ""
                 if plugin is not None:
@@ -921,7 +1529,7 @@ class Dialog:
         head = tk.Canvas(inner, bg=FRAME, height=p(28), highlightthickness=0, width=W)
         head.pack(fill="x")
         head.create_text(p(10), p(14), text=title, anchor="w", fill=TITLE_TEXT, font=t.font_title)
-        head.bind("<Button-1>", lambda e: begin_native_move(top))
+        head.bind("<Button-1>", lambda e: begin_native_drag(top))
         body = tk.Canvas(inner, bg=PANEL, highlightthickness=0, width=W)
         body.pack(fill="both", expand=True, padx=p(5), pady=(0, p(5)))
         y = p(14)
@@ -1016,14 +1624,14 @@ class Dialog:
 
         def popup():
             """Открывает меню вариантов."""
-            menu = tk.Menu(self.top, tearoff=0, bg=GROUP, fg=TEXT, activebackground=SELECT, activeforeground=WHITE, bd=0, font=t.font, relief="flat")
+            menu = PopupMenu(t)
             for value, label in options:
                 def pick(v=value, l=label):
                     var.set(v)
                     if caption is not None:
                         button.set_text(l)
                 menu.add_command(label=label, command=pick)
-            menu.tk_popup(body.winfo_rootx() + x, body.winfo_rooty() + y + t.p(26))
+            menu.popup(body.winfo_rootx() + x, body.winfo_rooty() + y + t.p(26), w)
         button = Button(body, t, x, y, w, t.p(26), caption or "", popup)
         body.create_image(x + w - t.p(12), y + t.p(13), image=t.images["caret"], state="disabled")
 
@@ -1145,7 +1753,7 @@ class FilterPanel:
         c.create_text(p(10), self.head_h // 2, text=title, anchor="w", fill=TITLE_TEXT, font=t.font_title)
         c.create_text(p(120), self.head_h // 2, text=tr("В поле поиска тоже можно: purpose:reverb,delay vendor:arturia -format:vst"),
                       anchor="w", fill=TEXT_DIM, font=t.font)
-        Button(c, t, self.width - p(112), p(6), p(102), p(26), tr("Сбросить все"), self._reset)
+        Button(c, t, self.width - p(112), p(6), p(102), p(26), tr("Сбросить все"), self._reset, under=FRAME)
         room = self.height - self.head_h
         if self.content_h > room:
             bar = room * room / self.content_h
@@ -1236,14 +1844,19 @@ class App:
         )
 
     def __init__(self, root: tk.Tk, scale: float, settings: core.Settings, db_override: str | None = None,
-                 forced_theme: str | None = None, show_event=None):
+                 forced_theme: str | None = None, show_event=None, background_load: bool = False):
         """Загружает данные и строит окно."""
         self.root, self.s = root, settings
         self.dpi = scale
         self.motion = Motion(root, settings["animations"])
         self.curtain = Curtain()
         self.tray = None
+        self.tray_request = None
         self.show_event = show_event
+        self.loading = False
+        self.load_token = 0
+        self.after_load: list = []
+        self.saved_selection = list(settings["selected"])
         self.last_backup = 0.0
         self.backup_running = False
         self.key_bindings: dict[str, str] = {}
@@ -1261,9 +1874,6 @@ class App:
         self.worker: threading.Thread | None = None
         self.cancel_flag = threading.Event()
         self.events: queue.Queue = queue.Queue()
-        self.maximized = False
-        self.normal_geometry = ""
-        self.resize_state = None
         self.hint_text = ""
         self._locate_database()
         if not self.s["layout"]:
@@ -1282,11 +1892,11 @@ class App:
         self.t = self._make_theme()
         self._build_window()
         self.find_var.set(settings["find_text"])
-        self.refresh(first=True)
-        self.grid.selected = set(settings["selected"]) & {p.key for p in self.grid.items}
-        if self.grid.selected:
-            self.grid.show_row(settings["selected"][0])
-            self._update_plugin_page()
+        if background_load:
+            self.load_in_background()
+        else:
+            self.refresh()
+            self._restore_selection()
         self.bind_hotkeys()
         self.root.after(2000, self._watch_theme)
         if show_event:
@@ -1309,6 +1919,8 @@ class App:
         mode = self.s["theme_mode"]
         self.theme_path = self.forced_theme or (fltheme.find_active_theme(self.db, self.install) if mode == "fl" else None)
         self.theme_stamp = self._theme_signature()
+        globals().update(STATUS_OK=self.s["status_ok"] or STANDARD_STATUS_OK, STATUS_ERROR=self.s["status_error"] or STANDARD_STATUS_ERROR,
+                         STATUS_ICONS=self.s["status_style"] == "icons")
         if mode == "custom" and not self.forced_theme:
             globals().update(fltheme.custom_palette(self.s["custom_colors"]))
         else:
@@ -1346,13 +1958,18 @@ class App:
         self._load_palette()
         self.t = self._make_theme()
         self.undo_btn = None  # кнопка исчезнет вместе со страницей настроек
+        self.about.hide()  # звук секвенсора не должен пережить свою страницу
         self.frame.destroy()
         self._build_window()
         self.grid.selected = selected
         self.grid.anchor = anchor
         self.find_var.set(find)
         self.page = page
-        self.refresh()
+        if self.loading:
+            self.grid.show_skeleton()
+        else:
+            self.update_view()
+            self._update_undo_button()
         self.show_page(page)
 
     def set_scale(self, percent: int) -> None:
@@ -1387,15 +2004,11 @@ class App:
     def _header_menu(self, event) -> None:
         """Меню колонок по правому клику на заголовке."""
         menu = self._menu()
-        menu.marks = []  # Tk хранит только имя переменной, поэтому держим ссылки, пока меню открыто
         for key, label, _width in columns():
             if key not in ("fav", "name"):
-                mark = tk.IntVar(menu, 0 if key in self.s["hidden_columns"] else 1)
-                menu.marks.append(mark)
-                menu.add_checkbutton(label=label, onvalue=1, offvalue=0, variable=mark,
+                menu.add_checkbutton(label=label, checked=key not in self.s["hidden_columns"],
                                      command=lambda k=key: self.set_column_visible(k, k in self.s["hidden_columns"]))
-        menu.tk_popup(event.x_root, event.y_root)
-        menu.grab_release()
+        menu.popup(event.x_root, event.y_root)
 
     def settings_changed(self) -> None:
         """Изменились производители или правила: обновляем список и папки."""
@@ -1411,6 +2024,7 @@ class App:
         self.bind_hotkeys()
         i18n.set_language(self.s["language"])
         self.s.save()
+        self._apply_vendors()
         self.rebuild_ui()
 
     def _double_click(self, plugin: core.Plugin) -> None:
@@ -1442,7 +2056,7 @@ class App:
 
     def _do_refresh(self) -> None:
         """Клавиша: обновить список."""
-        self.refresh()
+        self.load_in_background()
 
     def _do_find(self) -> None:
         """Клавиша: перейти к поиску."""
@@ -1482,12 +2096,19 @@ class App:
             import settings_page
             settings_page.Wizard(self)
             self.s.first_run = False
+            # Экскурсия начнётся, когда список уже проявится.
+            self.when_loaded(lambda: self.root.after(500, lambda: settings_page.Tutorial(self, self._startup_action)))
+            return
+        self.when_loaded(self._startup_action)
+
+    def _startup_action(self) -> None:
+        """Выбранное действие при старте. Выполняется, когда база уже прочитана."""
         action = self.s["startup_action"]
         if action == "new":
             self.s["filters"]["organized"] = ["no"]
             self.filters_changed()
         elif action == "propose" and self.db:
-            self.organize_click(proposal=True)
+            self.root.after(500, lambda: self.organize_click(proposal=True))  # пусть список сначала проявится
 
     def _watch_second_start(self) -> None:
         """Второй запуск программы только будит это окно."""
@@ -1501,18 +2122,18 @@ class App:
             self.tray.hide()
         self.root.deiconify()
         make_app_window(self.root)
-        user32.ShowWindow(hwnd_of(self.root), 9)  # SW_RESTORE: для свёрнутого окна
+        user32.ShowWindowAsync(hwnd_of(self.root), 9)  # SW_RESTORE: для свёрнутого окна
         self.root.lift()
         self.root.focus_force()
         if self.main_tab == "about":
             self.about.show()
 
     # ------------------------------------------------------------------ плавные переходы
-    def fade_rect(self, x: int, y: int, w: int, h: int) -> None:
-        """Плавно проявляет область окна (координаты экрана)."""
+    def fade_rect(self, x: int, y: int, w: int, h: int, color: str | None = None) -> None:
+        """Плавно проявляет область окна (координаты экрана). color: цвет, из которого она проявляется."""
         if not self.motion.enabled or not self.root.winfo_viewable():
             return
-        self.curtain.show(hwnd_of(self.root), x, y, w, h, PANEL)
+        self.curtain.show(hwnd_of(self.root), x, y, w, h, color or PANEL)
         self.motion.run("curtain", 170, lambda share: self.curtain.alpha((1 - share) ** 2), self.curtain.hide)
 
     def _build_window(self) -> None:
@@ -1522,13 +2143,19 @@ class App:
         root.configure(bg=EDGE)
         self.frame = tk.Frame(root, bg=FRAME)
         self.frame.pack(fill="both", expand=True, padx=1, pady=1)
+        self.frame_inset = 1
+        root.bind("<Configure>", self._fit_frame)
+        root.after_idle(self._fit_frame)
         self._build_title()
         self._build_tabs()
         self.body = tk.Frame(self.frame, bg=PANEL)
         self.left_w = p(self.s["left_width"])
-        self.left = tk.Canvas(self.body, bg=PANEL, width=self.left_w, highlightthickness=0)
-        self.left.pack(side="left", fill="y")
-        self.left.bind("<Configure>", lambda e: self._place_bottom_buttons())
+        # Холст панели выше окна и не меняет размер вместе с ним: иначе он перерисовывался бы целиком.
+        self.left_box = tk.Frame(self.body, bg=PANEL, width=self.left_w)
+        self.left_box.pack(side="left", fill="y")
+        self.left = tk.Canvas(self.left_box, bg=PANEL, highlightthickness=0)
+        self.left.place(x=0, y=0, width=self.left_w, height=max(user32.GetSystemMetrics(79), root.winfo_screenheight()))
+        self.body.bind("<Configure>", lambda e: self._place_bottom_buttons())
         self.split = tk.Canvas(self.body, bg=PANEL, width=p(12), highlightthickness=0, cursor="sb_h_double_arrow")
         self.split.pack(side="left", fill="y")
         self.split.bind("<Configure>", self._draw_split)
@@ -1545,15 +2172,17 @@ class App:
         self._build_bottom(right)
         self.settings_page = tk.Canvas(self.frame, bg=PANEL, highlightthickness=0)
         self.about_page = tk.Canvas(self.frame, bg=PANEL, highlightthickness=0)
-        self.about = about.AboutPage(self.about_page, self.t, globals(), APP_TITLE, VERSION, lambda: self._open(PROJECT_URL))
+        self.about = about.AboutPage(self.about_page, self.t, globals(), APP_TITLE, VERSION, self)
         import settings_page
         self.settings_view = settings_page.SettingsPage(self.settings_page, self)
         self._build_left()
         self.show_tab(self.main_tab)
+        self.edge_cursor = ""
         self.frame.bind("<Motion>", self._edge_motion)
+        self.frame.bind("<Leave>", lambda e: self._set_edge_cursor(""))
         self.frame.bind("<Button-1>", self._edge_press)
-        self.frame.bind("<B1-Motion>", self._edge_drag)
-        self.frame.bind("<ButtonRelease-1>", lambda e: self._edge_release())
+        # Запасной путь: после перетаскивания Windows событие ухода с края может не прийти.
+        root.bind_all("<Motion>", self._edge_guard)
         root.protocol("WM_DELETE_WINDOW", self.close)
 
     def _build_tabs(self) -> None:
@@ -1571,6 +2200,18 @@ class App:
             self.tab_items[name] = (rect, text)
             c.tag_bind(f"win_{name}", "<Button-1>", lambda e, n=name: self.show_tab(n))
             x += w
+        self.help_btn = IconButton(c, t, 0, p(17), "ic_help", self.show_tutorial)
+        self.wiki_btn = IconButton(c, t, 0, p(17), "ic_web", self.open_wiki)
+        for button, hint in ((self.help_btn, tr("Показать обучение")), (self.wiki_btn, tr("Справка"))):
+            c.tag_bind(button.tag, "<Enter>", lambda e, v=hint: self.set_hint(v), add="+")
+            c.tag_bind(button.tag, "<Leave>", lambda e: self.set_hint(""), add="+")
+        c.bind("<Configure>", self._place_tab_icons)
+
+    def _place_tab_icons(self, event) -> None:
+        """Ставит значки справки у правого края вкладок."""
+        p = self.t.p
+        self.help_btn.move_to(event.width - p(14), p(17))
+        self.wiki_btn.move_to(event.width - p(42), p(17))
 
     def show_tab(self, name: str) -> None:
         """Переключает вкладку окна."""
@@ -1606,6 +2247,8 @@ class App:
         c.pack(fill="x")
         c.create_text(p(7), p(14), text=APP_TITLE, anchor="w", fill=TITLE_TEXT, font=t.font_title)
         c.bind("<Button-1>", self._title_press)
+        c.bind("<Motion>", self._title_motion)
+        c.bind("<Leave>", lambda e: c.configure(cursor=""))
         c.bind("<Double-Button-1>", lambda e: self.toggle_maximize())
         self.win_buttons = []
         for name, command in (("win_close", self.close), ("win_max", self.toggle_maximize), ("win_min", self.minimize)):
@@ -1633,8 +2276,21 @@ class App:
         current = self.title.find_withtag("current")
         if current and any(current[0] in pair for pair in self.win_buttons):
             return
-        if not self.maximized:
-            begin_native_move(self.root)
+        edge = self._title_edge(event)
+        begin_native_drag(self.root, EDGE_HITS[edge] if edge else _HT_CAPTION)
+
+    def _title_edge(self, event) -> str:
+        """Край окна в заголовке: верх и верхние углы."""
+        grip = self.t.p(5)
+        if self.maximized or event.y >= grip:
+            return ""
+        if event.x <= grip:
+            return "nw"
+        return "ne" if event.x >= self.title.winfo_width() - grip else "n"
+
+    def _title_motion(self, event) -> None:
+        """Курсор изменения размера у верхнего края."""
+        self.title.configure(cursor=EDGE_CURSORS.get(self._title_edge(event), ""))
 
     def _build_bottom(self, parent: tk.Misc) -> None:
         """Нижняя строка: статус, фильтр и поиск."""
@@ -1644,8 +2300,7 @@ class App:
         c.pack(fill="x")
         self.status_id = c.create_text(p(1), p(19), text="", anchor="w", fill=TEXT_SOFT, font=t.font_bold)
         self.find_label = c.create_text(0, p(19), text=tr("Поиск"), anchor="e", fill=TEXT_SOFT, font=t.font_bold)
-        self.filter_btn = Button(c, t, 0, p(7), p(30), p(24), "", self.toggle_filters)
-        self.filter_icon = c.create_image(0, p(19), image=t.images["filter"], state="disabled")
+        self.filter_btn = IconButton(c, t, 0, p(19), "filter", self.toggle_filters)
         self.filter_badge = c.create_text(0, p(19), text="", anchor="e", fill=ORANGE, font=t.font_bold)
         for sequence, text in (("<Enter>", tr("Фильтры")), ("<Leave>", "")):
             c.tag_bind(self.filter_btn.tag, sequence, lambda e, v=text: self.set_hint(v), add="+")
@@ -1665,8 +2320,7 @@ class App:
         self.bottom.coords(self.find_window, event.width - p(1), p(19))
         self.bottom.coords(self.find_label, event.width - p(214), p(19))
         x = event.width - p(214) - self.t.font_bold.measure(tr("Поиск")) - p(12) - p(30)
-        self.bottom.coords(self.filter_btn.image, x, p(7))
-        self.bottom.coords(self.filter_icon, x + p(15), p(19))
+        self.filter_btn.move_to(x + p(15), p(19))
         self.bottom.coords(self.filter_badge, x - p(6), p(19))
         self._render_status()
 
@@ -1686,7 +2340,8 @@ class App:
         width = max(p(270), min(p(520), width))
         if width != self.left_w:
             self.left_w = width
-            self.left.configure(width=width)
+            self.left_box.configure(width=width)
+            self.left.place_configure(width=width)
             self._build_left()
 
     # ------------------------------------------------------------------ левая панель
@@ -1712,13 +2367,14 @@ class App:
         c, t = self.paint, self.t
         p = t.p
         click = f"led_{key}"
-        image = c.create_image(x, y, anchor="w", image=t.images["led_on" if self.s[key] else "led_off"], tags=(tag, click))
+        suffix = "_panel" if tag == "top_led" else ""  # индикатор вне группы лежит прямо на панели
+        image = c.create_image(x, y, anchor="w", image=t.images[("led_on" if self.s[key] else "led_off") + suffix], tags=(tag, click))
         c.create_text(x + p(18), y, text=label, anchor="w", fill=TEXT_SOFT, font=t.font, tags=(tag, click))
 
         def toggle(_event):
             """Переключает настройку."""
             self.s[key] = not self.s[key]
-            frames = t.led_frames() if self.motion.enabled else [t.images["led_off"], t.images["led_on"]]
+            frames = t.led_frames(suffix) if self.motion.enabled else [t.images["led_off" + suffix], t.images["led_on" + suffix]]
             steps = frames if self.s[key] else frames[::-1]
             self.motion.run(click, 110, lambda share: c.itemconfigure(image, image=steps[min(len(steps) - 1, int(share * len(steps)))]))
             if command:
@@ -1767,8 +2423,7 @@ class App:
         x0, x1 = p(6), self.left_w - p(6)
         y = p(89)
         self._group(y, p(59), tr("База плагинов FL Studio"), tag)
-        self.db_btn_folder = Button(c, t, x0 + p(6), y + p(29), p(34), p(23), "", self.choose_database, tags=(tag,))
-        c.create_image(x0 + p(23), y + p(40), image=t.images["folder"], state="disabled", tags=tag)
+        self.db_btn_folder = IconButton(c, t, x0 + p(23), y + p(40), "folder", self.choose_database, GROUP, (tag,))
         self.db_text = c.create_text(x0 + p(47), y + p(40), text="", anchor="w", fill=TEXT, font=t.font, tags=tag)
         c.tag_bind(self.db_text, "<Enter>", lambda e: self.set_hint(self.db or ""))
         c.tag_bind(self.db_text, "<Leave>", lambda e: self.set_hint(""))
@@ -1791,12 +2446,14 @@ class App:
         self._draw_sources()
         y += h + p(8)
         self._group(y, p(56), tr("Раскладка папок"), tag)
-        self.layout_btn = Button(c, t, x0 + p(6), y + p(26), x1 - x0 - p(12), p(24), "", self.layout_menu, tags=(tag,))
+        self.layout_box = (x0, y, x1, y + p(56))
+        self.layout_btn = Button(c, t, x0 + p(6), y + p(26), x1 - x0 - p(12), p(24), "", self.layout_menu, tags=(tag,), under=GROUP)
         c.create_image(x1 - p(16), y + p(38), image=t.images["caret"], state="disabled", tags=tag)
         y += p(62)
         rows = self.option_rows()
         options_h = p(26) + len(rows) * p(21) + p(9)
         self._group(y, options_h, tr("Параметры организации"), tag)
+        self.options_box = (x0, y, x1, y + options_h)
         for i, (key, label, hint) in enumerate(rows):
             self._led(x0 + p(14), y + p(32) + i * p(21), label, key, tag, hint)
         self._update_layout_label()
@@ -1837,7 +2494,7 @@ class App:
             c.create_text(path_x, y, text=t.fit(source.path, room, middle=True), anchor="w",
                           fill=ink if enabled else TEXT_OFF, font=t.font, state=state, tags=tag)
             c.tag_bind(f"src_{r}", "<Button-1>", lambda e, s=source: self._source_click(e, s))
-        if not self.sources:
+        if not self.sources and not self.loading:
             c.create_text(x0 + p(10), y0 + p(12), text=tr("Источники не найдены"), anchor="w", fill=TEXT_DIM, font=t.font,
                           state=state, tags=("srcrow", "p_options"))
 
@@ -1941,7 +2598,7 @@ class App:
         if not hasattr(self, "apply_btn"):
             return
         c, p = self.left, self.t.p
-        y = c.winfo_height() - p(35)
+        y = self.body.winfo_height() - p(35)
         if y < p(545):
             y = p(545)
         for button, x in ((self.apply_btn, p(6)), (self.reset_btn, p(6) + self.apply_btn.w + p(6))):
@@ -1994,7 +2651,8 @@ class App:
         many = len(selection) > 1
         self.vendor_entry.configure(state="normal")
         put("name", tr("Выбрано: {items}").format(items=plugins_word(len(selection))) if many else plugin.name)
-        put("status", "ok" if plugin.ok else tr("ошибка"))
+        put("status", tr("Работает") if plugin.ok else tr("Ошибка"))
+        c.itemconfigure(self.fields["status"], fill=STATUS_OK if plugin.ok else STATUS_ERROR)
         put("type", "?" if not plugin.type_known and not plugin.ok else tr("Эффект") if plugin.kind == "Effects" else tr("Синтезатор"))
         preset = os.path.relpath(plugin.fst, self.db) if plugin.fst and self.db and not plugin.source.startswith("custom:") else (plugin.fst or tr("нет файла"))
         put("preset", preset, self.left_w - p(32), middle=True)
@@ -2042,8 +2700,77 @@ class App:
                             generators_layout=s["layout_generators"], format_order=tuple(s["format_order"]),
                             folder_language=s["folder_language"], strip_suffix=s["strip_suffix"], move_from_new=s["move_from_new"])
 
-    def refresh(self, first: bool = False) -> None:
-        """Перечитывает базу с диска и обновляет окно."""
+    def refresh(self) -> None:
+        """Перечитывает базу с диска сразу и обновляет окно."""
+        self.load_token += 1  # результат идущей фоновой загрузки больше не нужен
+        if self.loading:
+            self._finish_loading()
+        self._use_database(self._read_database())
+
+    def load_in_background(self) -> None:
+        """Читает базу в фоновом потоке: окно не замирает, а в списке идёт анимация загрузки."""
+        self.load_token += 1
+        token = self.load_token
+        if self.grid.selected:
+            self.saved_selection = sorted(self.grid.selected)
+        self.loading = True
+        self.plugins, self.sources = [], []
+        self.grid.selected = set()
+        self.grid.set_items([])
+        self._render_status()
+        self.set_hint(tr("Загрузка базы плагинов…"))
+        if hasattr(self, "src_box"):
+            self._draw_sources()
+        self.grid.show_skeleton()
+        box: dict = {}
+
+        def work():
+            try:
+                box["data"] = self._read_database()
+            except Exception as exc:  # окно не должно зависнуть в состоянии загрузки
+                box["data"] = {"plugins": [], "sources": [], "error": str(exc), "organized": {}, "folders": {}}
+
+        def wait():
+            if token != self.load_token:
+                return
+            if thread.is_alive():
+                self.root.after(20, wait)
+                return
+            self._finish_loading()
+            self._use_database(box["data"])
+            self._restore_selection()
+            self.grid.reveal()
+            pending, self.after_load = self.after_load, []
+            for action in pending:
+                action()
+
+        thread = threading.Thread(target=work, daemon=True)
+        # Чуть позже: сначала окно успевает нарисовать анимацию загрузки.
+        self.root.after(60, lambda: (thread.start(), wait()))
+
+    def _finish_loading(self) -> None:
+        """Убирает признаки загрузки."""
+        self.loading = False
+        self.grid.hide_skeleton()
+        self.set_hint("")
+
+    def when_loaded(self, action) -> None:
+        """Выполняет действие сразу или когда закончится загрузка базы."""
+        if self.loading:
+            self.after_load.append(action)
+        else:
+            action()
+
+    def _restore_selection(self) -> None:
+        """Возвращает выбор в списке."""
+        self.grid.selected = set(self.saved_selection) & {p.key for p in self.grid.items}
+        if self.grid.selected:
+            first = next(key for key in self.saved_selection if key in self.grid.selected)
+            self.grid.show_row(first)
+            self._update_plugin_page()
+
+    def _read_database(self) -> dict:
+        """Вся работа с диском и расчёты. Не трогает окно, поэтому работает и в фоновом потоке."""
         plugins, sources = [], []
         error = ""
         if self.db:
@@ -2055,38 +2782,38 @@ class App:
             custom, source = core.load_custom(folder, self.install)
             plugins.extend(custom)
             sources.append(source)
-        self.plugins, self.sources = plugins, sources
+        self._apply_vendors(plugins)
+        organized, folders = core.scan_organized(self.db) if self.db else ({}, {})
+        for p in plugins:
+            p.organized_in = organized.get((p.kind, p.name_id))
+        return {"plugins": plugins, "sources": sources, "error": error, "folders": folders}
+
+    def _use_database(self, data: dict) -> None:
+        """Показывает прочитанную базу."""
+        self.plugins, self.sources, self.folders = data["plugins"], data["sources"], data.get("folders", {})
         if self.s["disabled_sources"] is None:
             self.s["disabled_sources"] = []
-        self._apply_vendors()
-        self._mark_organized()
-        self.source_offset = min(self.source_offset, max(0, len(sources) - self.source_rows))
+        self.source_offset = min(self.source_offset, max(0, len(self.sources) - self.source_rows))
         if hasattr(self, "src_box"):
             self._draw_sources()
         self.update_view()
         self._update_plugin_page()
         self._update_undo_button()
-        if error:
-            self.set_hint(tr("Не удалось прочитать базу: {error}").format(error=error))
+        if data["error"]:
+            self.set_hint(tr("Не удалось прочитать базу: {error}").format(error=data["error"]))
 
-    def _apply_vendors(self) -> None:
+    def _apply_vendors(self, plugins=None) -> None:
         """Считает производителя и назначение каждого плагина."""
         overrides = self.s["vendor_overrides"]
         aliases = {source.casefold(): target for source, target in self.s["vendor_aliases"].items()}
         purpose_overrides = self.s["purpose_overrides"]
         purpose_rules = rules.load_rules(self.s["purpose_rules"])
-        for p in self.plugins:
+        for p in self.plugins if plugins is None else plugins:
             p.vendor = overrides.get(p.name_id) or rules.apply_alias(p.raw_vendor, aliases) or (core.UNKNOWN_VENDOR if p.ok else "")
             p.vendor_edited = p.name_id in overrides
             p.purposes, p.purpose_source = rules.classify(p, purpose_overrides, purpose_rules)
             labels = " ".join(rules.purpose_label(x) for x in p.purposes)
             p.search = f"{p.name} {p.vendor} {p.filename} {p.formats} {labels}".casefold()
-
-    def _mark_organized(self) -> None:
-        """Отмечает плагины, уже разложенные по папкам."""
-        organized, self.folders = core.scan_organized(self.db) if self.db else ({}, {})
-        for p in self.plugins:
-            p.organized_in = organized.get((p.kind, p.name_id))
 
     def source_plugins(self) -> list[core.Plugin]:
         """Плагины из включённых источников."""
@@ -2121,15 +2848,14 @@ class App:
             return
         active = sum(len(v) for v in self.s["filters"].values())
         self.bottom.itemconfigure(self.filter_badge, text=str(active) if active else "")
-        self.bottom.itemconfigure(self.filter_icon, image=self.t.images["filter_on" if active else "filter"])
+        self.filter_btn.set_active(bool(active))
 
     def language_menu(self) -> None:
         """Меню языков."""
         menu = self._menu()
         for code, name in i18n.available().items():
             menu.add_command(label=name, command=lambda c=code: self.set_language(c))
-        menu.tk_popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
-        menu.grab_release()
+        menu.popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
 
     def set_language(self, code: str) -> None:
         """Меняет язык без перезапуска."""
@@ -2138,6 +2864,7 @@ class App:
         self.s["language"] = code
         self.s.save()
         i18n.set_language(code)
+        self._apply_vendors()  # в строках поиска есть переведённые назначения
         self.rebuild_ui()
 
     def toggle_filters(self) -> None:
@@ -2145,7 +2872,7 @@ class App:
         if self.filter_panel:
             self.filter_panel.close()
             return
-        box = self.bottom.bbox(self.filter_btn.image)
+        box = self.bottom.bbox(self.filter_btn.hit)
         right = self.bottom.winfo_rootx() + self.bottom.winfo_width()
         bottom = self.bottom.winfo_rooty() + box[1] - self.t.p(4)
         self.filter_panel = FilterPanel(self, right, bottom)
@@ -2168,14 +2895,13 @@ class App:
         """Меню раскладок: для всех, для эффектов, для генераторов."""
         menu = self._menu()
         for title, key in ((tr("Все плагины"), "all"), (tr("Эффекты"), "layout"), (tr("Генераторы"), "layout_generators")):
-            sub = self._menu(menu)
+            sub = self._menu()
             for name in rules.LAYOUTS:
                 sub.add_command(label=tr(rules.LAYOUT_LABELS[name]), command=lambda v=rules.LAYOUTS[name], k=key: self.set_layout(v, k))
             sub.add_separator()
             sub.add_command(label=tr("Свой шаблон…"), command=lambda k=key: self.custom_layout(k))
             menu.add_cascade(label=title, menu=sub)
-        menu.tk_popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
-        menu.grab_release()
+        menu.popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
 
     def custom_layout(self, key: str = "all") -> None:
         """Окно своего шаблона. key: для каких плагинов."""
@@ -2206,11 +2932,11 @@ class App:
     def _purpose_menu(self, _event=None) -> None:
         """Меню назначения для выбранных плагинов."""
         if self.grid.selection():
-            self._purpose_popup().tk_popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
+            self._purpose_popup().popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
 
-    def _purpose_popup(self, parent=None) -> tk.Menu:
+    def _purpose_popup(self) -> PopupMenu:
         """Создаёт меню назначений."""
-        menu = self._menu(parent)
+        menu = self._menu()
         for purpose in sorted(rules.PURPOSES, key=lambda x: rules.purpose_label(x).casefold()):
             menu.add_command(label=rules.purpose_label(purpose), command=lambda v=purpose: self.set_purpose(v))
         menu.add_separator()
@@ -2228,10 +2954,9 @@ class App:
                 overrides.pop(p.name_id, None)
         self._after_vendor_edit(selection)
 
-    def _menu(self, parent=None) -> tk.Menu:
+    def _menu(self) -> PopupMenu:
         """Меню в цветах программы."""
-        return tk.Menu(parent or self.root, tearoff=0, bg=GROUP, fg=TEXT, activebackground=SELECT, activeforeground=WHITE, bd=0,
-                       font=self.t.font, relief="flat")
+        return PopupMenu(self.t)
 
     # ------------------------------------------------------------------ бэкапы
     def _backup_before_change(self, small: bool = False) -> bool:
@@ -2311,8 +3036,7 @@ class App:
             stamp = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime(os.path.getmtime(path)))
             size = os.path.getsize(path) / 1048576
             menu.add_command(label=f"{stamp}  ({size:.1f} MB)", command=lambda v=path: self._restore(v))
-        menu.tk_popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
-        menu.grab_release()
+        menu.popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
 
     def _restore(self, path: str) -> None:
         """Восстанавливает выбранный бэкап."""
@@ -2440,20 +3164,47 @@ class App:
         if present:
             menu.add_command(label=tr("Убрать копию ({count})").format(count=len(present)), command=lambda: self._remove_plugins(present))
         menu.add_command(label=tr("Изменить вендора…"), command=self._focus_vendor)
-        menu.add_cascade(label=tr("Назначение"), menu=self._purpose_popup(menu))
+        menu.add_cascade(label=tr("Назначение"), menu=self._purpose_popup())
         menu.add_separator()
         if one.organized_in:
             menu.add_command(label=tr("Открыть папку копии"), command=lambda: self._open(one.organized_in))
         if one.primary and os.path.isdir(os.path.dirname(one.primary.filename)):
             menu.add_command(label=tr("Открыть папку плагина"), command=lambda: self._open(os.path.dirname(one.primary.filename)))
-        menu.tk_popup(event.x_root, event.y_root)
-        menu.grab_release()
+        menu.popup(event.x_root, event.y_root)
 
     def _focus_vendor(self) -> None:
         """Переходит к полю производителя."""
         self.show_page("plugin")
         self.vendor_entry.focus_set()
         self.vendor_entry.select_range(0, "end")
+
+    def open_releases(self) -> None:
+        """Номер версии: страница релизов, после вопроса."""
+        self._ask_open(tr("Открыть в браузере страницу релизов?"), PROJECT_URL + "/releases")
+
+    def show_tutorial(self) -> None:
+        """Значок вопроса: обучение заново."""
+        import settings_page
+        if self.filter_panel:
+            self.filter_panel.close()
+        self.when_loaded(lambda: settings_page.Tutorial(self))
+
+    def open_wiki(self) -> None:
+        """Значок планеты: вики программы на языке интерфейса, после вопроса."""
+        self._ask_open(tr("Открыть в браузере справку?"), f"{SITE_URL}{i18n.LANG}/wiki/index.html")
+
+    def open_project(self) -> None:
+        """Кнопка «Страница проекта»: сайт, после вопроса."""
+        self._ask_open(tr("Открыть в браузере страницу проекта?"), SITE_URL)
+
+    def _ask_open(self, question: str, url: str) -> None:
+        """Спрашивает и открывает адрес в браузере."""
+        if Dialog(self.root, self.t, tr("Открыть"), question, [tr("Открыть"), tr("Отмена")]).result == 0:
+            self._open(url)
+
+    def show_error(self, text: str) -> None:
+        """Окно с ошибкой."""
+        Dialog(self.root, self.t, tr("Ошибка"), text, [tr("Понятно")])
 
     def _open(self, path: str) -> None:
         """Открывает папку или адрес средствами Windows."""
@@ -2515,7 +3266,7 @@ class App:
     # ------------------------------------------------------------------ раскладка
     def organize_click(self, proposal: bool = False) -> None:
         """Главная кнопка. proposal: предложение при запуске, молчит, если предлагать нечего."""
-        if self.backup_running:
+        if self.backup_running or self.loading:
             return
         if self.worker:
             self.cancel_flag.set()
@@ -2739,18 +3490,28 @@ class App:
 
     def minimize(self) -> None:
         """Сворачивает окно."""
-        user32.ShowWindow(hwnd_of(self.root), 6)
+        user32.ShowWindowAsync(hwnd_of(self.root), 6)  # Async: окно Tk не должно обрабатывать это внутри вызова из Python
+
+    @property
+    def maximized(self) -> bool:
+        """Развёрнуто ли окно сейчас. Спрашиваем Windows: развернуть можно и без кнопки программы."""
+        return bool(user32.IsZoomed(hwnd_of(self.root)))
+
+    def _fit_frame(self, event=None) -> None:
+        """Развёрнутое окно Windows заходит за экран на толщину рамки: отодвигаем содержимое от этих краёв."""
+        if event is not None and event.widget is not self.root:
+            return
+        inset = 1  # контур окна
+        if self.maximized:
+            left, top, _width, _height = work_area(self.root)
+            inset = max(0, left - self.root.winfo_rootx(), top - self.root.winfo_rooty())
+        if inset != self.frame_inset:
+            self.frame_inset = inset
+            self.frame.pack_configure(padx=inset, pady=inset)
 
     def toggle_maximize(self) -> None:
         """Разворачивает или возвращает окно."""
-        if self.maximized:
-            self.root.geometry(self.normal_geometry)
-            self.maximized = False
-        else:
-            self.normal_geometry = self.root.geometry()
-            x, y, w, h = work_area(self.root)
-            self.root.geometry(f"{w}x{h}+{x}+{y}")
-            self.maximized = True
+        user32.ShowWindowAsync(hwnd_of(self.root), 9 if self.maximized else 3)
 
     def _edge_at(self, event) -> str:
         """Какой край окна под мышью."""
@@ -2767,38 +3528,24 @@ class App:
 
     def _edge_motion(self, event) -> None:
         """Курсор изменения размера у края."""
-        cursors = {"s": "sb_v_double_arrow", "e": "sb_h_double_arrow", "w": "sb_h_double_arrow",
-                   "se": "size_nw_se", "sw": "size_ne_sw"}
-        self.frame.configure(cursor=cursors.get(self._edge_at(event), "") if not self.maximized else "")
+        self._set_edge_cursor(EDGE_CURSORS.get(self._edge_at(event), "") if not self.maximized else "")
+
+    def _set_edge_cursor(self, cursor: str) -> None:
+        """Ставит курсор рамки. Он наследуется всеми виджетами внутри, поэтому у края его надо сразу снимать."""
+        if cursor != self.edge_cursor:
+            self.edge_cursor = cursor
+            self.frame.configure(cursor=cursor)
+
+    def _edge_guard(self, event) -> None:
+        """Мышь уже над другим виджетом: рамка больше не должна менять курсор."""
+        if self.edge_cursor and event.widget is not self.frame:
+            self._set_edge_cursor("")
 
     def _edge_press(self, event) -> None:
-        """Начало изменения размера."""
+        """Изменение размера за край: его ведёт сама Windows."""
         edge = self._edge_at(event)
         if edge and not self.maximized:
-            r = self.root
-            self.resize_state = (edge, event.x_root, event.y_root, r.winfo_x(), r.winfo_y(), r.winfo_width(), r.winfo_height())
-
-    def _edge_drag(self, event) -> None:
-        """Меняет размер окна."""
-        if not self.resize_state:
-            return
-        edge, x0, y0, wx, wy, ww, wh = self.resize_state
-        p = self.t.p
-        min_w, min_h = p(900), p(679)
-        dx, dy = event.x_root - x0, event.y_root - y0
-        x, y, w, h = wx, wy, ww, wh
-        if "e" in edge:
-            w = max(min_w, ww + dx)
-        if "w" in edge:
-            w = max(min_w, ww - dx)
-            x = wx + ww - w
-        if "s" in edge:
-            h = max(min_h, wh + dy)
-        self.root.geometry(f"{w}x{h}+{x}+{y}")
-
-    def _edge_release(self) -> None:
-        """Конец изменения размера."""
-        self.resize_state = None
+            begin_native_drag(self.root, EDGE_HITS[edge])
 
     def _save_layout(self) -> None:
         """Запоминает окно, колонки, поиск, вкладку и выбор."""
@@ -2807,7 +3554,12 @@ class App:
         self.s["column_widths"] = {k: round(v / scale) for k, v in self.grid.widths.items()}
         self.s["sort"] = [self.grid.sort_key, self.grid.sort_reverse]
         self.s["column_order"] = self.grid.order[1:]
-        self.s["geometry"] = self.normal_geometry if self.maximized else self.root.geometry()
+        hwnd = hwnd_of(self.root)
+        if user32.IsZoomed(hwnd) or user32.IsIconic(hwnd):
+            self.s["geometry"] = normal_geometry(self.root)
+        else:
+            self.s["geometry"] = self.root.geometry()  # прилипшее к краю окно откроется там же
+        self.s["maximized"] = bool(user32.IsZoomed(hwnd))
         self.s["find_text"] = self.find_var.get()
         self.s["main_tab"] = self.main_tab
         self.s["side_page"] = self.page
@@ -2823,26 +3575,36 @@ class App:
         """Прячет окно в трей. False, если значок создать не удалось."""
         if self.tray is None:
             import tray
-            self.tray = tray.Tray(resource_path("assets", "app.ico"), APP_TITLE, lambda: self.root.after(0, self.restore_window),
-                                  lambda: self.root.after(0, self._tray_menu))
+            # Windows вызывает это вне обычного кода Tk, поэтому здесь только записка для таймера.
+            self.tray = tray.Tray(resource_path("assets", "app.ico"), APP_TITLE, lambda: setattr(self, "tray_request", self.restore_window),
+                                  lambda: setattr(self, "tray_request", self._tray_menu))
         if not self.tray.show():
             return False
         self._save_layout()
         self.s.save()
         self.about.hide()
         self.root.withdraw()
+        self._watch_tray()
         return True
+
+    def _watch_tray(self) -> None:
+        """Пока окно в трее, выполняет то, что запросил значок."""
+        request, self.tray_request = self.tray_request, None
+        if request:
+            request()
+        if self.tray and self.tray.shown:
+            self.root.after(100, self._watch_tray)
 
     def _tray_menu(self) -> None:
         """Меню значка в трее."""
         menu = self._menu()
         menu.add_command(label=tr("Открыть"), command=self.restore_window)
         menu.add_command(label=tr("Выход"), command=self.quit)
-        menu.tk_popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
-        menu.grab_release()
+        menu.popup(self.root.winfo_pointerx(), self.root.winfo_pointery())
 
     def quit(self) -> None:
         """Выход из программы."""
+        self.about.hide()
         if self.tray:
             self.tray.hide()
         if self.worker:
@@ -2859,7 +3621,8 @@ def resource_path(*parts: str) -> str:
     return os.path.join(base, *parts)
 
 
-def create_window(settings: core.Settings, db_override: str | None = None, forced_theme: str | None = None, show_event=None) -> tuple[tk.Tk, App]:
+def create_window(settings: core.Settings, db_override: str | None = None, forced_theme: str | None = None, show_event=None,
+                  background_load: bool = False) -> tuple[tk.Tk, App]:
     """Создаёт окно и настраивает его положение."""
     scale = enable_dpi_awareness()
     root = tk.Tk()
@@ -2871,7 +3634,7 @@ def create_window(settings: core.Settings, db_override: str | None = None, force
             root.iconbitmap(default=icon)
         except tk.TclError:
             pass
-    app = App(root, scale, settings, db_override, forced_theme, show_event)
+    app = App(root, scale, settings, db_override, forced_theme, show_event, background_load)
     theme = app.t
     geometry = settings["geometry"]
     if not geometry or not _geometry_visible(root, geometry):
@@ -2887,6 +3650,11 @@ def create_window(settings: core.Settings, db_override: str | None = None, force
     if settings["always_on_top"]:
         root.attributes("-topmost", True)
     root.deiconify()
+    root.update_idletasks()
+    make_app_window(root)
+    app.native_frame = NativeFrame(root, lambda: (app.t.p(900), app.t.p(679)))
+    if settings["maximized"]:
+        user32.ShowWindowAsync(hwnd_of(root), 3)
     root.lift()
     root.focus_force()
     return root, app
@@ -2906,7 +3674,7 @@ def _geometry_visible(root: tk.Misc, geometry: str) -> bool:
 
 def run(settings: core.Settings, db_override: str | None = None, forced_theme: str | None = None, show_event=None) -> None:
     """Запускает программу."""
-    root, app = create_window(settings, db_override, forced_theme, show_event)
+    root, app = create_window(settings, db_override, forced_theme, show_event, background_load=True)
     fade_in_window(root, app.motion, 180)
     root.after(220, app.startup)
     root.mainloop()

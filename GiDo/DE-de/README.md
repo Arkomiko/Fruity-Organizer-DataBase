@@ -104,7 +104,7 @@ Füge auf der Registerkarte „Einstellungen“ oder in FODB.json Regeln hinzu, 
 Benötigt Windows und Python 3.13. Das Programm nutzt nur die Standardbibliothek.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Danksagung

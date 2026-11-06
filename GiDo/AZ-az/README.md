@@ -104,7 +104,7 @@ FODB aktiv mövzunu oxuyur və FL Studio-da dəyişəndə rənglərini yeniləyi
 Windows və Python 3.13 lazımdır. Proqramın özü yalnız standart kitabxanadan istifadə edir.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Təşəkkür

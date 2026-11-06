@@ -104,7 +104,7 @@ Dodawaj reguły na karcie Ustawienia lub w FODB.json, aby wyrażeniami regularny
 Wymaga Windows i Pythona 3.13. Program korzysta tylko z biblioteki standardowej.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Podziękowania

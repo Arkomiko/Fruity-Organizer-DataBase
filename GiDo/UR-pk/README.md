@@ -106,7 +106,7 @@ FODB فعال تھیم پڑھتا ہے اور FL Studio میں بدلنے پر �
 Windows اور Python 3.13 درکار ہیں۔ پروگرام صرف اسٹینڈرڈ لائبریری استعمال کرتا ہے۔
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## اظہارِ تشکر

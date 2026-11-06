@@ -145,7 +145,8 @@ class SettingsPage:
         self.section = app.settings_section
         self.format_drag = None
         self.tables: list[Table] = []
-        canvas.bind("<Configure>", lambda e: self.build())
+        self.build_job = None
+        canvas.bind("<Configure>", self._configure)
         # На холст, а не на элементы: обработчики перерисовывают элементы под самой мышью.
         canvas.bind("<MouseWheel>", lambda e: any(table.wheel(e) for table in self.tables))
         canvas.bind("<Button-1>", lambda e: [table.click(e) for table in self.tables])
@@ -153,8 +154,18 @@ class SettingsPage:
         canvas.bind("<B1-Motion>", self._format_motion)
         canvas.bind("<ButtonRelease-1>", lambda e: self._format_release())
 
+    def _configure(self, _event) -> None:
+        """Размер изменился: перестраиваем страницу, когда он перестанет меняться."""
+        if self.build_job is not None:
+            self.c.after_cancel(self.build_job)
+        if hasattr(self, "status"):
+            self.build_job = self.c.after(60, self.build)
+        else:
+            self.build()
+
     def build(self) -> None:
         """Рисует меню разделов и текущий раздел."""
+        self.build_job = None
         c, t = self.c, self.t
         p = t.p
         c.delete("all")
@@ -223,7 +234,7 @@ class SettingsPage:
 
     def button(self, x, y, w, text, command, h=None):
         """Кнопка."""
-        return U.Button(self.c, self.t, x, y, w, h or self.t.p(26), text, command, tags=("sec",))
+        return U.Button(self.c, self.t, x, y, w, h or self.t.p(26), text, command, tags=("sec",), under=U.GROUP)
 
     def dropdown(self, x, y, w, current, options, pick) -> None:
         """Кнопка с меню из пар (значение, подпись)."""
@@ -232,8 +243,7 @@ class SettingsPage:
             menu = self.app._menu()
             for value, label in options:
                 menu.add_command(label=label, command=lambda v=value: pick(v))
-            menu.tk_popup(self.c.winfo_rootx() + x, self.c.winfo_rooty() + y + self.t.p(26))
-            menu.grab_release()
+            menu.popup(self.c.winfo_rootx() + x, self.c.winfo_rooty() + y + self.t.p(26), w)
         label = next((text for value, text in options if value == current), str(current))
         self.button(x, y, w, self.t.fit(label, w - self.t.p(30)), popup)
         self.c.create_image(x + w - self.t.p(12), y + self.t.p(13), image=self.t.images["caret"], state="disabled", tags="sec")
@@ -272,8 +282,7 @@ class SettingsPage:
         self.led(self.x0 + p(14), y0 + p(142), tr("Поверх всех окон"), "always_on_top", "", app._apply_topmost)
         y += p(198)
         self.group(y, p(66), tr("База плагинов FL Studio"))
-        self.button(self.x0 + p(12), y + p(30), p(34), "", self._choose_database)
-        self.c.create_image(self.x0 + p(29), y + p(43), image=self.t.images["folder"], state="disabled", tags="sec")
+        U.IconButton(self.c, self.t, self.x0 + p(29), y + p(43), "folder", self._choose_database, U.GROUP, ("sec",))
         self.label(self.x0 + p(56), y + p(43), self.t.fit(app.db or tr("Папка не найдена: выберите её"), self.x1 - self.x0 - p(70), middle=True), U.TEXT if app.db else U.ORANGE)
 
     def _choose_database(self) -> None:
@@ -563,6 +572,43 @@ class SettingsPage:
         for i, (key, label) in enumerate(columns):
             x = self.x0 + p(14) + i % 3 * column_w
             self._column_led(x, y + p(36) + i // 3 * p(22), key, label)
+        y += p(42) + (len(columns) + 2) // 3 * p(22)
+        self.group(y, p(128), tr("Статус"))
+        y0 = y + p(30)
+        self.label(self.x0 + p(14), y0 + p(13), tr("Вид статуса"))
+
+        def style(value):
+            s["status_style"] = value
+            s.save()
+            app.rebuild_ui()
+        self.dropdown(self.x0 + p(250), y0, p(320), s["status_style"], [("text", tr("Текст")), ("icons", tr("Значки"))], style)
+        self._status_color(y0 + p(32), tr("Цвет: работает"), "status_ok", U.STANDARD_STATUS_OK)
+        self._status_color(y0 + p(64), tr("Цвет: ошибка"), "status_error", U.STANDARD_STATUS_ERROR)
+
+    def _status_color(self, y, text, key, standard) -> None:
+        """Строка цвета статуса: палитра открывается, только если выбран свой цвет."""
+        c, t, s, p = self.c, self.t, self.app.s, self.t.p
+        self.label(self.x0 + p(14), y + p(13), text)
+        current = s[key]
+
+        def mode(value):
+            s[key] = (current or standard) if value == "custom" else ""
+            s.save()
+            self.app.rebuild_ui()
+        self.dropdown(self.x0 + p(250), y, p(320), "custom" if current else "standard", [("standard", tr("Стандартный")), ("custom", tr("Свой"))], mode)
+        tag = f"swatch_{key}"
+        x = self.x0 + p(580)
+        c.create_rectangle(x, y + p(3), x + p(34), y + p(23), fill=current or standard, outline=U.BOX_LINE, stipple="" if current else "gray50", tags=("sec", tag))
+        if current:
+            c.tag_bind(tag, "<Button-1>", lambda e: self._pick_status_color(key, current))
+
+    def _pick_status_color(self, key: str, color: str) -> None:
+        """Окно выбора цвета статуса."""
+        _rgb, picked = colorchooser.askcolor(color=color, parent=self.app.root)
+        if picked:
+            self.app.s[key] = picked.upper()
+            self.app.s.save()
+            self.app.rebuild_ui()
 
     def _column_led(self, x, y, key, label) -> None:
         """Переключатель видимости колонки."""
@@ -719,6 +765,219 @@ class SettingsPage:
         self.app.settings_imported()
 
 
+class Tutorial:
+    """Обучение: затемняет окно, подсвечивает его часть и объясняет её в карточке рядом."""
+
+    DIM = 0.6  # насколько темнеет окно вокруг подсветки
+    MOVE_MS = 280
+
+    def __init__(self, app, done=None):
+        """done: что выполнить, когда обучение закончится."""
+        self.app, self.t, self.done = app, app.t, done
+        self.root = app.root
+        p = self.t.p
+        app.show_tab("plugins")
+        app.show_page("options")
+        self.root.update_idletasks()
+        box_of = self._canvas_box
+        self.steps = (
+            ("Добро пожаловать в FODB", "FODB наводит порядок в браузере плагинов FL Studio. Короткая экскурсия покажет главное, это займёт минуту.", None),
+            ("Список плагинов", "Здесь все плагины из базы FL Studio. Назначение определяется автоматически. Звезда значит, что плагин уже разложен: клик по ней кладёт или убирает его.",
+             lambda: self._widget_box(app.grid.c)),
+            ("Источники плагинов", "Откуда брать плагины. Снимите галочку, чтобы скрыть источник, например VST, если есть VST3.", lambda: box_of(app.left, app.src_box)),
+            ("Раскладка папок", "Как называть папки: по производителю, по назначению или вложенно. Для эффектов и генераторов можно выбрать разное.", lambda: box_of(app.left, app.layout_box)),
+            ("Параметры организации", "Что делать при раскладке: одна копия на плагин, пропуск ошибок и другие правила. Наведите на строку, и внизу появится подсказка.", lambda: box_of(app.left, app.options_box)),
+            ("Фильтры", "Воронка открывает фильтры по назначению, производителю и другим признакам. В поиске можно просто набрать название.", self._filter_box),
+            ("Организовать плагины", "Главная кнопка. Сначала покажет, что и куда ляжет, и сделает бэкап базы. Ваши плагины при этом не меняются.",
+             lambda: box_of(app.left, app.left.bbox(app.main_btn.image))),
+            ("Настройки", "Здесь отмена и бэкапы, цвета и шрифт, горячие клавиши и ваши правила.", lambda: box_of(app.tabs, app.tabs.bbox("win_settings"))),
+            ("Всё готово!", "После раскладки обновите браузер плагинов в FL Studio. Знак вопроса покажет эту экскурсию снова, а планета откроет справку.", self._help_box),
+        )
+        self.index = 0
+        self.size = (self.root.winfo_rootx(), self.root.winfo_rooty(), self.root.winfo_width(), self.root.winfo_height())
+        rx, ry, rw, rh = self.size
+        owner = U.hwnd_of(self.root)
+        self.shade = U.Curtain("FODBTutorialShade")
+        self.ring = U.Curtain("FODBTutorialRing")
+        self.ring_width = max(2, p(2))
+        self.shade.show(owner, rx, ry, rw, rh, "#000000")
+        self.ring.show(owner, rx, ry, rw, rh, U.ORANGE)
+        self.ring.shape((0, 0, 0, 0), None)
+        self.hole = None
+        self.shade.alpha(0.0)
+        self.top = tk.Toplevel(self.root, bg=U.EDGE)
+        self.top.withdraw()
+        self.top.overrideredirect(True)
+        self.top.transient(self.root)  # карточка принадлежит окну и не висит поверх других программ
+        self.top.protocol("WM_DELETE_WINDOW", self.finish)
+        self.card_w = p(380)
+        self.c = tk.Canvas(self.top, bg=U.PANEL, width=self.card_w, height=p(180), highlightthickness=1, highlightbackground=U.ORANGE, bd=0)
+        self.c.pack()
+        self.top.bind("<Escape>", lambda e: self.finish())
+        self.top.bind("<Return>", lambda e: self.next())
+        self.top.bind("<KeyPress>", self._key)
+        self._build_card()
+        U.fade_in_window(self.top, self.t.motion, 200)
+        self.t.motion.run("tutorial_shade", 220, lambda share: self.shade.alpha(self.DIM * share))
+        self.draw()
+        self.card_x, self.card_y = self._card_position(None)
+        self.top.geometry(f"+{self.card_x}+{self.card_y}")
+        self.top.deiconify()
+        self.top.lift()
+        self.top.focus_force()
+        self.top.grab_set()
+
+    # ------------------------------------------------------------------ где что находится
+    def _widget_box(self, widget) -> tuple[int, int, int, int]:
+        """Границы виджета на экране."""
+        x, y = widget.winfo_rootx(), widget.winfo_rooty()
+        return x, y, x + widget.winfo_width(), y + widget.winfo_height()
+
+    def _canvas_box(self, canvas, box) -> tuple[int, int, int, int]:
+        """Границы прямоугольника с холста на экране."""
+        x, y = canvas.winfo_rootx(), canvas.winfo_rooty()
+        return x + box[0], y + box[1], x + box[2], y + box[3]
+
+    def _filter_box(self) -> tuple[int, int, int, int]:
+        """Значок фильтров и поле поиска."""
+        app = self.app
+        x, y = app.bottom.winfo_rootx(), app.bottom.winfo_rooty()
+        left = app.bottom.bbox(app.filter_btn.hit)[0]
+        return x + left, y, x + app.bottom.winfo_width(), y + app.bottom.winfo_height()
+
+    def _help_box(self) -> tuple[int, int, int, int]:
+        """Значки обучения и справки."""
+        app = self.app
+        x, y = app.tabs.winfo_rootx(), app.tabs.winfo_rooty()
+        x0, y0, _x1, y1 = app.tabs.bbox(app.wiki_btn.hit)
+        return x + x0, y + y0, x + app.tabs.bbox(app.help_btn.hit)[2], y + y1
+
+    def _target(self):
+        """Что подсвечивает текущий шаг, с небольшим запасом вокруг. None: ничего."""
+        getter = self.steps[self.index][2]
+        if getter is None:
+            return None
+        pad = self.t.p(3)
+        x0, y0, x1, y1 = getter()
+        return x0 - pad, y0 - pad, x1 + pad, y1 + pad
+
+    def _card_position(self, target) -> tuple[int, int]:
+        """Ставит карточку там, где хватает места: справа, слева, снизу или сверху от подсветки."""
+        p = self.t.p
+        rx, ry, rw, rh = self.size
+        w, h = self.card_w + 2, self.c.winfo_reqheight() + 2
+        if target is None:
+            return rx + (rw - w) // 2, ry + (rh - h) // 2
+        x0, y0, x1, y1 = target
+        gap = p(14)
+        middle_x, middle_y = (x0 + x1 - w) // 2, (y0 + y1 - h) // 2
+        options = ((x1 + gap, middle_y, x1 + gap + w <= rx + rw), (x0 - gap - w, middle_y, x0 - gap - w >= rx),
+                   (middle_x, y1 + gap, y1 + gap + h <= ry + rh), (middle_x, y0 - gap - h, y0 - gap - h >= ry))
+        x, y = next(((x, y) for x, y, fits in options if fits), (rx + (rw - w) // 2, ry + p(40)))
+        return max(rx + p(6), min(rx + rw - w - p(6), x)), max(ry + p(6), min(ry + rh - h - p(6), y))
+
+    # ------------------------------------------------------------------ карточка
+    def _build_card(self) -> None:
+        """Создаёт карточку один раз. Её высота равна самому длинному шагу, поэтому значки не прыгают."""
+        c, t = self.c, self.t
+        p = t.p
+        self.title_item = c.create_text(p(16), p(20), anchor="w", fill=U.ORANGE, font=t.font_title)
+        self.body_item = c.create_text(p(16), p(38), anchor="nw", fill=U.TEXT, font=t.font, width=self.card_w - p(32))
+        bottom = 0
+        for _title, text, _getter in self.steps:
+            c.itemconfigure(self.body_item, text=tr(text))
+            bottom = max(bottom, c.bbox(self.body_item)[3])
+        y = bottom + p(26)
+        self.skip_item = c.create_text(p(16), y, text=tr("Пропустить"), anchor="w", fill=U.TEXT_SOFT, font=t.font)
+        c.tag_bind(self.skip_item, "<Enter>", lambda e: c.itemconfigure(self.skip_item, fill=U.ORANGE))
+        c.tag_bind(self.skip_item, "<Leave>", lambda e: c.itemconfigure(self.skip_item, fill=U.TEXT_SOFT))
+        c.tag_bind(self.skip_item, "<ButtonRelease-1>", lambda e: self.finish())
+        self.count_item = c.create_text(self.card_w // 2, y, fill=U.TEXT_DIM, font=t.font)
+        self.back_btn = U.IconButton(c, t, self.card_w - p(58), y, "ic_prev", self.back)
+        self.next_btn = U.IconButton(c, t, self.card_w - p(28), y, "ic_next", self.next)
+        c.configure(height=y + p(20))
+
+    def draw(self) -> None:
+        """Показывает в карточке текущий шаг."""
+        c = self.c
+        title, text, _getter = self.steps[self.index]
+        last = self.index == len(self.steps) - 1
+        c.itemconfigure(self.title_item, text=tr(title))
+        c.itemconfigure(self.body_item, text=tr(text))
+        c.itemconfigure(self.count_item, text=f"{self.index + 1} / {len(self.steps)}")
+        c.itemconfigure(self.skip_item, state="hidden" if last else "normal")
+        self.back_btn.set_visible(self.index > 0)
+        self.next_btn.set_icon("ic_done" if last else "ic_next")
+        self.top.update_idletasks()
+
+    def _key(self, event) -> None:
+        """Стрелки листают шаги. Коды клавиш не зависят от раскладки."""
+        if event.keycode == 39:
+            self.next()
+        elif event.keycode == 37:
+            self.back()
+
+    def next(self) -> None:
+        """Следующий шаг или конец."""
+        if self.index == len(self.steps) - 1:
+            self.finish()
+        else:
+            self.go(self.index + 1)
+
+    def back(self) -> None:
+        """Предыдущий шаг."""
+        if self.index:
+            self.go(self.index - 1)
+
+    def go(self, index: int) -> None:
+        """Переход: подсветка и карточка плавно едут на новое место."""
+        self.index = index
+        self.draw()
+        target = self._target()
+        rx, ry, rw, rh = self.size
+        cx, cy = rx + rw // 2, ry + rh // 2
+        start_hole = self.hole or (cx, cy, cx, cy)
+        end_hole = target or (cx, cy, cx, cy)
+        start_card = (self.card_x, self.card_y)
+        end_card = self._card_position(target)
+
+        def step(share):
+            eased = 1 - (1 - share) ** 3
+            box = tuple(round(a + (b - a) * eased) for a, b in zip(start_hole, end_hole))
+            self._set_hole(box)
+            self.card_x = round(start_card[0] + (end_card[0] - start_card[0]) * eased)
+            self.card_y = round(start_card[1] + (end_card[1] - start_card[1]) * eased)
+            self.top.geometry(f"+{self.card_x}+{self.card_y}")
+
+        def arrive():
+            if target is None:
+                self.hole = None
+                self.shade.shape(None, None)
+                self.ring.shape((0, 0, 0, 0), None)
+
+        self.t.motion.run("tutorial_move", self.MOVE_MS, step, arrive)
+
+    def _set_hole(self, box) -> None:
+        """Прорезает затемнение и обводит прорезь."""
+        rx, ry, rw, rh = self.size
+        self.hole = box  # следующий переход начнётся отсюда, даже если этот не закончился
+        x0, y0, x1, y1 = box[0] - rx, box[1] - ry, box[2] - rx, box[3] - ry
+        self.shade.shape((0, 0, rw, rh), (x0, y0, x1, y1))
+        w = self.ring_width
+        self.ring.shape((x0 - w, y0 - w, x1 + w, y1 + w), (x0, y0, x1, y1))
+
+    def finish(self) -> None:
+        """Конец обучения: всё плавно исчезает, окно снова отвечает."""
+        self.t.motion.stop("tutorial_move")
+        self.top.grab_release()
+        self.top.destroy()
+        self.ring.hide()
+        self.t.motion.run("tutorial_shade", 200, lambda share: self.shade.alpha(self.DIM * (1 - share)), self.shade.hide)
+        self.root.focus_force()
+        if self.done:
+            self.done()
+
+
 class Wizard:
     """Первый запуск: только то, что программа не может решить сама."""
 
@@ -756,8 +1015,7 @@ class Wizard:
         U.Button(c, t, x, p(86), field_w, p(26), i18n.available().get(i18n.LANG, i18n.LANG), self.language_menu)
         c.create_image(x + field_w - p(12), p(99), image=t.images["caret"], state="disabled")
         c.create_text(p(16), p(145), text=tr("База плагинов FL Studio"), anchor="w", fill=U.TEXT_SOFT, font=t.font_bold)
-        U.Button(c, t, x, p(132), p(34), p(26), "", self.choose)
-        c.create_image(x + p(17), p(145), image=t.images["folder"], state="disabled")
+        U.IconButton(c, t, x + p(17), p(145), "folder", self.choose, U.PANEL)
         found = app.db or tr("Папка не найдена: выберите её")
         c.create_text(x + p(44), p(137), text=t.fit(found, field_w - p(46), middle=True), anchor="w", fill=U.TEXT if app.db else U.ORANGE, font=t.font)
         c.create_text(x + p(44), p(152), text=tr("Найдена автоматически. Можно указать другую.") if app.db else "", anchor="w", fill=U.TEXT_DIM, font=t.font)
@@ -770,10 +1028,10 @@ class Wizard:
 
     def language_menu(self) -> None:
         """Меню языков."""
-        menu = self.app._menu(self.top)
+        menu = self.app._menu()
         for code, name in i18n.available().items():
             menu.add_command(label=name, command=lambda v=code: self.language(v))
-        menu.tk_popup(self.top.winfo_pointerx(), self.top.winfo_pointery())
+        menu.popup(self.top.winfo_pointerx(), self.top.winfo_pointery())
 
     def language(self, code: str) -> None:
         """Меняет язык."""

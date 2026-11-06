@@ -104,7 +104,7 @@ Thêm quy tắc trong thẻ Cài đặt hoặc FODB.json để đặt công dụ
 Cần Windows và Python 3.13. Chương trình chỉ dùng thư viện chuẩn.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Ghi công

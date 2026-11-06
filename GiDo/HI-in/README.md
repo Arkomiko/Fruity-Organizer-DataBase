@@ -104,7 +104,7 @@ FODB सक्रिय थीम पढ़ता है और FL Studio मे
 Windows और Python 3.13 चाहिए। प्रोग्राम केवल स्टैंडर्ड लाइब्रेरी का उपयोग करता है।
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## आभार

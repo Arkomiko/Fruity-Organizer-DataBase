@@ -104,7 +104,7 @@ Ayarlar sekmesinden veya FODB.json içinden kural ekleyerek düzenli ifadelerle 
 Windows ve Python 3.13 gerekir. Program yalnızca standart kitaplığı kullanır.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Teşekkürler

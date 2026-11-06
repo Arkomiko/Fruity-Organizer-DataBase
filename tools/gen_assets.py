@@ -112,8 +112,197 @@ def funnel():
     return img
 
 
+# Лисичка Arkomiko: контур и глаза в координатах исходного рисунка.
+FOX_LINE = [(600, 460), (820, 700), (1110, 700), (1330, 460), (1476, 872), (968, 1478), (456, 872)]
+FOX_EYES = ([(637, 936), (782, 954), (880, 1062), (746, 1043)], [(1294, 936), (1149, 954), (1051, 1062), (1185, 1043)])
+FOX_SIZE = 40
+
+
+def _fox_point(x, y):
+    """Переводит точку рисунка в координаты значка."""
+    scale = (FOX_SIZE - 2) / 1053
+    return ((x - 442) * scale + (FOX_SIZE - 1048 * scale) / 2) * SS, ((y - 440) * scale + 1) * SS
+
+
+def fox_line():
+    """Контур лисички."""
+    img = canvas(FOX_SIZE)
+    points = [_fox_point(x, y) for x, y in FOX_LINE]
+    ImageDraw.Draw(img).line(points + points[:2], fill=(255, 255, 255, 255), width=SS, joint="curve")
+    return img
+
+
+def fox_eyes(openness):
+    """Глаза лисички. openness: 1 открыты, 0 закрыты (остаётся тонкая линия)."""
+    img = canvas(FOX_SIZE)
+    d = ImageDraw.Draw(img)
+    for eye in FOX_EYES:
+        middle = sum(y for _x, y in eye) / len(eye)
+        d.polygon([_fox_point(x, middle + (y - middle) * max(openness, 0.08)) for x, y in eye], fill=(255, 255, 255, 255))
+    return img
+
+
+def icon_play():
+    """Значок «играть»."""
+    img = canvas(16)
+    ImageDraw.Draw(img).polygon([(4.5 * SS, 2.5 * SS), (13 * SS, 8 * SS), (4.5 * SS, 13.5 * SS)], fill=(255, 255, 255, 255))
+    return img
+
+
+def icon_stop():
+    """Значок «стоп»."""
+    img = canvas(16)
+    ImageDraw.Draw(img).rectangle((3.5 * SS, 3.5 * SS, 12.5 * SS - 1, 12.5 * SS - 1), fill=(255, 255, 255, 255))
+    return img
+
+
+def icon_arrow(forward):
+    """Стрелка вперёд или назад."""
+    img = canvas(16)
+    d = ImageDraw.Draw(img)
+    c = (255, 255, 255, 255)
+    points = ((2.5, 8), (13, 8)), ((8.5, 3.5), (13, 8), (8.5, 12.5))
+    for line in points:
+        d.line([((x if forward else 16 - x) * SS, y * SS) for x, y in line], fill=c, width=int(1.7 * SS), joint="curve")
+    return img
+
+
+def _icon_line(points, width=1.5):
+    """Значок из одной линии. Точки заданы в клетках значка 16 на 16."""
+    img = canvas(16)
+    ImageDraw.Draw(img).line([(x * SS, y * SS) for x, y in points], fill=(255, 255, 255, 255), width=int(width * SS), joint="curve")
+    return img
+
+
+def icon_play_big():
+    """Большой значок «играть»."""
+    img = canvas(22)
+    ImageDraw.Draw(img).polygon([(6 * SS, 3.5 * SS), (18 * SS, 11 * SS), (6 * SS, 18.5 * SS)], fill=(255, 255, 255, 255))
+    return img
+
+
+def icon_stop_big():
+    """Большой значок «стоп»."""
+    img = canvas(22)
+    ImageDraw.Draw(img).rectangle((5 * SS, 5 * SS, 17 * SS - 1, 17 * SS - 1), fill=(255, 255, 255, 255))
+    return img
+
+
+def icon_sine():
+    """Синусоида."""
+    return _icon_line([(1 + x / 2, 8 - 4.5 * math.sin(math.pi * x / 14)) for x in range(29)])
+
+
+def icon_triangle():
+    """Треугольная волна: значок-треугольник."""
+    return _icon_line([(8, 2.5), (14, 13), (2, 13), (8, 2.5), (14, 13)])
+
+
+def icon_square():
+    """Квадратная волна: значок-квадрат."""
+    return _icon_line([(3, 3), (13, 3), (13, 13), (3, 13), (3, 3), (13, 3)])
+
+
+def icon_bell():
+    """Колокол: значок-крестик."""
+    img = _icon_line([(3, 3), (13, 13)], 1.7)
+    ImageDraw.Draw(img).line([(13 * SS, 3 * SS), (3 * SS, 13 * SS)], fill=(255, 255, 255, 255), width=int(1.7 * SS))
+    return img
+
+
+def icon_scale():
+    """Лад: ступени."""
+    return _icon_line([(1.5, 14), (5, 14), (5, 10), (8.8, 10), (8.8, 6), (12.5, 6), (12.5, 2), (15, 2)])
+
+
+def icon_help():
+    """Знак вопроса."""
+    img = canvas(16)
+    d = ImageDraw.Draw(img)
+    c = (255, 255, 255, 255)
+    width = int(1.8 * SS)
+    d.arc((4.2 * SS, 1.6 * SS, 11.8 * SS, 9.2 * SS), 180, 50, fill=c, width=width)
+    d.line([(10.2 * SS, 8.2 * SS), (8 * SS, 9.8 * SS), (8 * SS, 11 * SS)], fill=c, width=width, joint="curve")
+    d.ellipse((6.9 * SS, 12.4 * SS, 9.1 * SS, 14.6 * SS), fill=c)
+    return img
+
+
+def icon_web():
+    """Планета: круг, меридиан и параллели."""
+    img = canvas(16)
+    d = ImageDraw.Draw(img)
+    c = (255, 255, 255, 255)
+    width = int(1.15 * SS)
+    d.ellipse((1.2 * SS, 1.2 * SS, 14.8 * SS, 14.8 * SS), outline=c, width=width)
+    d.ellipse((4.9 * SS, 1.2 * SS, 11.1 * SS, 14.8 * SS), outline=c, width=width)
+    for y in (5.2, 10.8):
+        d.line([(2.2 * SS, y * SS), (13.8 * SS, y * SS)], fill=c, width=width)
+    return img
+
+
+def icon_done():
+    """Галочка «готово»."""
+    img = canvas(16)
+    points = ((2.5, 8.5), (6.5, 12.5), (13.5, 4))
+    ImageDraw.Draw(img).line([(x * SS, y * SS) for x, y in points], fill=(255, 255, 255, 255), width=int(1.9 * SS), joint="curve")
+    return img
+
+
+def icon_sound(muted):
+    """Значок звука: динамик с волнами или с крестиком."""
+    img = canvas(16)
+    d = ImageDraw.Draw(img)
+    c = (255, 255, 255, 255)
+    d.polygon([(x * SS, y * SS) for x, y in ((1.5, 6), (4, 6), (8, 2.5), (8, 13.5), (4, 10), (1.5, 10))], fill=c)
+    if muted:
+        d.line([(10.5 * SS, 5.5 * SS), (15 * SS, 10.5 * SS)], fill=c, width=int(1.3 * SS))
+        d.line([(15 * SS, 5.5 * SS), (10.5 * SS, 10.5 * SS)], fill=c, width=int(1.3 * SS))
+    else:
+        d.arc((6.5 * SS, 4.5 * SS, 12 * SS, 11.5 * SS), -55, 55, fill=c, width=int(1.1 * SS))
+        d.arc((6.5 * SS, 2 * SS, 15 * SS, 14 * SS), -55, 55, fill=c, width=int(1.1 * SS))
+    return img
+
+
+def _export_tray(d):
+    """Лоток внизу значка: общий знак экспорта."""
+    c = (255, 255, 255, 255)
+    d.rectangle((1.5 * SS, 13.5 * SS, 14.5 * SS - 1, 15 * SS - 1), fill=c)
+
+
+def icon_wav():
+    """Значок экспорта WAV: волна над лотком."""
+    img = canvas(16)
+    d = ImageDraw.Draw(img)
+    _export_tray(d)
+    for x, half in ((2.5, 1.5), (5, 3.5), (7.5, 5), (10, 3), (12.5, 1.5)):
+        d.rectangle(((x - 0.6) * SS, (6.5 - half) * SS, (x + 0.6) * SS, (6.5 + half) * SS), fill=(255, 255, 255, 255))
+    return img
+
+
+def icon_midi():
+    """Значок экспорта MIDI: клавиши над лотком."""
+    img = canvas(16)
+    d = ImageDraw.Draw(img)
+    _export_tray(d)
+    c = (255, 255, 255, 255)
+    d.rectangle((2 * SS, 1.5 * SS, 14 * SS - 1, 11.5 * SS - 1), fill=c)
+    for x in (5.5, 9.5):  # щели между белыми клавишами
+        d.rectangle((x * SS, 7 * SS, (x + 1) * SS - 1, 11.5 * SS), fill=(0, 0, 0, 0))
+    for x in (4.5, 8.5, 12.0):  # чёрные клавиши вырезаны из заливки
+        d.rectangle(((x - 0.9) * SS, 1.5 * SS, (x + 0.9) * SS, 7 * SS), fill=(0, 0, 0, 0))
+    return img
+
+
 GLYPHS = {
     "filter": funnel,
+    # Значки с приставками fx_ и ic_ окрашиваются по запросу, только когда нужны.
+    "fx_line": fox_line, "fx_eye0": lambda: fox_eyes(1.0), "fx_eye1": lambda: fox_eyes(0.45), "fx_eye2": lambda: fox_eyes(0.0),
+    "ic_play": icon_play, "ic_stop": icon_stop, "ic_sound": lambda: icon_sound(False), "ic_mute": lambda: icon_sound(True),
+    "ic_wav": icon_wav, "ic_midi": icon_midi,
+    "ic_prev": lambda: icon_arrow(False), "ic_next": lambda: icon_arrow(True), "ic_done": icon_done,
+    "ic_help": icon_help, "ic_web": icon_web,
+    "ic_sine": icon_sine, "ic_triangle": icon_triangle, "ic_square": icon_square, "ic_bell": icon_bell, "ic_scale": icon_scale,
+    "ic_play_big": icon_play_big, "ic_stop_big": icon_stop_big,
     "star_on": lambda: star(True), "star_off": lambda: star(False),
     "check": check, "folder": folder,
     "folder_plus": lambda: folder_badge("plus"), "folder_x": lambda: folder_badge("x"),
@@ -131,10 +320,10 @@ def packed_mask(img, scale):
 
 # Логотип FODB: каждая буква это рисунок на сетке ячеек секвенсора.
 LETTERS = {
-    "F": ("#####", "#....", "#....", "####.", "#....", "#....", "#...."),
-    "O": (".###.", "#...#", "#...#", "#...#", "#...#", "#...#", ".###."),
-    "D": ("####.", "#...#", "#...#", "#...#", "#...#", "#...#", "####."),
-    "B": ("####.", "#...#", "#...#", "####.", "#...#", "#...#", "####."),
+    "F": ("####", "#...", "#...", "###.", "#...", "#...", "#..."),
+    "O": (".##.", "#..#", "#..#", "#..#", "#..#", "#..#", ".##."),
+    "D": ("###.", "#..#", "#..#", "#..#", "#..#", "#..#", "###."),
+    "B": ("###.", "#..#", "#..#", "###.", "#..#", "#..#", "###."),
 }
 MINI = {
     "F": ("###", "#..", "##.", "#..", "#.."),
@@ -150,7 +339,7 @@ BACK = "#262B2F"
 def logo_svg(text_line=True):
     """Логотип FODB в SVG."""
     pad, gap, letter_gap, margin = 16, 3, 13, 22
-    letter_w = 5 * pad + 4 * gap
+    letter_w = 4 * pad + 3 * gap
     grid_h = 7 * pad + 6 * gap
     width = margin * 2 + 4 * letter_w + 3 * letter_gap
     height = margin * 2 + grid_h + (34 if text_line else 0)

@@ -192,7 +192,7 @@ class Site:
             rows = "".join(f'<tr><td>{tr(label)}</td><td dir="ltr">{default}</td></tr>' for _action, label, default in hotkeys.ACTIONS)
             return (f'<p>{tr("Дважды щёлкните строку, чтобы назначить другое сочетание.")}</p>'
                     f'<table><tr><th>{tr("Действие")}</th><th>{tr("Клавиши")}</th></tr>{rows}</table>')
-        return f"<p>{text('build_t')}</p><pre>./build.ps1</pre>"
+        return f"<p>{text('build_t')}</p><pre>./packaging/build.ps1</pre>"
 
     def wiki_page(self, prefix: str, slug: str, key: str | None) -> str:
         """Страница вики с боковым содержанием. key=None: само содержание."""

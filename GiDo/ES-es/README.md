@@ -104,7 +104,7 @@ Añade reglas en la pestaña Ajustes o en FODB.json para definir el uso por nomb
 Necesita Windows y Python 3.13. El programa solo usa la biblioteca estándar.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Créditos

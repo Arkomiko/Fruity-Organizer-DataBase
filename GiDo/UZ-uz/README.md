@@ -104,7 +104,7 @@ FODB faol mavzuni oʻqiydi va uni FL Studio'da oʻzgartirganingizda ranglarini y
 Windows va Python 3.13 kerak. Dasturning oʻzi faqat standart kutubxonadan foydalanadi.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Minnatdorchilik

@@ -104,7 +104,7 @@ FODB는 활성 테마를 읽고 FL Studio에서 변경하면 색상을 업데이
 Windows와 Python 3.13이 필요합니다. 프로그램은 표준 라이브러리만 사용합니다.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## 크레딧

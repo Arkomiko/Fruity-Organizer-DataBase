@@ -1,5 +1,5 @@
 {
-  // Python из виртуального окружения сборки. Создаётся командой .\build.ps1.
+  // Python из виртуального окружения сборки. Создаётся командой .\packaging\build.ps1.
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv-build/Scripts/python.exe",
   "python.analysis.extraPaths": ["src"],
 

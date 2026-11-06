@@ -13,12 +13,12 @@ VSVersionInfo(
     StringFileInfo([StringTable('040904B0', [
       StringStruct('CompanyName', 'Arkomiko'),
       StringStruct('FileDescription', 'Fruity Organizer DataBase'),
-      StringStruct('FileVersion', '1.1.0.0611'),
+      StringStruct('FileVersion', '1.1.0.0611-a2'),
       StringStruct('InternalName', 'FODB'),
       StringStruct('LegalCopyright', 'MIT License'),
       StringStruct('OriginalFilename', 'FODB.exe'),
       StringStruct('ProductName', 'Fruity Organizer DataBase'),
-      StringStruct('ProductVersion', '1.1.0.0611')
+      StringStruct('ProductVersion', '1.1.0.0611-a2')
     ])]),
     VarFileInfo([VarStruct('Translation', [1033, 1200])])
   ]

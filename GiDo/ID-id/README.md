@@ -104,7 +104,7 @@ Tambahkan aturan di tab Pengaturan atau FODB.json untuk menentukan kegunaan menu
 Memerlukan Windows dan Python 3.13. Program hanya memakai pustaka standar.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Kredit

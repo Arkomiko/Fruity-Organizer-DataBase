@@ -104,7 +104,7 @@ FODB সক্রিয় থিম পড়ে এবং FL Studio-তে ব
 Windows ও Python 3.13 প্রয়োজন। প্রোগ্রামটি কেবল স্ট্যান্ডার্ড লাইব্রেরি ব্যবহার করে।
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## কৃতজ্ঞতা

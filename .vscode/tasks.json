@@ -6,7 +6,7 @@
       "label": "Пересобрать FODB.exe",
       "type": "process",
       "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/build.ps1"],
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/packaging/build.ps1"],
       "group": { "kind": "build", "isDefault": true },
       "problemMatcher": []
     },

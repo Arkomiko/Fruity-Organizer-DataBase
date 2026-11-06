@@ -104,7 +104,7 @@ FODB 会读取当前主题，并在你于 FL Studio 中更换主题时刷新配�
 需要 Windows 和 Python 3.13。程序本身只使用标准库。
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## 致谢

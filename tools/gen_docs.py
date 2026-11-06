@@ -12,10 +12,10 @@ SITE = "https://arkomiko.github.io/Fruity-Organizer-DataBase/"
 LIT, DIM, BACK, PANEL, TEXT = "#FFB23E", "#3C454B", "#262B2F", "#4D565C", "#BDC6CB"
 FONT = "Segoe UI, Noto Sans, Helvetica, Arial, sans-serif"
 LETTERS = {
-    "F": ("#####", "#....", "#....", "####.", "#....", "#....", "#...."),
-    "O": (".###.", "#...#", "#...#", "#...#", "#...#", "#...#", ".###."),
-    "D": ("####.", "#...#", "#...#", "#...#", "#...#", "#...#", "####."),
-    "B": ("####.", "#...#", "#...#", "####.", "#...#", "#...#", "####."),
+    "F": ("####", "#...", "#...", "###.", "#...", "#...", "#..."),
+    "O": (".##.", "#..#", "#..#", "#..#", "#..#", "#..#", ".##."),
+    "D": ("###.", "#..#", "#..#", "#..#", "#..#", "#..#", "###."),
+    "B": ("###.", "#..#", "#..#", "###.", "#..#", "#..#", "###."),
 }
 
 
@@ -29,7 +29,7 @@ def write(path, text):
 def banner_svg(lang):
     """Логотип из ячеек: бегунок проходит по столбцам и зажигает их, а под ним сменяются лозунги."""
     pad, gap, letter_gap = 13, 3, 11
-    letter_w = 5 * pad + 4 * gap
+    letter_w = 4 * pad + 3 * gap
     grid_h = 7 * pad + 6 * gap
     grid_w = 4 * letter_w + 3 * letter_gap
     width, height = 860, 214
@@ -291,7 +291,7 @@ def readme(code, lang, to_root, art):
 {lang["build_t"]}
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## {lang["credits"]}

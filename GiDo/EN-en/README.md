@@ -104,7 +104,7 @@ Add rules on the Settings tab or in FODB.json to set purposes by name or vendor,
 Needs Windows and Python 3.13. The program itself uses only the standard library.
 
 ```powershell
-./build.ps1
+./packaging/build.ps1
 ```
 
 ## Credits
