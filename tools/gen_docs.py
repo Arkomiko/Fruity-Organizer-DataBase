@@ -224,7 +224,7 @@ def readme(code, lang, to_root, art):
 {switcher(code, to_root)}
 </p>
 
-<p align="center"><a href="{REPO}/releases/latest"><b>⬇ {escape(lang["download"])}</b></a> &nbsp;|&nbsp; <a href="{SITE}{code}/wiki/index.html"><b>{escape(lang["wiki"])}</b></a></p>
+<p align="center"><a href="{REPO}/releases/latest"><b>⬇ {escape(lang["download"])}</b></a> &nbsp;|&nbsp; <a href="{SITE}{code}/wiki/index.html"><b>{escape(lang["wiki"])}</b></a> &nbsp;|&nbsp; <a href="{REPO}/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
 {lang["intro"]}
 

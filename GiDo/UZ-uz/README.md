@@ -29,7 +29,7 @@
 <a href="../../GiDo/HE-il/README.md"><img src="../../GiDo/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe yuklab olish</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/UZ-uz/wiki/index.html"><b>Viki</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe yuklab olish</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/UZ-uz/wiki/index.html"><b>Viki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
 FL Studio plaginlar bazasi uchun portativ organayzer. Plaginlarni papkalarga ishlab chiqaruvchi, vazifa yoki ikkalasi boʻyicha joylaydi va FL Studio'ning oʻz qismidek koʻrinadi.
 

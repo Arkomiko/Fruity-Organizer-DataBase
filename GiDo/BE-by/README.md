@@ -29,7 +29,7 @@
 <a href="../../GiDo/HE-il/README.md"><img src="../../GiDo/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Спампаваць FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/BE-by/wiki/index.html"><b>Вікі</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Спампаваць FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/BE-by/wiki/index.html"><b>Вікі</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
 Партатыўны арганайзер базы плагінаў FL Studio. Раскладвае плагіны па папках: па вытворцы, па прызначэнні або адразу па абодвух, а выглядае як родная частка FL Studio.
 

@@ -29,7 +29,7 @@
 <a href="../../GiDo/HE-il/README.md"><img src="../../GiDo/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe 다운로드</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/KO-kr/wiki/index.html"><b>위키</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe 다운로드</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/KO-kr/wiki/index.html"><b>위키</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
 FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입니다. 플러그인을 제조사, 용도 또는 둘 다에 따라 폴더로 정리하며 FL Studio와 잘 어울리는 모습으로 동작합니다.
 

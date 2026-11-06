@@ -325,12 +325,6 @@ LETTERS = {
     "D": ("###.", "#..#", "#..#", "#..#", "#..#", "#..#", "###."),
     "B": ("###.", "#..#", "#..#", "###.", "#..#", "#..#", "###."),
 }
-MINI = {
-    "F": ("###", "#..", "##.", "#..", "#.."),
-    "O": ("###", "#.#", "#.#", "#.#", "###"),
-    "D": ("##.", "#.#", "#.#", "#.#", "##."),
-    "B": ("##.", "#.#", "##.", "#.#", "##."),
-}
 LIT = "#FFB23E"
 DIM = "#3C454B"
 BACK = "#262B2F"
@@ -362,24 +356,24 @@ def logo_svg(text_line=True):
 
 
 def app_icon():
-    """Значок программы: F и B горящими ячейками, достаточно крупными для малых размеров."""
+    """Значок программы: F и B такими же буквами в 4 столбца, как в логотипе."""
     size = 512
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     d.rounded_rectangle((8, 8, size - 8, size - 8), 72, fill=BACK)
-    pad, gap, letter_gap = 56, 10, 40
-    block_w = 3 * pad + 2 * gap
-    block_h = 5 * pad + 4 * gap
+    pad, gap, letter_gap = 50, 6, 20
+    block_w = 4 * pad + 3 * gap
+    block_h = 7 * pad + 6 * gap
     # Две строки букв не читались бы, поэтому на значке F и B, первая и последняя буквы.
     total = 2 * block_w + letter_gap
     x0, y0 = (size - total) // 2, (size - block_h) // 2
     for index, letter in enumerate("FB"):
         ox = x0 + index * (block_w + letter_gap)
-        for row, pattern in enumerate(MINI[letter]):
+        for row, pattern in enumerate(LETTERS[letter]):
             for col, value in enumerate(pattern):
                 x = ox + col * (pad + gap)
                 y = y0 + row * (pad + gap)
-                d.rounded_rectangle((x, y, x + pad, y + pad), 9, fill=LIT if value == "#" else DIM)
+                d.rounded_rectangle((x, y, x + pad, y + pad), 8, fill=LIT if value == "#" else DIM)
     return img
 
 

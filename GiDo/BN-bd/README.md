@@ -29,7 +29,7 @@
 <a href="../../GiDo/HE-il/README.md"><img src="../../GiDo/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ডাউনলোড করুন</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/BN-bd/wiki/index.html"><b>উইকি</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ডাউনলোড করুন</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/BN-bd/wiki/index.html"><b>উইকি</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
 FL Studio প্লাগইন ডেটাবেসের জন্য একটি পোর্টেবল অর্গানাইজার। এটি প্লাগইনগুলোকে নির্মাতা, ব্যবহার বা উভয় অনুযায়ী ফোল্ডারে সাজায় এবং FL Studio-র সঙ্গে মানানসই দেখায়।
 

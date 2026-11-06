@@ -31,7 +31,7 @@
 <a href="../../GiDo/HE-il/README.md"><img src="../../GiDo/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ڈاؤن لوڈ کریں</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/UR-pk/wiki/index.html"><b>وکی</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ڈاؤن لوڈ کریں</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/UR-pk/wiki/index.html"><b>وکی</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
 FL Studio پلگ اِن ڈیٹا بیس کے لیے ایک پورٹیبل آرگنائزر۔ یہ پلگ اِنز کو بنانے والے، استعمال یا دونوں کے مطابق فولڈرز میں رکھتا ہے اور FL Studio کے ساتھ ہم آہنگ دکھائی دیتا ہے۔
 
