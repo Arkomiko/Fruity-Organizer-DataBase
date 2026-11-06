@@ -26,7 +26,7 @@ def write(path, text):
 
 
 def banner_svg(lang):
-    """Логотип из ячеек: бегунок проходит по столбцам и зажигает их."""
+    """Логотип из ячеек: бегунок проходит по столбцам и зажигает их, а под ним сменяются лозунги."""
     pad, gap, letter_gap = 13, 3, 11
     letter_w = 5 * pad + 4 * gap
     grid_h = 7 * pad + 6 * gap
@@ -46,21 +46,28 @@ def banner_svg(lang):
                 else:
                     rects.append(f'<rect class="off" x="{x:g}" y="{y:g}" width="{pad}" height="{pad}" rx="2.5" style="animation-delay:{delay:.2f}s"/>')
     direction = ' direction="rtl"' if lang.get("rtl") else ""
+    # Лозунги показываются по очереди: у каждого своя задержка в общем цикле.
+    slogan_seconds = 4
+    slogan_cycle = slogan_seconds * len(lang["taglines"])
+    slogans = "\n".join(
+        f'<text class="tag{" first" if i == 0 else ""}" x="{width / 2}" y="{oy + grid_h + 54}" text-anchor="middle"{direction} '
+        f'style="animation-delay:{i * slogan_seconds}s">{escape(slogan)}</text>'
+        for i, slogan in enumerate(lang["taglines"]))
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-label="FODB">
 <style>
 .on{{fill:{LIT};animation:hit {cycle}s ease-out infinite}}
 .off{{fill:{DIM};animation:tick {cycle}s ease-out infinite}}
 .title{{font:600 13px {FONT};letter-spacing:6px;fill:#8B959B}}
-.tag{{font:15px {FONT};fill:{TEXT};animation:rise 1.1s ease-out both}}
+.tag{{font:15px {FONT};fill:{TEXT};opacity:0;animation:slogan {slogan_cycle}s ease-in-out infinite both}}
 @keyframes hit{{0%,100%{{fill:{LIT};opacity:.86}}4%{{fill:#FFE3AE;opacity:1}}20%{{fill:{LIT};opacity:.86}}}}
 @keyframes tick{{0%,100%{{fill:{DIM}}}4%{{fill:#6A747A}}18%{{fill:{DIM}}}}}
-@keyframes rise{{from{{opacity:0;transform:translateY(8px)}}to{{opacity:1;transform:none}}}}
-@media (prefers-reduced-motion:reduce){{.on,.off,.tag{{animation:none}}}}
+@keyframes slogan{{0%{{opacity:0;transform:translateY(8px)}}3%,30%{{opacity:1;transform:none}}33%,100%{{opacity:0;transform:translateY(-6px)}}}}
+@media (prefers-reduced-motion:reduce){{.on,.off,.tag{{animation:none}}.first{{opacity:1}}}}
 </style>
 <rect width="{width}" height="{height}" rx="12" fill="{BACK}"/>
 {''.join(rects)}
 <text class="title" x="{width / 2}" y="{oy + grid_h + 28}" text-anchor="middle">FRUITY ORGANIZER DATABASE</text>
-<text class="tag" x="{width / 2}" y="{oy + grid_h + 54}" text-anchor="middle"{direction}>{escape(lang["tagline"])}</text>
+{slogans}
 </svg>
 '''
 

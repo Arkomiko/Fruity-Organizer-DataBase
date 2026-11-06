@@ -2,7 +2,7 @@
 
 LANGUAGES = {
     "EN-en": dict(
-        name="English", html="en", tagline="Your FL Studio plugin library, finally in order",
+        name="English", html="en", taglines=("Perfect order in your library.", "An organizer for those tired of scrolling through lists.", "Lots of tools? Put everything in its place!"),
         intro="A portable organizer for the FL Studio plugin database. It sorts plugins into folders by vendor, by purpose, or both, and looks right at home next to FL Studio.",
         download="Download FODB.exe", features="Features",
         f1="Sort by vendor, by purpose, or nest them either way: Vendor\\Purpose or Purpose\\Vendor",
@@ -27,7 +27,7 @@ LANGUAGES = {
         vendor="Vendor", purpose="Purpose", reverb="Reverb", delay="Delay", synth="Synths", installed="Installed", organized="Organized",
         caption_themes="Follows the active theme"),
     "RU-ru": dict(
-        name="Русский", html="ru", tagline="Ваша библиотека плагинов FL Studio наконец в порядке",
+        name="Русский", html="ru", taglines=("Идеальный порядок в твоей библиотеке.", "Органайзер для тех, кто устал листать списки.", "Много инструментов? Расставь всё по полочкам!"),
         intro="Портативный органайзер базы плагинов FL Studio. Раскладывает плагины по папкам: по производителю, по назначению или сразу по обоим, а выглядит как родная часть FL Studio.",
         download="Скачать FODB.exe", features="Возможности",
         f1="Сортировка по производителю, по назначению или с вложенностью в любом порядке: Производитель\\Назначение или Назначение\\Производитель",
@@ -52,7 +52,7 @@ LANGUAGES = {
         vendor="Производитель", purpose="Назначение", reverb="Реверберация", delay="Дилеи", synth="Синтезаторы", installed="Installed", organized="Организовано",
         caption_themes="Следует за активной темой"),
     "ZH-cn": dict(
-        name="简体中文", html="zh-CN", tagline="让你的 FL Studio 插件库井然有序",
+        name="简体中文", html="zh-CN", taglines=("让你的插件库井然有序。", "献给翻列表翻累了的你。", "工具太多？让一切各就各位！"),
         intro="一款便携式 FL Studio 插件数据库整理工具。可按厂商、用途或两者组合把插件归入文件夹，界面风格与 FL Studio 浑然一体。",
         download="下载 FODB.exe", features="功能",
         f1="按厂商、按用途排序，或任意嵌套：厂商\\用途 或 用途\\厂商",
@@ -77,7 +77,7 @@ LANGUAGES = {
         vendor="厂商", purpose="用途", reverb="混响", delay="延迟", synth="合成器", installed="Installed", organized="已整理",
         caption_themes="跟随当前主题"),
     "ES-es": dict(
-        name="Español", html="es", tagline="Tu biblioteca de plugins de FL Studio, por fin en orden",
+        name="Español", html="es", taglines=("Orden perfecto en tu biblioteca.", "El organizador para quienes se cansaron de recorrer listas.", "¿Muchas herramientas? ¡Cada cosa en su sitio!"),
         intro="Un organizador portátil para la base de datos de plugins de FL Studio. Ordena los plugins en carpetas por fabricante, por función o por ambos, con un aspecto que encaja con FL Studio.",
         download="Descargar FODB.exe", features="Funciones",
         f1="Ordena por fabricante, por función o anida en cualquier orden: Fabricante\\Función o Función\\Fabricante",
@@ -102,7 +102,7 @@ LANGUAGES = {
         vendor="Fabricante", purpose="Función", reverb="Reverb", delay="Delay", synth="Sintetizadores", installed="Installed", organized="Organizado",
         caption_themes="Sigue el tema activo"),
     "HI-in": dict(
-        name="हिन्दी", html="hi", tagline="आपकी FL Studio प्लगइन लाइब्रेरी, आखिरकार व्यवस्थित",
+        name="हिन्दी", html="hi", taglines=("आपकी लाइब्रेरी में पूरी व्यवस्था।", "उनके लिए ऑर्गनाइज़र जो सूचियाँ पलटते-पलटते थक गए।", "बहुत सारे टूल? हर चीज़ अपनी जगह रखो!"),
         intro="FL Studio प्लगइन डेटाबेस के लिए एक पोर्टेबल ऑर्गनाइज़र। यह प्लगइन को निर्माता, उपयोग या दोनों के अनुसार फ़ोल्डरों में रखता है और FL Studio के साथ घुल-मिल जाता है।",
         download="FODB.exe डाउनलोड करें", features="विशेषताएँ",
         f1="निर्माता या उपयोग के अनुसार छाँटें, या किसी भी क्रम में नेस्ट करें: निर्माता\\उपयोग या उपयोग\\निर्माता",
@@ -127,7 +127,7 @@ LANGUAGES = {
         vendor="निर्माता", purpose="उपयोग", reverb="रिवर्ब", delay="डिले", synth="सिंथ", installed="Installed", organized="व्यवस्थित",
         caption_themes="सक्रिय थीम का अनुसरण"),
     "AR-sa": dict(
-        name="العربية", html="ar", rtl=True, tagline="مكتبة إضافات FL Studio لديك، مرتبة أخيرًا",
+        name="العربية", html="ar", rtl=True, taglines=("نظام مثالي في مكتبتك.", "منظِّم لمن سئم تصفح القوائم.", "أدوات كثيرة؟ ضع كل شيء في مكانه!"),
         intro="منظّم محمول لقاعدة بيانات إضافات FL Studio. يرتّب الإضافات في مجلدات حسب الشركة المصنعة أو الغرض أو كليهما، بمظهر ينسجم مع FL Studio.",
         download="تنزيل FODB.exe", features="الميزات",
         f1="الفرز حسب الشركة أو الغرض أو التداخل بأي ترتيب: الشركة\\الغرض أو الغرض\\الشركة",
@@ -152,7 +152,7 @@ LANGUAGES = {
         vendor="الشركة", purpose="الغرض", reverb="صدى", delay="تأخير", synth="مُركِّبات", installed="Installed", organized="منظَّم",
         caption_themes="يتبع السمة النشطة"),
     "FR-fr": dict(
-        name="Français", html="fr", tagline="Votre bibliothèque de plugins FL Studio, enfin en ordre",
+        name="Français", html="fr", taglines=("Un ordre parfait dans votre bibliothèque.", "L'organiseur pour ceux qui en ont assez de faire défiler des listes.", "Trop d'outils ? Chaque chose à sa place !"),
         intro="Un organiseur portable pour la base de plugins de FL Studio. Il range les plugins dans des dossiers par éditeur, par usage ou les deux, avec une apparence qui s'accorde à FL Studio.",
         download="Télécharger FODB.exe", features="Fonctionnalités",
         f1="Tri par éditeur, par usage ou imbriqué dans l'ordre voulu : Éditeur\\Usage ou Usage\\Éditeur",
@@ -177,7 +177,7 @@ LANGUAGES = {
         vendor="Éditeur", purpose="Usage", reverb="Réverbe", delay="Délai", synth="Synthés", installed="Installed", organized="Organisé",
         caption_themes="Suit le thème actif"),
     "BN-bd": dict(
-        name="বাংলা", html="bn", tagline="আপনার FL Studio প্লাগইন লাইব্রেরি, অবশেষে গোছানো",
+        name="বাংলা", html="bn", taglines=("আপনার লাইব্রেরিতে নিখুঁত শৃঙ্খলা।", "তালিকা ঘেঁটে যারা ক্লান্ত, তাদের জন্য অর্গানাইজার।", "অনেক টুল? সব কিছু জায়গামতো রাখো!"),
         intro="FL Studio প্লাগইন ডেটাবেসের জন্য একটি পোর্টেবল অর্গানাইজার। এটি প্লাগইনগুলোকে নির্মাতা, ব্যবহার বা উভয় অনুযায়ী ফোল্ডারে সাজায় এবং FL Studio-র সঙ্গে মানানসই দেখায়।",
         download="FODB.exe ডাউনলোড করুন", features="বৈশিষ্ট্য",
         f1="নির্মাতা বা ব্যবহার অনুযায়ী সাজান, অথবা যেকোনো ক্রমে নেস্ট করুন: নির্মাতা\\ব্যবহার বা ব্যবহার\\নির্মাতা",
@@ -202,7 +202,7 @@ LANGUAGES = {
         vendor="নির্মাতা", purpose="ব্যবহার", reverb="রিভার্ব", delay="ডিলে", synth="সিন্থ", installed="Installed", organized="সাজানো",
         caption_themes="সক্রিয় থিম অনুসরণ করে"),
     "PT-br": dict(
-        name="Português", html="pt-BR", tagline="Sua biblioteca de plugins do FL Studio, finalmente em ordem",
+        name="Português", html="pt-BR", taglines=("Ordem perfeita na sua biblioteca.", "O organizador para quem cansou de rolar listas.", "Muitas ferramentas? Cada coisa em seu lugar!"),
         intro="Um organizador portátil para o banco de plugins do FL Studio. Coloca os plugins em pastas por fabricante, por finalidade ou ambos, com um visual que combina com o FL Studio.",
         download="Baixar FODB.exe", features="Recursos",
         f1="Organize por fabricante, por finalidade ou aninhe em qualquer ordem: Fabricante\\Finalidade ou Finalidade\\Fabricante",
@@ -227,7 +227,7 @@ LANGUAGES = {
         vendor="Fabricante", purpose="Finalidade", reverb="Reverb", delay="Delay", synth="Sintetizadores", installed="Installed", organized="Organizado",
         caption_themes="Acompanha o tema ativo"),
     "UR-pk": dict(
-        name="اردو", html="ur", rtl=True, tagline="آپ کی FL Studio پلگ اِن لائبریری، آخرکار منظم",
+        name="اردو", html="ur", rtl=True, taglines=("آپ کی لائبریری میں مکمل ترتیب۔", "ان کے لیے آرگنائزر جو فہرستیں دیکھ دیکھ کر تھک گئے۔", "بہت سے ٹولز؟ ہر چیز اپنی جگہ پر رکھو!"),
         intro="FL Studio پلگ اِن ڈیٹا بیس کے لیے ایک پورٹیبل آرگنائزر۔ یہ پلگ اِنز کو بنانے والے، استعمال یا دونوں کے مطابق فولڈرز میں رکھتا ہے اور FL Studio کے ساتھ ہم آہنگ دکھائی دیتا ہے۔",
         download="FODB.exe ڈاؤن لوڈ کریں", features="خصوصیات",
         f1="بنانے والے یا استعمال کے مطابق ترتیب دیں، یا کسی بھی ترتیب میں نیسٹ کریں: بنانے والا\\استعمال یا استعمال\\بنانے والا",
@@ -252,7 +252,7 @@ LANGUAGES = {
         vendor="بنانے والا", purpose="استعمال", reverb="ریورب", delay="ڈیلے", synth="سنتھ", installed="Installed", organized="منظم",
         caption_themes="فعال تھیم کی پیروی"),
     "ID-id": dict(
-        name="Indonesia", html="id", tagline="Pustaka plugin FL Studio Anda, akhirnya rapi",
+        name="Indonesia", html="id", taglines=("Keteraturan sempurna di pustaka Anda.", "Penata bagi yang lelah menelusuri daftar.", "Banyak alat? Tata semuanya pada tempatnya!"),
         intro="Pengatur portabel untuk basis data plugin FL Studio. Menata plugin ke dalam folder menurut vendor, kegunaan, atau keduanya, dengan tampilan yang menyatu dengan FL Studio.",
         download="Unduh FODB.exe", features="Fitur",
         f1="Urutkan menurut vendor, kegunaan, atau susun bertingkat dalam urutan apa pun: Vendor\\Kegunaan atau Kegunaan\\Vendor",
@@ -277,7 +277,7 @@ LANGUAGES = {
         vendor="Vendor", purpose="Kegunaan", reverb="Reverb", delay="Delay", synth="Synth", installed="Installed", organized="Tertata",
         caption_themes="Mengikuti tema aktif"),
     "DE-de": dict(
-        name="Deutsch", html="de", tagline="Deine FL-Studio-Plugin-Bibliothek, endlich in Ordnung",
+        name="Deutsch", html="de", taglines=("Perfekte Ordnung in deiner Bibliothek.", "Der Organizer für alle, die genug vom Listenblättern haben.", "Viele Tools? Alles an seinen Platz!"),
         intro="Ein portabler Organizer für die Plugin-Datenbank von FL Studio. Er sortiert Plugins nach Hersteller, Einsatzzweck oder beidem in Ordner und fügt sich optisch in FL Studio ein.",
         download="FODB.exe herunterladen", features="Funktionen",
         f1="Sortieren nach Hersteller, nach Zweck oder verschachtelt in beliebiger Reihenfolge: Hersteller\\Zweck oder Zweck\\Hersteller",
@@ -302,7 +302,7 @@ LANGUAGES = {
         vendor="Hersteller", purpose="Zweck", reverb="Reverb", delay="Delay", synth="Synths", installed="Installed", organized="Organisiert",
         caption_themes="Folgt dem aktiven Theme"),
     "JA-jp": dict(
-        name="日本語", html="ja", tagline="FL Studio のプラグインライブラリを、ついにすっきり整理",
+        name="日本語", html="ja", taglines=("ライブラリを完璧に整頓。", "リストをめくるのに疲れた人のための整理ツール。", "ツールが多すぎる？すべてをあるべき場所へ！"),
         intro="FL Studio のプラグインデータベース用ポータブル整理ツールです。メーカー別、用途別、またはその両方でプラグインをフォルダーに整理し、FL Studio になじむ見た目で動作します。",
         download="FODB.exe をダウンロード", features="機能",
         f1="メーカー別、用途別、または任意の順で階層化：メーカー\\用途 または 用途\\メーカー",
@@ -327,7 +327,7 @@ LANGUAGES = {
         vendor="メーカー", purpose="用途", reverb="リバーブ", delay="ディレイ", synth="シンセ", installed="Installed", organized="整理済み",
         caption_themes="現在のテーマに追従"),
     "TR-tr": dict(
-        name="Türkçe", html="tr", tagline="FL Studio eklenti kitaplığınız sonunda düzenli",
+        name="Türkçe", html="tr", taglines=("Kitaplığınızda kusursuz düzen.", "Liste kaydırmaktan yorulanlar için düzenleyici.", "Çok mu araç var? Her şeyi yerli yerine koy!"),
         intro="FL Studio eklenti veritabanı için taşınabilir bir düzenleyici. Eklentileri üreticiye, kullanım amacına veya her ikisine göre klasörlere yerleştirir ve FL Studio ile uyumlu görünür.",
         download="FODB.exe indir", features="Özellikler",
         f1="Üreticiye, amaca göre sıralayın veya istediğiniz sırada iç içe yerleştirin: Üretici\\Amaç ya da Amaç\\Üretici",
@@ -352,7 +352,7 @@ LANGUAGES = {
         vendor="Üretici", purpose="Amaç", reverb="Reverb", delay="Delay", synth="Synth'ler", installed="Installed", organized="Düzenlendi",
         caption_themes="Etkin temayı izler"),
     "KO-kr": dict(
-        name="한국어", html="ko", tagline="FL Studio 플러그인 라이브러리를 드디어 깔끔하게",
+        name="한국어", html="ko", taglines=("라이브러리를 완벽하게 정리하세요.", "목록 넘기기에 지친 분을 위한 정리 도구.", "도구가 많나요? 모든 것을 제자리에!"),
         intro="FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입니다. 플러그인을 제조사, 용도 또는 둘 다에 따라 폴더로 정리하며 FL Studio와 잘 어울리는 모습으로 동작합니다.",
         download="FODB.exe 다운로드", features="기능",
         f1="제조사별, 용도별 정렬 또는 원하는 순서로 중첩: 제조사\\용도 또는 용도\\제조사",
@@ -377,7 +377,7 @@ LANGUAGES = {
         vendor="제조사", purpose="용도", reverb="리버브", delay="딜레이", synth="신스", installed="Installed", organized="정리됨",
         caption_themes="활성 테마를 따라갑니다"),
     "VI-vn": dict(
-        name="Tiếng Việt", html="vi", tagline="Thư viện plugin FL Studio của bạn, cuối cùng đã gọn gàng",
+        name="Tiếng Việt", html="vi", taglines=("Trật tự hoàn hảo trong thư viện của bạn.", "Trình sắp xếp cho người đã mệt vì lướt danh sách.", "Quá nhiều công cụ? Sắp xếp mọi thứ đúng chỗ!"),
         intro="Công cụ sắp xếp di động cho cơ sở dữ liệu plugin của FL Studio. Sắp plugin vào thư mục theo hãng, theo công dụng hoặc cả hai, với giao diện hòa hợp cùng FL Studio.",
         download="Tải FODB.exe", features="Tính năng",
         f1="Sắp theo hãng, theo công dụng hoặc lồng theo thứ tự bất kỳ: Hãng\\Công dụng hoặc Công dụng\\Hãng",
@@ -402,7 +402,7 @@ LANGUAGES = {
         vendor="Hãng", purpose="Công dụng", reverb="Reverb", delay="Delay", synth="Synth", installed="Installed", organized="Đã sắp xếp",
         caption_themes="Theo giao diện đang dùng"),
     "IT-it": dict(
-        name="Italiano", html="it", tagline="La tua libreria di plugin FL Studio, finalmente in ordine",
+        name="Italiano", html="it", taglines=("Ordine perfetto nella tua libreria.", "L'organizer per chi è stanco di scorrere elenchi.", "Tanti strumenti? Ogni cosa al suo posto!"),
         intro="Un organizzatore portatile per il database dei plugin di FL Studio. Sistema i plugin in cartelle per produttore, per funzione o per entrambi, con un aspetto in armonia con FL Studio.",
         download="Scarica FODB.exe", features="Funzionalità",
         f1="Ordina per produttore, per funzione o annida in qualsiasi ordine: Produttore\\Funzione o Funzione\\Produttore",
@@ -427,7 +427,7 @@ LANGUAGES = {
         vendor="Produttore", purpose="Funzione", reverb="Riverbero", delay="Delay", synth="Sintetizzatori", installed="Installed", organized="Organizzato",
         caption_themes="Segue il tema attivo"),
     "PL-pl": dict(
-        name="Polski", html="pl", tagline="Twoja biblioteka wtyczek FL Studio wreszcie w porządku",
+        name="Polski", html="pl", taglines=("Idealny porządek w Twojej bibliotece.", "Organizer dla tych, którzy są zmęczeni przewijaniem list.", "Dużo narzędzi? Wszystko na swoim miejscu!"),
         intro="Przenośny organizer bazy wtyczek FL Studio. Układa wtyczki w folderach według producenta, przeznaczenia lub obu naraz i wygląda jak naturalna część FL Studio.",
         download="Pobierz FODB.exe", features="Funkcje",
         f1="Sortowanie według producenta, przeznaczenia lub zagnieżdżanie w dowolnej kolejności: Producent\\Przeznaczenie albo Przeznaczenie\\Producent",
@@ -452,7 +452,7 @@ LANGUAGES = {
         vendor="Producent", purpose="Przeznaczenie", reverb="Pogłos", delay="Delay", synth="Syntezatory", installed="Installed", organized="Uporządkowane",
         caption_themes="Podąża za aktywnym motywem"),
     "UK-ua": dict(
-        name="Українська", html="uk", tagline="Ваша бібліотека плагінів FL Studio нарешті в порядку",
+        name="Українська", html="uk", taglines=("Ідеальний порядок у твоїй бібліотеці.", "Органайзер для тих, хто втомився гортати списки.", "Багато інструментів? Розклади все по поличках!"),
         intro="Портативний органайзер бази плагінів FL Studio. Розкладає плагіни по папках за виробником, призначенням або одразу за обома й виглядає як природна частина FL Studio.",
         download="Завантажити FODB.exe", features="Можливості",
         f1="Сортування за виробником, за призначенням або з вкладеністю в будь-якому порядку: Виробник\\Призначення чи Призначення\\Виробник",
@@ -477,7 +477,7 @@ LANGUAGES = {
         vendor="Виробник", purpose="Призначення", reverb="Реверберація", delay="Дилеї", synth="Синтезатори", installed="Installed", organized="Організовано",
         caption_themes="Слідує за активною темою"),
     "TH-th": dict(
-        name="ไทย", html="th", tagline="คลังปลั๊กอิน FL Studio ของคุณ เป็นระเบียบเสียที",
+        name="ไทย", html="th", taglines=("ความเป็นระเบียบที่สมบูรณ์แบบในคลังของคุณ", "ตัวจัดระเบียบสำหรับคนที่เบื่อการไล่ดูรายการ", "เครื่องมือเยอะไหม จัดทุกอย่างให้เข้าที่!"),
         intro="เครื่องมือจัดระเบียบแบบพกพาสำหรับฐานข้อมูลปลั๊กอินของ FL Studio จัดปลั๊กอินลงโฟลเดอร์ตามผู้ผลิต ตามการใช้งาน หรือทั้งสองอย่าง พร้อมหน้าตาที่เข้ากับ FL Studio",
         download="ดาวน์โหลด FODB.exe", features="คุณสมบัติ",
         f1="จัดเรียงตามผู้ผลิต ตามการใช้งาน หรือซ้อนกันในลำดับใดก็ได้: ผู้ผลิต\\การใช้งาน หรือ การใช้งาน\\ผู้ผลิต",
