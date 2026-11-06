@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@
 - Миттєво підхоплює поточну тему FL Studio
 - Автоматичні резервні копії, скасування одним кліком, нічого не виходить за межі папки бази
 - Один файл на 9 МБ без встановлення; налаштування зберігаються поруч
-- 20 мов інтерфейсу та налаштування розкладок, клавіш, масштабу, шрифтів, кольорів тощо
+- 19 мов інтерфейсу та налаштування розкладок, клавіш, масштабу, шрифтів, кольорів тощо
 
 ## Швидкий старт
 

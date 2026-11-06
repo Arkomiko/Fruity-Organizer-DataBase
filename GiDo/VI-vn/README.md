@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@ Công cụ sắp xếp di động cho cơ sở dữ liệu plugin của FL Studi
 - Theo dõi giao diện FL Studio hiện tại theo thời gian thực
 - Sao lưu tự động, hoàn tác một lần nhấp, không có gì ra ngoài thư mục cơ sở dữ liệu
 - Một tệp 9 MB không cần cài đặt; thiết lập nằm ngay bên cạnh
-- 20 ngôn ngữ giao diện cùng cài đặt bố cục, phím tắt, tỷ lệ, phông chữ, màu sắc và hơn thế
+- 19 ngôn ngữ giao diện cùng cài đặt bố cục, phím tắt, tỷ lệ, phông chữ, màu sắc và hơn thế
 
 ## Bắt đầu nhanh
 

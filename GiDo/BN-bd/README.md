@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-on.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@ FL Studio প্লাগইন ডেটাবেসের জন্য এক�
 - FL Studio-র বর্তমান থিম সঙ্গে সঙ্গে অনুসরণ করে
 - স্বয়ংক্রিয় ব্যাকআপ, এক ক্লিকে পূর্বাবস্থা, কিছুই ডেটাবেস ফোল্ডারের বাইরে যায় না
 - ৯ MB-র একটি ফাইল, ইনস্টলেশন লাগে না; সেটিংস তার পাশেই থাকে
-- 20টি ইন্টারফেস ভাষা এবং বিন্যাস, হটকি, স্কেল, ফন্ট, রং ইত্যাদির সেটিংস
+- 19টি ইন্টারফেস ভাষা এবং বিন্যাস, হটকি, স্কেল, ফন্ট, রং ইত্যাদির সেটিংস
 
 ## দ্রুত শুরু
 

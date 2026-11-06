@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@ FL Studio のプラグインデータベース用ポータブル整理ツール�
 - 現在の FL Studio テーマにリアルタイムで追従
 - 自動バックアップ、ワンクリックで元に戻す、データベースフォルダーの外には何も出ません
 - インストール不要の 9 MB の単一ファイル。設定はその隣に保存
-- 20 のインターフェース言語と、配置、ホットキー、スケール、フォント、色などの設定
+- 19 のインターフェース言語と、配置、ホットキー、スケール、フォント、色などの設定
 
 ## クイックスタート
 

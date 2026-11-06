@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-on.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@ FL Studio प्लगइन डेटाबेस के लिए एक प�
 - FL Studio की मौजूदा थीम का तुरंत अनुसरण करता है
 - स्वचालित बैकअप, एक क्लिक में पूर्ववत, कुछ भी डेटाबेस फ़ोल्डर से बाहर नहीं जाता
 - 9 MB की एक फ़ाइल, इंस्टॉलेशन की ज़रूरत नहीं; सेटिंग्स उसी के पास रहती हैं
-- 20 इंटरफ़ेस भाषाएँ और लेआउट, हॉटकी, स्केल, फ़ॉन्ट, रंग आदि की सेटिंग्स
+- 19 इंटरफ़ेस भाषाएँ और लेआउट, हॉटकी, स्केल, फ़ॉन्ट, रंग आदि की सेटिंग्स
 
 ## त्वरित शुरुआत
 

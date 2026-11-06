@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-on.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@ Un organizador portátil para la base de datos de plugins de FL Studio. Ordena l
 - Sigue el tema actual de FL Studio en tiempo real
 - Copias de seguridad automáticas, deshacer con un clic, nada sale de la carpeta de la base de datos
 - Un solo archivo de 9 MB sin instalación; los ajustes se guardan a su lado
-- 20 idiomas de interfaz y ajustes de distribución, atajos, escala, fuentes, colores y más
+- 19 idiomas de interfaz y ajustes de distribución, atajos, escala, fuentes, colores y más
 
 ## Inicio rápido
 

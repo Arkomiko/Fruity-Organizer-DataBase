@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@ Przenośny organizer bazy wtyczek FL Studio. Układa wtyczki w folderach według
 - Na bieżąco podąża za aktualnym motywem FL Studio
 - Automatyczne kopie zapasowe, cofanie jednym kliknięciem, nic nie opuszcza folderu bazy
 - Jeden plik 9 MB bez instalacji; ustawienia leżą obok niego
-- 20 języków interfejsu oraz ustawienia układu, skrótów, skali, czcionek, kolorów i nie tylko
+- 19 języków interfejsu oraz ustawienia układu, skrótów, skali, czcionek, kolorów i nie tylko
 
 ## Szybki start
 

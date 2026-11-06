@@ -311,8 +311,8 @@ def main():
         missing = required - set(lang)
         if missing:
             raise SystemExit(f"{code}: missing {sorted(missing)}")
-    if len(LANGUAGES) != 20:
-        raise SystemExit("expected 20 languages")
+    if len(LANGUAGES) != 19:
+        raise SystemExit("expected 19 languages")
     for code, lang in LANGUAGES.items():
         folder = os.path.join(ROOT, "GiDo", code)
         write(os.path.join(folder, "banner.svg"), banner_svg(lang))

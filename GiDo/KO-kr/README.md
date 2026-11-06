@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@ FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입�
 - 현재 FL Studio 테마를 실시간으로 따라갑니다
 - 자동 백업, 클릭 한 번으로 되돌리기, 데이터베이스 폴더 밖으로 나가는 것은 없습니다
 - 설치가 필요 없는 9 MB 단일 파일, 설정은 그 옆에 저장됩니다
-- 20개 인터페이스 언어와 배치, 단축키, 배율, 글꼴, 색상 등의 설정
+- 19개 인터페이스 언어와 배치, 단축키, 배율, 글꼴, 색상 등의 설정
 
 ## 빠른 시작
 

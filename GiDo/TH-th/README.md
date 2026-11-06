@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@
 - ตามธีม FL Studio ปัจจุบันแบบเรียลไทม์
 - สำรองข้อมูลอัตโนมัติ เลิกทำได้ในคลิกเดียว ไม่มีสิ่งใดออกนอกโฟลเดอร์ฐานข้อมูล
 - ไฟล์เดียวขนาด 9 MB ไม่ต้องติดตั้ง การตั้งค่าอยู่ข้างไฟล์
-- 20 ภาษาอินเทอร์เฟซ พร้อมการตั้งค่าเลย์เอาต์ ปุ่มลัด ขนาด แบบอักษร สี และอื่น ๆ
+- 19 ภาษาอินเทอร์เฟซ พร้อมการตั้งค่าเลย์เอาต์ ปุ่มลัด ขนาด แบบอักษร สี และอื่น ๆ
 
 ## เริ่มต้นอย่างรวดเร็ว
 

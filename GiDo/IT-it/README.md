@@ -6,7 +6,6 @@
 <a href="../../GiDo/ZH-cn/README.md"><img src="../../docs/lang/ZH-cn-off.svg" height="26" alt="简体中文"></a>
 <a href="../../GiDo/ES-es/README.md"><img src="../../docs/lang/ES-es-off.svg" height="26" alt="Español"></a>
 <a href="../../GiDo/HI-in/README.md"><img src="../../docs/lang/HI-in-off.svg" height="26" alt="हिन्दी"></a>
-<a href="../../GiDo/AR-sa/README.md"><img src="../../docs/lang/AR-sa-off.svg" height="26" alt="العربية"></a>
 <a href="../../GiDo/FR-fr/README.md"><img src="../../docs/lang/FR-fr-off.svg" height="26" alt="Français"></a>
 <a href="../../GiDo/BN-bd/README.md"><img src="../../docs/lang/BN-bd-off.svg" height="26" alt="বাংলা"></a>
 <a href="../../GiDo/PT-br/README.md"><img src="../../docs/lang/PT-br-off.svg" height="26" alt="Português"></a>
@@ -37,7 +36,7 @@ Un organizzatore portatile per il database dei plugin di FL Studio. Sistema i pl
 - Segue il tema corrente di FL Studio in tempo reale
 - Backup automatici, annullamento con un clic, nulla esce dalla cartella del database
 - Un unico file da 9 MB senza installazione; le impostazioni restano accanto
-- 20 lingue dell'interfaccia e impostazioni per disposizione, scorciatoie, scala, caratteri, colori e altro
+- 19 lingue dell'interfaccia e impostazioni per disposizione, scorciatoie, scala, caratteri, colori e altro
 
 ## Avvio rapido
 
