@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe 다운로드</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe 다운로드</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/KO-kr/wiki/index.html"><b>위키</b></a></p>
 
 FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입니다. 플러그인을 제조사, 용도 또는 둘 다에 따라 폴더로 정리하며 FL Studio와 잘 어울리는 모습으로 동작합니다.
 
@@ -35,8 +42,8 @@ FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입�
 - 용도, 제조사, 형식, 비트, 상태, 파일 날짜, 크기 등으로 필터링
 - 현재 FL Studio 테마를 실시간으로 따라갑니다
 - 자동 백업, 클릭 한 번으로 되돌리기, 데이터베이스 폴더 밖으로 나가는 것은 없습니다
-- 설치가 필요 없는 9 MB 단일 파일, 설정은 그 옆에 저장됩니다
-- 19개 인터페이스 언어와 배치, 단축키, 배율, 글꼴, 색상 등의 설정
+- 설치가 필요 없는 10 MB 단일 파일, 설정은 그 옆에 저장됩니다
+- 26개 인터페이스 언어와 배치, 단축키, 배율, 글꼴, 색상 등의 설정
 
 ## 빠른 시작
 

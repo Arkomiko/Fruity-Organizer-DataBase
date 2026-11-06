@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-on.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Завантажити FODB.exe</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Завантажити FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/UK-ua/wiki/index.html"><b>Вікі</b></a></p>
 
 Портативний органайзер бази плагінів FL Studio. Розкладає плагіни по папках за виробником, призначенням або одразу за обома й виглядає як природна частина FL Studio.
 
@@ -35,8 +42,8 @@
 - Фільтри за призначенням, виробником, форматом, розрядністю, статусом, датою файлу, розміром тощо
 - Миттєво підхоплює поточну тему FL Studio
 - Автоматичні резервні копії, скасування одним кліком, нічого не виходить за межі папки бази
-- Один файл на 9 МБ без встановлення; налаштування зберігаються поруч
-- 19 мов інтерфейсу та налаштування розкладок, клавіш, масштабу, шрифтів, кольорів тощо
+- Один файл на 10 МБ без встановлення; налаштування зберігаються поруч
+- 26 мов інтерфейсу та налаштування розкладок, клавіш, масштабу, шрифтів, кольорів тощо
 
 ## Швидкий старт
 

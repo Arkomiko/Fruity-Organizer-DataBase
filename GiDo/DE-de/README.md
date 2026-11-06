@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe herunterladen</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe herunterladen</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/DE-de/wiki/index.html"><b>Wiki</b></a></p>
 
 Ein portabler Organizer für die Plugin-Datenbank von FL Studio. Er sortiert Plugins nach Hersteller, Einsatzzweck oder beidem in Ordner und fügt sich optisch in FL Studio ein.
 
@@ -35,8 +42,8 @@ Ein portabler Organizer für die Plugin-Datenbank von FL Studio. Er sortiert Plu
 - Filter für Zweck, Hersteller, Format, Bit, Status, Dateidatum, Größe und mehr
 - Folgt live dem aktuellen FL-Studio-Theme
 - Automatische Backups, Rückgängig mit einem Klick, nichts verlässt den Datenbankordner
-- Eine einzige 9-MB-Datei ohne Installation; die Einstellungen liegen daneben
-- 19 Oberflächensprachen sowie Einstellungen für Anordnung, Kürzel, Skalierung, Schriften, Farben und mehr
+- Eine einzige 10-MB-Datei ohne Installation; die Einstellungen liegen daneben
+- 26 Oberflächensprachen sowie Einstellungen für Anordnung, Kürzel, Skalierung, Schriften, Farben und mehr
 
 ## Schnellstart
 

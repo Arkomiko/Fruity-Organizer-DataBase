@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-on.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Pobierz FODB.exe</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Pobierz FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/PL-pl/wiki/index.html"><b>Wiki</b></a></p>
 
 Przenośny organizer bazy wtyczek FL Studio. Układa wtyczki w folderach według producenta, przeznaczenia lub obu naraz i wygląda jak naturalna część FL Studio.
 
@@ -35,8 +42,8 @@ Przenośny organizer bazy wtyczek FL Studio. Układa wtyczki w folderach według
 - Filtry według przeznaczenia, producenta, formatu, bitów, stanu, daty pliku, rozmiaru i innych
 - Na bieżąco podąża za aktualnym motywem FL Studio
 - Automatyczne kopie zapasowe, cofanie jednym kliknięciem, nic nie opuszcza folderu bazy
-- Jeden plik 9 MB bez instalacji; ustawienia leżą obok niego
-- 19 języków interfejsu oraz ustawienia układu, skrótów, skali, czcionek, kolorów i nie tylko
+- Jeden plik 10 MB bez instalacji; ustawienia leżą obok niego
+- 26 języków interfejsu oraz ustawienia układu, skrótów, skali, czcionek, kolorów i nie tylko
 
 ## Szybki start
 

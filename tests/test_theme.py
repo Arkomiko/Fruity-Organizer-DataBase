@@ -113,7 +113,7 @@ class LanguageTests(unittest.TestCase):
 
     def test_all_language_files_are_complete(self):
         codes = i18n.available()
-        self.assertEqual(len(codes), 19, sorted(codes))
+        self.assertEqual(len(codes), 26, sorted(codes))
         for code in codes:
             data = i18n._read(code)
             meta = data.pop("_meta")

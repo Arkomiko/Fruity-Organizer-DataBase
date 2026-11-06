@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe डाउनलोड करें</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe डाउनलोड करें</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/HI-in/wiki/index.html"><b>विकी</b></a></p>
 
 FL Studio प्लगइन डेटाबेस के लिए एक पोर्टेबल ऑर्गनाइज़र। यह प्लगइन को निर्माता, उपयोग या दोनों के अनुसार फ़ोल्डरों में रखता है और FL Studio के साथ घुल-मिल जाता है।
 
@@ -35,8 +42,8 @@ FL Studio प्लगइन डेटाबेस के लिए एक प�
 - उपयोग, निर्माता, फ़ॉर्मेट, बिट, स्थिति, फ़ाइल तिथि, आकार आदि के फ़िल्टर
 - FL Studio की मौजूदा थीम का तुरंत अनुसरण करता है
 - स्वचालित बैकअप, एक क्लिक में पूर्ववत, कुछ भी डेटाबेस फ़ोल्डर से बाहर नहीं जाता
-- 9 MB की एक फ़ाइल, इंस्टॉलेशन की ज़रूरत नहीं; सेटिंग्स उसी के पास रहती हैं
-- 19 इंटरफ़ेस भाषाएँ और लेआउट, हॉटकी, स्केल, फ़ॉन्ट, रंग आदि की सेटिंग्स
+- 10 MB की एक फ़ाइल, इंस्टॉलेशन की ज़रूरत नहीं; सेटिंग्स उसी के पास रहती हैं
+- 26 इंटरफ़ेस भाषाएँ और लेआउट, हॉटकी, स्केल, फ़ॉन्ट, रंग आदि की सेटिंग्स
 
 ## त्वरित शुरुआत
 

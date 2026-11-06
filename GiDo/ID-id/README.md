@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Unduh FODB.exe</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Unduh FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/ID-id/wiki/index.html"><b>Wiki</b></a></p>
 
 Pengatur portabel untuk basis data plugin FL Studio. Menata plugin ke dalam folder menurut vendor, kegunaan, atau keduanya, dengan tampilan yang menyatu dengan FL Studio.
 
@@ -35,8 +42,8 @@ Pengatur portabel untuk basis data plugin FL Studio. Menata plugin ke dalam fold
 - Filter untuk kegunaan, vendor, format, bit, status, tanggal berkas, ukuran, dan lainnya
 - Mengikuti tema FL Studio yang aktif secara langsung
 - Cadangan otomatis, urungkan sekali klik, tidak ada yang keluar dari folder basis data
-- Satu berkas 9 MB tanpa instalasi; pengaturan tersimpan di sebelahnya
-- 19 bahasa antarmuka serta pengaturan tata letak, pintasan, skala, font, warna, dan lainnya
+- Satu berkas 10 MB tanpa instalasi; pengaturan tersimpan di sebelahnya
+- 26 bahasa antarmuka serta pengaturan tata letak, pintasan, skala, font, warna, dan lainnya
 
 ## Mulai cepat
 

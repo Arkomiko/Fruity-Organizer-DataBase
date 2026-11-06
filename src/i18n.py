@@ -13,9 +13,9 @@ from functools import lru_cache
 DEFAULT = "EN-en"
 # Основной код языка Windows -> файл языка.
 _WINDOWS_LANGUAGES = {
-    0x09: "EN-en", 0x19: "RU-ru", 0x23: "RU-ru", 0x04: "ZH-cn", 0x0A: "ES-es", 0x39: "HI-in", 0x0C: "FR-fr",
+    0x09: "EN-en", 0x19: "RU-ru", 0x23: "BE-by", 0x04: "ZH-cn", 0x0A: "ES-es", 0x39: "HI-in", 0x0C: "FR-fr",
     0x45: "BN-bd", 0x16: "PT-br", 0x20: "UR-pk", 0x21: "ID-id", 0x07: "DE-de", 0x11: "JA-jp", 0x1F: "TR-tr", 0x12: "KO-kr",
-    0x2A: "VI-vn", 0x10: "IT-it", 0x15: "PL-pl", 0x22: "UK-ua", 0x1E: "TH-th",
+    0x2A: "VI-vn", 0x10: "IT-it", 0x15: "PL-pl", 0x22: "UK-ua", 0x1E: "TH-th", 0x3F: "KK-kz", 0x43: "UZ-uz", 0x2C: "AZ-az", 0x2B: "HY-am", 0x0D: "HE-il",
 }
 _SHORT = {"ru": "RU-ru", "en": "EN-en"}
 

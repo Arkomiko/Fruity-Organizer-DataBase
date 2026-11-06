@@ -1,0 +1,30 @@
+:root{color-scheme:dark;--back:#2b3136;--panel:#3c454b;--line:#273036;--text:#d5dbdf;--dim:#9aa4aa;--accent:#ffb23e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--back);color:var(--text);font:16px/1.6 "Segoe UI",system-ui,sans-serif}
+a{color:var(--accent)}
+img{max-width:100%;height:auto;display:block}
+header{background:#262b2f;border-bottom:1px solid var(--line)}
+.bar,main,footer{max-width:960px;margin:0 auto;padding:0 16px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;padding-block:10px}
+.bar .name{font-weight:600;color:var(--text);text-decoration:none;margin-inline-end:auto}
+.bar a{text-decoration:none}
+.langs{position:relative}
+.langs summary{cursor:pointer;color:var(--dim)}
+.langs ul{position:absolute;inset-inline-end:0;z-index:1;width:min(520px,90vw);margin:6px 0 0;padding:10px;list-style:none;columns:2;background:var(--panel);border:1px solid var(--line);border-radius:4px}
+main{padding-block:24px 40px}
+h1{font-size:28px;line-height:1.25;margin:0 0 12px}
+h2{font-size:20px;margin:28px 0 8px}
+.lead{color:var(--dim);margin-top:0}
+.download{display:inline-block;margin:6px 0 22px;padding:9px 18px;background:var(--accent);color:#1a1d20;border-radius:4px;font-weight:600;text-decoration:none}
+.shot{border:1px solid var(--line);border-radius:4px;margin-bottom:12px}
+pre{direction:ltr;text-align:left;overflow-x:auto;padding:12px;background:#262b2f;border:1px solid var(--line);border-radius:4px;font:14px/1.5 Consolas,monospace}
+table{border-collapse:collapse;width:100%}
+td,th{padding:6px 10px;border:1px solid var(--line);text-align:start}
+th{background:var(--panel);font-weight:600}
+.wiki{display:grid;grid-template-columns:220px 1fr;gap:28px}
+.wiki nav ul{list-style:none;margin:0;padding:0}
+.wiki nav li{margin-bottom:6px}
+.wiki nav .here{color:var(--text);font-weight:600}
+.page{min-width:0}
+footer{padding-block:16px 28px;color:var(--dim);font-size:14px;border-top:1px solid var(--line)}
+@media (max-width:720px){.wiki{grid-template-columns:1fr}.langs ul{columns:1;inset-inline:0 auto}}

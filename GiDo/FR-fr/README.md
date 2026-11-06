@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Télécharger FODB.exe</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Télécharger FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/FR-fr/wiki/index.html"><b>Wiki</b></a></p>
 
 Un organiseur portable pour la base de plugins de FL Studio. Il range les plugins dans des dossiers par éditeur, par usage ou les deux, avec une apparence qui s'accorde à FL Studio.
 
@@ -35,8 +42,8 @@ Un organiseur portable pour la base de plugins de FL Studio. Il range les plugin
 - Filtres par usage, éditeur, format, bits, état, date de fichier, taille et plus
 - Suit le thème actuel de FL Studio en direct
 - Sauvegardes automatiques, annulation en un clic, rien ne sort du dossier de la base
-- Un seul fichier de 9 Mo sans installation ; les réglages restent à côté
-- 19 langues d'interface et des réglages de disposition, raccourcis, échelle, polices, couleurs et plus
+- Un seul fichier de 10 Mo sans installation ; les réglages restent à côté
+- 26 langues d'interface et des réglages de disposition, raccourcis, échelle, polices, couleurs et plus
 
 ## Démarrage rapide
 

@@ -1,3 +1,4 @@
+# Сборка релиза: тег вида v1.2.3.4 создаёт релиз с FODB.exe и NuGet-пакет.
 name: Release
 
 on:
@@ -6,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   build:
@@ -15,13 +17,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+      - uses: nuget/setup-nuget@v2
       - name: Install build tools
         run: python -m pip install -r requirements-build.txt
       - name: Test
         run: python -m unittest discover -s tests
       - name: Build
         run: python -m PyInstaller --noconfirm --clean --log-level WARN FODB.spec
-      - name: Publish
+      - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "${{ github.ref_name }}" dist/FODB.exe --generate-notes
+      - name: Publish package
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart("v")
+          nuget pack packaging/FODB.nuspec -Version $version -BasePath . -OutputDirectory packaging -NoPackageAnalysis
+          dotnet nuget push "packaging/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ github.token }}" --skip-duplicate

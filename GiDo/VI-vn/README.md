@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Tải FODB.exe</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Tải FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/VI-vn/wiki/index.html"><b>Wiki</b></a></p>
 
 Công cụ sắp xếp di động cho cơ sở dữ liệu plugin của FL Studio. Sắp plugin vào thư mục theo hãng, theo công dụng hoặc cả hai, với giao diện hòa hợp cùng FL Studio.
 
@@ -35,8 +42,8 @@ Công cụ sắp xếp di động cho cơ sở dữ liệu plugin của FL Studi
 - Lọc theo công dụng, hãng, định dạng, bit, trạng thái, ngày tệp, kích thước và hơn thế
 - Theo dõi giao diện FL Studio hiện tại theo thời gian thực
 - Sao lưu tự động, hoàn tác một lần nhấp, không có gì ra ngoài thư mục cơ sở dữ liệu
-- Một tệp 9 MB không cần cài đặt; thiết lập nằm ngay bên cạnh
-- 19 ngôn ngữ giao diện cùng cài đặt bố cục, phím tắt, tỷ lệ, phông chữ, màu sắc và hơn thế
+- Một tệp 10 MB không cần cài đặt; thiết lập nằm ngay bên cạnh
+- 26 ngôn ngữ giao diện cùng cài đặt bố cục, phím tắt, tỷ lệ, phông chữ, màu sắc và hơn thế
 
 ## Bắt đầu nhanh
 

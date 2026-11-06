@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Descargar FODB.exe</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Descargar FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/ES-es/wiki/index.html"><b>Wiki</b></a></p>
 
 Un organizador portátil para la base de datos de plugins de FL Studio. Ordena los plugins en carpetas por fabricante, por función o por ambos, con un aspecto que encaja con FL Studio.
 
@@ -35,8 +42,8 @@ Un organizador portátil para la base de datos de plugins de FL Studio. Ordena l
 - Filtros por función, fabricante, formato, bits, estado, fecha de archivo, tamaño y más
 - Sigue el tema actual de FL Studio en tiempo real
 - Copias de seguridad automáticas, deshacer con un clic, nada sale de la carpeta de la base de datos
-- Un solo archivo de 9 MB sin instalación; los ajustes se guardan a su lado
-- 19 idiomas de interfaz y ajustes de distribución, atajos, escala, fuentes, colores y más
+- Un solo archivo de 10 MB sin instalación; los ajustes se guardan a su lado
+- 26 idiomas de interfaz y ajustes de distribución, atajos, escala, fuentes, colores y más
 
 ## Inicio rápido
 

@@ -22,9 +22,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ڈاؤن لوڈ کریں</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ڈاؤن لوڈ کریں</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/UR-pk/wiki/index.html"><b>وکی</b></a></p>
 
 FL Studio پلگ اِن ڈیٹا بیس کے لیے ایک پورٹیبل آرگنائزر۔ یہ پلگ اِنز کو بنانے والے، استعمال یا دونوں کے مطابق فولڈرز میں رکھتا ہے اور FL Studio کے ساتھ ہم آہنگ دکھائی دیتا ہے۔
 
@@ -37,8 +44,8 @@ FL Studio پلگ اِن ڈیٹا بیس کے لیے ایک پورٹیبل آرگ
 - استعمال، بنانے والے، فارمیٹ، بٹس، حالت، فائل کی تاریخ، سائز وغیرہ کے فلٹر
 - FL Studio کی موجودہ تھیم کی فوری پیروی کرتا ہے
 - خودکار بیک اپ، ایک کلک میں واپسی، کچھ بھی ڈیٹا بیس فولڈر سے باہر نہیں جاتا
-- 9 MB کی ایک فائل، انسٹالیشن کی ضرورت نہیں؛ سیٹنگز اسی کے ساتھ رہتی ہیں
-- انٹرفیس کی 19 زبانیں اور لے آؤٹ، شارٹ کٹ، پیمانے، فونٹ، رنگوں وغیرہ کی ترتیبات
+- 10 MB کی ایک فائل، انسٹالیشن کی ضرورت نہیں؛ سیٹنگز اسی کے ساتھ رہتی ہیں
+- انٹرفیس کی 26 زبانیں اور لے آؤٹ، شارٹ کٹ، پیمانے، فونٹ، رنگوں وغیرہ کی ترتیبات
 
 ## فوری آغاز
 

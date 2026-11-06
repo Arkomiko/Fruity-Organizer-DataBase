@@ -1345,6 +1345,7 @@ class App:
         find = self.find_var.get()
         self._load_palette()
         self.t = self._make_theme()
+        self.undo_btn = None  # кнопка исчезнет вместе со страницей настроек
         self.frame.destroy()
         self._build_window()
         self.grid.selected = selected

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Описание NuGet-пакета с FODB.exe. Версию подставляет сборка релиза. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>FODB</id>
+    <version>0.0.0</version>
+    <title>Fruity Organizer DataBase</title>
+    <authors>Arkomiko</authors>
+    <description>Portable organizer for the FL Studio plugin database: sorts plugins by vendor and purpose.</description>
+    <license type="expression">MIT</license>
+    <projectUrl>https://arkomiko.github.io/Fruity-Organizer-DataBase/</projectUrl>
+    <repository type="git" url="https://github.com/Arkomiko/Fruity-Organizer-DataBase" />
+    <tags>fl-studio plugin-manager vst vst3 organizer windows</tags>
+  </metadata>
+  <files>
+    <file src="dist\FODB.exe" target="tools\FODB.exe" />
+  </files>
+</package>

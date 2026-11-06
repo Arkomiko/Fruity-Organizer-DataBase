@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ডাউনলোড করুন</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ডাউনলোড করুন</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/BN-bd/wiki/index.html"><b>উইকি</b></a></p>
 
 FL Studio প্লাগইন ডেটাবেসের জন্য একটি পোর্টেবল অর্গানাইজার। এটি প্লাগইনগুলোকে নির্মাতা, ব্যবহার বা উভয় অনুযায়ী ফোল্ডারে সাজায় এবং FL Studio-র সঙ্গে মানানসই দেখায়।
 
@@ -36,7 +43,7 @@ FL Studio প্লাগইন ডেটাবেসের জন্য এক�
 - FL Studio-র বর্তমান থিম সঙ্গে সঙ্গে অনুসরণ করে
 - স্বয়ংক্রিয় ব্যাকআপ, এক ক্লিকে পূর্বাবস্থা, কিছুই ডেটাবেস ফোল্ডারের বাইরে যায় না
 - ৯ MB-র একটি ফাইল, ইনস্টলেশন লাগে না; সেটিংস তার পাশেই থাকে
-- 19টি ইন্টারফেস ভাষা এবং বিন্যাস, হটকি, স্কেল, ফন্ট, রং ইত্যাদির সেটিংস
+- 26টি ইন্টারফেস ভাষা এবং বিন্যাস, হটকি, স্কেল, ফন্ট, রং ইত্যাদির সেটিংস
 
 ## দ্রুত শুরু
 

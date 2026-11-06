@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-off.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe indir</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe indir</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/TR-tr/wiki/index.html"><b>Wiki</b></a></p>
 
 FL Studio eklenti veritabanı için taşınabilir bir düzenleyici. Eklentileri üreticiye, kullanım amacına veya her ikisine göre klasörlere yerleştirir ve FL Studio ile uyumlu görünür.
 
@@ -35,8 +42,8 @@ FL Studio eklenti veritabanı için taşınabilir bir düzenleyici. Eklentileri 
 - Amaç, üretici, biçim, bit, durum, dosya tarihi, boyut ve daha fazlası için filtreler
 - Geçerli FL Studio temasını anında izler
 - Otomatik yedekler, tek tıkla geri alma, hiçbir şey veritabanı klasörünün dışına çıkmaz
-- Kurulum gerektirmeyen tek bir 9 MB dosya; ayarlar yanında durur
-- 19 arayüz dili ve yerleşim, kısayol, ölçek, yazı tipi, renk gibi ayarlar
+- Kurulum gerektirmeyen tek bir 10 MB dosya; ayarlar yanında durur
+- 26 arayüz dili ve yerleşim, kısayol, ölçek, yazı tipi, renk gibi ayarlar
 
 ## Hızlı başlangıç
 

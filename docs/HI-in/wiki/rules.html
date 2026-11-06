@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>अपने नियम | FODB</title>
+<meta name="description" content="FL Studio प्लगइन डेटाबेस के लिए एक पोर्टेबल ऑर्गनाइज़र। यह प्लगइन को निर्माता, उपयोग या दोनों के अनुसार फ़ोल्डरों में रखता है और FL Studio के साथ घुल-मिल जाता है।">
+<link rel="stylesheet" href="../../site.css">
+</head>
+<body>
+<header><div class="bar">
+<a class="name" href="../../HI-in/index.html">FODB</a>
+<a href="../../HI-in/index.html">होम</a>
+<a href="../../HI-in/wiki/index.html">विकी</a>
+<a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">FODB.exe डाउनलोड करें</a>
+<a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">सोर्स कोड</a>
+<details class="langs"><summary>भाषा: हिन्दी</summary><ul><li><a href="../../EN-en/wiki/rules.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/rules.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/rules.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/rules.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/rules.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/rules.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/rules.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/rules.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/rules.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/rules.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/rules.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/rules.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/rules.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/rules.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/rules.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/rules.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/rules.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/rules.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/rules.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/rules.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/rules.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/rules.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/rules.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/rules.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/rules.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/rules.html" lang="he">עברית</a></li></ul></details>
+</div></header>
+<main>
+<div class="wiki"><nav><ul><li><a href="../../HI-in/wiki/start.html">त्वरित शुरुआत</a></li><li><a href="../../HI-in/wiki/layouts.html">फ़ोल्डर लेआउट</a></li><li><a href="../../HI-in/wiki/filters.html">फ़िल्टर</a></li><li><span class="here">अपने नियम</span></li><li><a href="../../HI-in/wiki/safety.html">सुरक्षा</a></li><li><a href="../../HI-in/wiki/themes.html">FL Studio थीम</a></li><li><a href="../../HI-in/wiki/settings.html">सेटिंग्स</a></li><li><a href="../../HI-in/wiki/hotkeys.html">हॉटकी</a></li><li><a href="../../HI-in/wiki/build.html">सोर्स से बनाएँ</a></li></ul></nav><div class="page"><h1>अपने नियम</h1><p>पहचानता है कि प्लगइन किस काम का है: रिवर्ब, EQ, डायनेमिक्स, सिंथ और 18 अन्य उपयोग</p><p>सेटिंग्स टैब या FODB.json में नियम जोड़ें और रेगुलर एक्सप्रेशन से नाम या निर्माता के अनुसार उपयोग तय करें:</p><pre>&quot;purpose_rules&quot;: [
+  { &quot;purpose&quot;: &quot;drums&quot;, &quot;name&quot;: &quot;kick|808&quot; },
+  { &quot;purpose&quot;: &quot;vocal&quot;, &quot;vendor&quot;: &quot;antares&quot; }
+]</pre><p>पहला मेल खाने वाला नियम स्वचालित पहचान से ऊपर है। शर्तों में रेगुलर एक्सप्रेशन चलते हैं।</p><h2>उपयोग</h2><ul><li>EQ</li><li>अन्य</li><li>एनालाइज़र</li><li>कंट्रोलर और MIDI</li><li>चैनल स्ट्रिप</li><li>डायनेमिक्स</li><li>डिले</li><li>डिस्टॉर्शन और सैचुरेशन</li><li>ड्रम</li><li>पिच</li><li>पुनर्स्थापन</li><li>फ़िल्टर</li><li>मास्टरिंग</li><li>मॉड्यूलेशन</li><li>यूटिलिटी</li><li>रचनात्मक इफ़ेक्ट</li><li>रिवर्ब</li><li>वाद्य यंत्र</li><li>वोकल</li><li>सिंथ</li><li>सैंपलर</li><li>स्टीरियो और स्पेस</li></ul></div></div>
+</main>
+<footer><p>Magabes और सहयोगियों के FL Studio Automatic Plugin Organizer पर आधारित, MIT लाइसेंस के तहत।</p><p>स्वतंत्र परियोजना, Image-Line से संबद्ध नहीं। FL Studio, Image-Line का ट्रेडमार्क है।</p></footer>
+</body>
+</html>

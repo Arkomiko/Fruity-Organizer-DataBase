@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from docs_text import LANGUAGES  # noqa: E402
 
 REPO = "https://github.com/Arkomiko/Fruity-Organizer-DataBase"
+SITE = "https://arkomiko.github.io/Fruity-Organizer-DataBase/"
 LIT, DIM, BACK, PANEL, TEXT = "#FFB23E", "#3C454B", "#262B2F", "#4D565C", "#BDC6CB"
 FONT = "Segoe UI, Noto Sans, Helvetica, Arial, sans-serif"
 LETTERS = {
@@ -223,7 +224,7 @@ def readme(code, lang, to_root, art):
 {switcher(code, to_root)}
 </p>
 
-<p align="center"><a href="{REPO}/releases/latest"><b>⬇ {escape(lang["download"])}</b></a></p>
+<p align="center"><a href="{REPO}/releases/latest"><b>⬇ {escape(lang["download"])}</b></a> &nbsp;|&nbsp; <a href="{SITE}{code}/wiki/index.html"><b>{escape(lang["wiki"])}</b></a></p>
 
 {lang["intro"]}
 
@@ -311,8 +312,8 @@ def main():
         missing = required - set(lang)
         if missing:
             raise SystemExit(f"{code}: missing {sorted(missing)}")
-    if len(LANGUAGES) != 19:
-        raise SystemExit("expected 19 languages")
+    if len(LANGUAGES) != 26:
+        raise SystemExit("expected 26 languages")
     for code, lang in LANGUAGES.items():
         folder = os.path.join(ROOT, "GiDo", code)
         write(os.path.join(folder, "banner.svg"), banner_svg(lang))

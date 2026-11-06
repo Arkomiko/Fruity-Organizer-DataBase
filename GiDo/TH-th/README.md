@@ -20,9 +20,16 @@
 <a href="../../GiDo/PL-pl/README.md"><img src="../../docs/lang/PL-pl-off.svg" height="26" alt="Polski"></a>
 <a href="../../GiDo/UK-ua/README.md"><img src="../../docs/lang/UK-ua-off.svg" height="26" alt="Українська"></a>
 <a href="../../GiDo/TH-th/README.md"><img src="../../docs/lang/TH-th-on.svg" height="26" alt="ไทย"></a>
+<a href="../../GiDo/KK-kz/README.md"><img src="../../docs/lang/KK-kz-off.svg" height="26" alt="Қазақша"></a>
+<a href="../../GiDo/UZ-uz/README.md"><img src="../../docs/lang/UZ-uz-off.svg" height="26" alt="Oʻzbekcha"></a>
+<a href="../../GiDo/BE-by/README.md"><img src="../../docs/lang/BE-by-off.svg" height="26" alt="Беларуская"></a>
+<a href="../../GiDo/AZ-az/README.md"><img src="../../docs/lang/AZ-az-off.svg" height="26" alt="Azərbaycanca"></a>
+<a href="../../GiDo/HY-am/README.md"><img src="../../docs/lang/HY-am-off.svg" height="26" alt="Հայերեն"></a>
+<a href="../../GiDo/ISV-sl/README.md"><img src="../../docs/lang/ISV-sl-off.svg" height="26" alt="Medžuslovjansky"></a>
+<a href="../../GiDo/HE-il/README.md"><img src="../../docs/lang/HE-il-off.svg" height="26" alt="עברית"></a>
 </p>
 
-<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ ดาวน์โหลด FODB.exe</b></a></p>
+<p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ ดาวน์โหลด FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/TH-th/wiki/index.html"><b>วิกิ</b></a></p>
 
 เครื่องมือจัดระเบียบแบบพกพาสำหรับฐานข้อมูลปลั๊กอินของ FL Studio จัดปลั๊กอินลงโฟลเดอร์ตามผู้ผลิต ตามการใช้งาน หรือทั้งสองอย่าง พร้อมหน้าตาที่เข้ากับ FL Studio
 
@@ -35,8 +42,8 @@
 - ตัวกรองตามการใช้งาน ผู้ผลิต รูปแบบ บิต สถานะ วันที่ไฟล์ ขนาด และอื่น ๆ
 - ตามธีม FL Studio ปัจจุบันแบบเรียลไทม์
 - สำรองข้อมูลอัตโนมัติ เลิกทำได้ในคลิกเดียว ไม่มีสิ่งใดออกนอกโฟลเดอร์ฐานข้อมูล
-- ไฟล์เดียวขนาด 9 MB ไม่ต้องติดตั้ง การตั้งค่าอยู่ข้างไฟล์
-- 19 ภาษาอินเทอร์เฟซ พร้อมการตั้งค่าเลย์เอาต์ ปุ่มลัด ขนาด แบบอักษร สี และอื่น ๆ
+- ไฟล์เดียวขนาด 10 MB ไม่ต้องติดตั้ง การตั้งค่าอยู่ข้างไฟล์
+- 26 ภาษาอินเทอร์เฟซ พร้อมการตั้งค่าเลย์เอาต์ ปุ่มลัด ขนาด แบบอักษร สี และอื่น ๆ
 
 ## เริ่มต้นอย่างรวดเร็ว
 

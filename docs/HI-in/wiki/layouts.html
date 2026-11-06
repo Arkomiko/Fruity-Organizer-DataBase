@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>फ़ोल्डर लेआउट | FODB</title>
+<meta name="description" content="FL Studio प्लगइन डेटाबेस के लिए एक पोर्टेबल ऑर्गनाइज़र। यह प्लगइन को निर्माता, उपयोग या दोनों के अनुसार फ़ोल्डरों में रखता है और FL Studio के साथ घुल-मिल जाता है।">
+<link rel="stylesheet" href="../../site.css">
+</head>
+<body>
+<header><div class="bar">
+<a class="name" href="../../HI-in/index.html">FODB</a>
+<a href="../../HI-in/index.html">होम</a>
+<a href="../../HI-in/wiki/index.html">विकी</a>
+<a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">FODB.exe डाउनलोड करें</a>
+<a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">सोर्स कोड</a>
+<details class="langs"><summary>भाषा: हिन्दी</summary><ul><li><a href="../../EN-en/wiki/layouts.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/layouts.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/layouts.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/layouts.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/layouts.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/layouts.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/layouts.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/layouts.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/layouts.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/layouts.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/layouts.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/layouts.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/layouts.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/layouts.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/layouts.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/layouts.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/layouts.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/layouts.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/layouts.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/layouts.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/layouts.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/layouts.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/layouts.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/layouts.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/layouts.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/layouts.html" lang="he">עברית</a></li></ul></details>
+</div></header>
+<main>
+<div class="wiki"><nav><ul><li><a href="../../HI-in/wiki/start.html">त्वरित शुरुआत</a></li><li><span class="here">फ़ोल्डर लेआउट</span></li><li><a href="../../HI-in/wiki/filters.html">फ़िल्टर</a></li><li><a href="../../HI-in/wiki/rules.html">अपने नियम</a></li><li><a href="../../HI-in/wiki/safety.html">सुरक्षा</a></li><li><a href="../../HI-in/wiki/themes.html">FL Studio थीम</a></li><li><a href="../../HI-in/wiki/settings.html">सेटिंग्स</a></li><li><a href="../../HI-in/wiki/hotkeys.html">हॉटकी</a></li><li><a href="../../HI-in/wiki/build.html">सोर्स से बनाएँ</a></li></ul></nav><div class="page"><h1>फ़ोल्डर लेआउट</h1><p>कोई प्रीसेट चुनें या इन हिस्सों से अपना टेम्पलेट लिखें:</p><pre>{vendor}  {purpose}  {format}  {bits}  {letter}  {kind}
+
+{vendor}\{purpose}
+{purpose}\{vendor}
+USER\{format}\{vendor}</pre><ul><li>निर्माता</li><li>उपयोग</li><li>निर्माता \ उपयोग</li><li>उपयोग \ निर्माता</li><li>फ़ॉर्मेट \ निर्माता</li><li>फ़ॉर्मेट \ उपयोग</li><li>पहला अक्षर</li><li>USER \ निर्माता</li><li>USER \ उपयोग \ निर्माता</li></ul><h2>व्यवस्था विकल्प</h2><ul><li><b>हर प्लगइन की एक कॉपी</b>: प्लगइन के कई फ़ॉर्मेट हों तो एक कॉपी होता है। क्रम सेटिंग्स में तय होता है।</li><li><b>त्रुटि वाले प्लगइन छोड़ें</b>: जिन्हें FL Studio स्कैन नहीं कर सका उन्हें कॉपी न करें।</li><li><b>व्यवस्थित प्लगइन छोड़ें</b>: तारे वाला प्लगइन पहले से Effects या Generators में है, इसलिए दोबारा कॉपी नहीं होता।</li><li><b>व्यवस्थित प्लगइन फिर से रखें</b>: तारे वाले प्लगइन मौजूदा लेआउट के फ़ोल्डरों में ले जाएँ। पूर्ववत बटन इसे वापस करता है।</li><li><b>मौजूदा फ़ाइलें बदलें</b>: निर्माता फ़ोल्डर में मौजूद फ़ाइल को बदलें।</li><li><b>केवल सूची के प्लगइन</b>: फ़िल्टर और खोज के बाद सूची में दिखने वाले ही व्यवस्थित करें।</li><li><b>New फ़ोल्डर से ले जाएँ</b>: व्यवस्थित होने पर प्लगइन FL Studio की New सूची से हट जाता है। पूर्ववत बटन उसे वापस लाता है।</li></ul></div></div>
+</main>
+<footer><p>Magabes और सहयोगियों के FL Studio Automatic Plugin Organizer पर आधारित, MIT लाइसेंस के तहत।</p><p>स्वतंत्र परियोजना, Image-Line से संबद्ध नहीं। FL Studio, Image-Line का ट्रेडमार्क है।</p></footer>
+</body>
+</html>
