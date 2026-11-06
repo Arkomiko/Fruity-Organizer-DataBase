@@ -1,0 +1,30 @@
+{
+  // Terminal > Run Task. Пересборка exe также запускается клавишами Ctrl+Shift+B.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Пересобрать FODB.exe",
+      "type": "process",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/build.ps1"],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Пересобрать и запустить FODB.exe",
+      "type": "process",
+      "command": "${workspaceFolder}/dist/FODB.exe",
+      "dependsOn": "Пересобрать FODB.exe",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Запустить тесты",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv-build/Scripts/python.exe",
+      "args": ["-m", "unittest", "discover", "-s", "tests"],
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

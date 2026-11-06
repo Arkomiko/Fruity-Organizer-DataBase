@@ -1,0 +1,15 @@
+# Local tooling and working files
+.claude/
+.venv-build/
+__pycache__/
+*.pyc
+
+# Build output
+build/
+dist/
+
+# Portable settings written next to the program
+FODB.json
+FODB.undo.json
+FODB.log
+Backups/

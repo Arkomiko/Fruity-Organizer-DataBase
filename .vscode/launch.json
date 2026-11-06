@@ -1,0 +1,48 @@
+{
+  // Запуск и отладка: выберите конфигурацию в панели Run and Debug (F5).
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "FODB: запустить программу",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/main.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "FODB: своя база (спросит путь)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/main.py",
+      "args": ["--db", "${input:databasePath}"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "FODB: на английском",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/main.py",
+      "args": ["--lang", "en"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Тесты",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "unittest",
+      "args": ["discover", "-s", "tests", "-v"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "databasePath",
+      "type": "promptString",
+      "description": "Путь к папке Plugin database (лучше к копии)"
+    }
+  ]
+}

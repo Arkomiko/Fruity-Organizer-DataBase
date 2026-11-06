@@ -1,0 +1,9 @@
+{
+  // Откройте этот файл через File > Open Workspace from File.
+  "folders": [
+    { "name": "FODB", "path": ".." }
+  ],
+  "extensions": {
+    "recommendations": ["ms-python.python", "ms-python.debugpy"]
+  }
+}
