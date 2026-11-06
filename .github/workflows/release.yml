@@ -1,9 +1,15 @@
 # Сборка релиза: тег вида v1.2.3.4 создаёт релиз с FODB.exe и NuGet-пакет.
+# Ручной запуск с указанием тега публикует только пакет для уже вышедшего релиза.
 name: Release
 
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Тег релиза, например v1.1.0.0611"
+        required: true
 
 permissions:
   contents: write
@@ -12,6 +18,8 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,11 +33,12 @@ jobs:
       - name: Build
         run: python -m PyInstaller --noconfirm --clean --log-level WARN FODB.spec
       - name: Publish release
+        if: github.event_name == 'push'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${{ github.ref_name }}" dist/FODB.exe --generate-notes
+        run: gh release create "$env:TAG" dist/FODB.exe --generate-notes
       - name: Publish package
         run: |
-          $version = "${{ github.ref_name }}".TrimStart("v")
-          nuget pack packaging/FODB.nuspec -Version $version -BasePath . -OutputDirectory packaging -NoPackageAnalysis
-          dotnet nuget push "packaging/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ github.token }}" --skip-duplicate
+          nuget pack packaging/FODB.nuspec -Version $env:TAG.TrimStart("v") -BasePath . -OutputDirectory packaging -NoPackageAnalysis
+          $package = (Get-ChildItem packaging -Filter *.nupkg).FullName
+          dotnet nuget push $package --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ github.token }}" --skip-duplicate
