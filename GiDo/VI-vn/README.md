@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Tải FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/VI-vn/wiki/index.html"><b>Wiki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 Công cụ sắp xếp di động cho cơ sở dữ liệu plugin của FL Studio. Sắp plugin vào thư mục theo hãng, theo công dụng hoặc cả hai, với giao diện hòa hợp cùng FL Studio.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ Công cụ sắp xếp di động cho cơ sở dữ liệu plugin của FL Studi
 - Sao lưu tự động, hoàn tác một lần nhấp, không có gì ra ngoài thư mục cơ sở dữ liệu
 - Một tệp 10 MB không cần cài đặt; thiết lập nằm ngay bên cạnh
 - 26 ngôn ngữ giao diện cùng cài đặt bố cục, phím tắt, tỷ lệ, phông chữ, màu sắc và hơn thế
+- Mod tùy chọn: danh sách plugin lớn hơn, danh mục mở, công dụng chi tiết biết học hỏi, cây xem trước và dải trạng thái. Bật trong Cài đặt, Dữ liệu.
 
 ## Bắt đầu nhanh
 

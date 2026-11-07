@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe 다운로드</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/KO-kr/wiki/index.html"><b>위키</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입니다. 플러그인을 제조사, 용도 또는 둘 다에 따라 폴더로 정리하며 FL Studio와 잘 어울리는 모습으로 동작합니다.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입�
 - 자동 백업, 클릭 한 번으로 되돌리기, 데이터베이스 폴더 밖으로 나가는 것은 없습니다
 - 설치가 필요 없는 10 MB 단일 파일, 설정은 그 옆에 저장됩니다
 - 26개 인터페이스 언어와 배치, 단축키, 배율, 글꼴, 색상 등의 설정
+- 선택형 모드: 더 큰 플러그인 목록, 공개 카탈로그, 학습하는 세분화된 용도, 미리 보기 트리, 상태 색 띠. 설정의 데이터에서 켭니다.
 
 ## 빠른 시작
 

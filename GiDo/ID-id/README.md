@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Unduh FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/ID-id/wiki/index.html"><b>Wiki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 Pengatur portabel untuk basis data plugin FL Studio. Menata plugin ke dalam folder menurut vendor, kegunaan, atau keduanya, dengan tampilan yang menyatu dengan FL Studio.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ Pengatur portabel untuk basis data plugin FL Studio. Menata plugin ke dalam fold
 - Cadangan otomatis, urungkan sekali klik, tidak ada yang keluar dari folder basis data
 - Satu berkas 10 MB tanpa instalasi; pengaturan tersimpan di sebelahnya
 - 26 bahasa antarmuka serta pengaturan tata letak, pintasan, skala, font, warna, dan lainnya
+- Mod opsional: daftar plugin lebih besar, katalog terbuka, kegunaan lebih rinci yang belajar dari Anda, pohon pratinjau, dan garis status. Aktifkan di Pengaturan, Data.
 
 ## Mulai cepat
 

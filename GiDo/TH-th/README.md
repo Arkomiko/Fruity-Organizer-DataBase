@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ ดาวน์โหลด FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/TH-th/wiki/index.html"><b>วิกิ</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 เครื่องมือจัดระเบียบแบบพกพาสำหรับฐานข้อมูลปลั๊กอินของ FL Studio จัดปลั๊กอินลงโฟลเดอร์ตามผู้ผลิต ตามการใช้งาน หรือทั้งสองอย่าง พร้อมหน้าตาที่เข้ากับ FL Studio
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@
 - สำรองข้อมูลอัตโนมัติ เลิกทำได้ในคลิกเดียว ไม่มีสิ่งใดออกนอกโฟลเดอร์ฐานข้อมูล
 - ไฟล์เดียวขนาด 10 MB ไม่ต้องติดตั้ง การตั้งค่าอยู่ข้างไฟล์
 - 26 ภาษาอินเทอร์เฟซ พร้อมการตั้งค่าเลย์เอาต์ ปุ่มลัด ขนาด แบบอักษร สี และอื่น ๆ
+- ม็อดเสริม: รายการปลั๊กอินที่ใหญ่ขึ้น แคตตาล็อกเปิด การใช้งานละเอียดที่เรียนรู้จากคุณ ต้นไม้แสดงตัวอย่าง และแถบสถานะ เปิดได้ที่การตั้งค่า หมวดข้อมูล
 
 ## เริ่มต้นอย่างรวดเร็ว
 

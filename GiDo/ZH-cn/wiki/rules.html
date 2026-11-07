@@ -5,23 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>自定义规则 | FODB</title>
 <meta name="description" content="一款便携式 FL Studio 插件数据库整理工具。可按厂商、用途或两者组合把插件归入文件夹，界面风格与 FL Studio 浑然一体。">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../ZH-cn/index.html">FODB</a>
+<a class="name" href="../../ZH-cn/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../ZH-cn/index.html">首页</a>
 <a href="../../ZH-cn/wiki/index.html">维基</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">下载 FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">源代码</a>
 <details class="langs"><summary>语言: 简体中文</summary><ul><li><a href="../../EN-en/wiki/rules.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/rules.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/rules.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/rules.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/rules.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/rules.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/rules.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/rules.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/rules.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/rules.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/rules.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/rules.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/rules.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/rules.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/rules.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/rules.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/rules.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/rules.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/rules.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/rules.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/rules.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/rules.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/rules.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/rules.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/rules.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/rules.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../ZH-cn/wiki/start.html">快速开始</a></li><li><a href="../../ZH-cn/wiki/layouts.html">文件夹布局</a></li><li><a href="../../ZH-cn/wiki/filters.html">筛选</a></li><li><span class="here">自定义规则</span></li><li><a href="../../ZH-cn/wiki/safety.html">安全</a></li><li><a href="../../ZH-cn/wiki/themes.html">FL Studio 主题</a></li><li><a href="../../ZH-cn/wiki/settings.html">设置</a></li><li><a href="../../ZH-cn/wiki/hotkeys.html">快捷键</a></li><li><a href="../../ZH-cn/wiki/build.html">从源码构建</a></li></ul></nav><div class="page"><h1>自定义规则</h1><p>自动识别插件用途：混响、均衡、动态、合成器等共 22 种</p><p>可在“设置”选项卡或 FODB.json 中添加规则，用正则表达式按名称或厂商指定用途：</p><pre>&quot;purpose_rules&quot;: [
+<div class="wiki"><nav><ul><li><a href="../../ZH-cn/wiki/start.html">快速开始</a></li><li><a href="../../ZH-cn/wiki/layouts.html">文件夹布局</a></li><li><a href="../../ZH-cn/wiki/filters.html">筛选</a></li><li><span class="here">自定义规则</span></li><li><a href="../../ZH-cn/wiki/safety.html">安全</a></li><li><a href="../../ZH-cn/wiki/themes.html">FL Studio 主题</a></li><li><a href="../../ZH-cn/wiki/settings.html">设置</a></li><li><a href="../../ZH-cn/wiki/hotkeys.html">快捷键</a></li><li><a href="../../ZH-cn/wiki/mods.html">模组</a></li><li><a href="../../ZH-cn/wiki/build.html">从源码构建</a></li></ul></nav><div class="page"><h1>自定义规则</h1><p>自动识别插件用途：混响、均衡、动态、合成器等共 22 种</p><p>可在“设置”选项卡或 FODB.json 中添加规则，用正则表达式按名称或厂商指定用途：</p><pre>&quot;purpose_rules&quot;: [
   { &quot;purpose&quot;: &quot;drums&quot;, &quot;name&quot;: &quot;kick|808&quot; },
   { &quot;purpose&quot;: &quot;vocal&quot;, &quot;vendor&quot;: &quot;antares&quot; }
 ]</pre><p>第一条匹配的规则优先于自动识别。条件支持正则表达式。</p><h2>用途</h2><ul><li>乐器</li><li>人声</li><li>修复</li><li>其他</li><li>分析器</li><li>创意效果</li><li>动态</li><li>合成器</li><li>均衡器</li><li>失真与饱和</li><li>实用工具</li><li>延迟</li><li>控制器与 MIDI</li><li>母带</li><li>混响</li><li>滤波器</li><li>立体声与空间</li><li>调制</li><li>通道条</li><li>采样器</li><li>音高</li><li>鼓</li></ul></div></div>
 </main>
-<footer><p>基于 Magabes 及贡献者的 FL Studio Automatic Plugin Organizer，采用 MIT 许可证。</p><p>独立项目，与 Image-Line 无关。FL Studio 是 Image-Line 的商标。</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>基于 Magabes 及贡献者的 FL Studio Automatic Plugin Organizer，采用 MIT 许可证。</p><p>独立项目，与 Image-Line 无关。FL Studio 是 Image-Line 的商标。</p></footer>
 </body>
 </html>

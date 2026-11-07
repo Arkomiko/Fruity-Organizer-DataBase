@@ -15,6 +15,8 @@ import sequencer
 from theme import mix
 
 FRAME_MS = 33
+PATTERNS = 8
+AUTHOR_URL = "https://arkomiko.net"
 LETTERS = {
     "F": ("####", "#...", "#...", "###.", "#...", "#...", "#..."),
     "O": (".##.", "#..#", "#..#", "#..#", "#..#", "#..#", ".##."),
@@ -94,7 +96,9 @@ class AboutPage:
         self.build_job = None
         self.width = 0
         self.logo = logo_pattern()
-        self.pattern = set(self.logo)  # рисунок секвенсора живёт до закрытия программы
+        self.patterns = self._load_patterns()  # восемь рисунков, пользователь заполняет их сам
+        self.active_pattern = 0
+        self.pattern = self.patterns[0]
         self.mixer = sequencer.Mixer(self.pattern)
         self.player: sequencer.Player | None = None
         self.frame = 0
@@ -133,6 +137,29 @@ class AboutPage:
         if self.build_job is not None:
             self.c.after_cancel(self.build_job)
         self.build_job = self.c.after(60, lambda: self.build(fade=False))
+
+    # ------------------------------------------------------------------ рисунки
+    def _load_patterns(self) -> list[set]:
+        """Читает рисунки из настроек. Первый по умолчанию это логотип."""
+        saved = self.app.s["sequencer_patterns"]
+        result = []
+        for index in range(PATTERNS):
+            cells = saved[index] if index < len(saved) else (self.logo if index == 0 else ())
+            result.append({(int(c), int(r)) for c, r in cells if 0 <= int(c) < COLUMNS and 0 <= int(r) < ROWS})
+        return result
+
+    def _save_patterns(self) -> None:
+        """Сохраняет рисунки в настройках."""
+        self.app.s["sequencer_patterns"] = [sorted(cells) for cells in self.patterns]
+        self.app.s.save()
+
+    def _pick_pattern(self, index: int) -> None:
+        """Переключает рисунок. Звук подхватит его со следующего шага."""
+        self.active_pattern = index
+        self.pattern = self.mixer.pattern = self.patterns[index]
+        for key in self.pattern:
+            self.energy[key] = 0.5
+        self._paint_choices()
 
     # ------------------------------------------------------------------ разметка
     def _background(self) -> str:
@@ -180,9 +207,9 @@ class AboutPage:
         y += p(10)
         signature_y = max(y + p(46), height - p(18))
         self._text(cx, signature_y, i18n.tr("Сделал то, что не смогли реализовать в официальной версии!"), "ORANGE", t.font_bold)
-        self.button_box = (cx - p(90), y, cx + p(90), y + p(28))
-        c.create_image(cx - p(90), y, anchor="nw", image=t.gradient(p(180), p(28), tone["BTN_TOP"], tone["BTN_BOTTOM"], tone["BTN_BORDER"], self._background()))
-        self._text(cx, y + p(14), i18n.tr("Страница проекта"), "TEXT_SOFT", t.font)
+        import ui
+        ui.IconButton(c, t, cx, y + p(14), "ic_github", self.app.open_project, self._background())
+        self.author_item = c.create_text(p(10), height - p(12), text="By Arkomiko", anchor="w", fill=self._author_color(False), font=t._font(11))
         self._draw_fox(width, height)
         if fade:
             self.frame = 0
@@ -380,6 +407,10 @@ class AboutPage:
         c.create_rectangle(*self.meter, fill=tone["BOX"], outline=tone["BOX_LINE"])
         self.meter_fill = c.create_rectangle(meter_x + 1, self.meter[3], self.meter[2], self.meter[3], fill=tone["ORANGE"], outline="")
 
+        self.pattern_chips = {}
+        for index in range(PATTERNS):
+            x, y = at(15 + index * 16, 26)
+            self.pattern_chips[index] = self._chip(x, y - p(10), p(16), p(20), str(index + 1), tr("Паттерн {number}").format(number=index + 1), lambda v=index: self._pick_pattern(v))
         self.play_btn = self._icon_button(*at(31, 55), "ic_play_big", tr("Играть"), self.play)
         self.stop_btn = self._icon_button(*at(69, 55), "ic_stop_big", tr("Стоп"), self.stop)
         self._paint_transport()
@@ -495,6 +526,8 @@ class AboutPage:
     def _paint_choices(self) -> None:
         """Подсвечивает выбранное и нажимает на пианино ноты текущего лада."""
         tone, mixer = self.colors, self.mixer
+        for key, item in self.pattern_chips.items():
+            self.c.itemconfigure(item, fill=tone["ORANGE" if key == self.active_pattern else "TEXT_BRIGHT" if self.patterns[key] else "TEXT_DIM"])
         for key, button in self.timbre_btns.items():
             button.set_active(key == mixer.timbre)
         for key, item in self.scale_chips.items():
@@ -627,9 +660,15 @@ class AboutPage:
         on_version = self._inside(self.c.bbox(self.version_item) or (0, 0, 0, 0), event)
         on_fox = self._inside(self.fox_box, event)
         self._set_fox_hover(on_fox)
-        link = on_version or on_fox or self.hover or self._inside(self.button_box, event)
+        on_author = self._inside(self.c.bbox(self.author_item) or (0, 0, 0, 0), event)
+        self.c.itemconfigure(self.author_item, fill=self._author_color(on_author))
+        link = on_version or on_fox or self.hover or on_author
         self.c.configure(cursor="hand2" if link else "")
         self.c.itemconfigure(self.version_item, fill=self.colors["ORANGE" if on_version else "TEXT_DIM"])
+
+    def _author_color(self, hover: bool) -> str:
+        """Цвет подписи автора: едва заметный, при наведении ярче."""
+        return self.colors["ORANGE"] if hover else mix(self._background(), self.colors["TEXT"], 0.3)
 
     def _leave(self, _event) -> None:
         """Мышь ушла со страницы."""
@@ -641,8 +680,8 @@ class AboutPage:
         self.c.focus_set()  # щелчок мимо поля темпа подтверждает введённое число
         if self._inside(self.c.bbox(self.version_item) or (0, 0, 0, 0), event):
             self.app.open_releases()
-        elif self._inside(self.button_box, event):
-            self.app.open_project()
+        elif self._inside(self.c.bbox(self.author_item) or (0, 0, 0, 0), event):
+            self.app._open(AUTHOR_URL)
         elif self._inside(self.fox_box, event):
             self.toggle_sequencer()
         else:
@@ -675,7 +714,11 @@ class AboutPage:
         self.stroke_pad = key
 
     def _stroke_end(self, _event) -> None:
-        """Кнопка отпущена."""
+        """Кнопка отпущена: рисунок сохраняется."""
+        if self.stroke is not None:
+            self._save_patterns()
+            if self.seq_on:
+                self._paint_choices()
         self.stroke = self.stroke_pad = None
 
     def _apply_stroke(self, key: tuple[int, int]) -> None:

@@ -33,6 +33,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ڈاؤن لوڈ کریں</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/UR-pk/wiki/index.html"><b>وکی</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio پلگ اِن ڈیٹا بیس کے لیے ایک پورٹیبل آرگنائزر۔ یہ پلگ اِنز کو بنانے والے، استعمال یا دونوں کے مطابق فولڈرز میں رکھتا ہے اور FL Studio کے ساتھ ہم آہنگ دکھائی دیتا ہے۔
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -46,6 +48,7 @@ FL Studio پلگ اِن ڈیٹا بیس کے لیے ایک پورٹیبل آرگ
 - خودکار بیک اپ، ایک کلک میں واپسی، کچھ بھی ڈیٹا بیس فولڈر سے باہر نہیں جاتا
 - 10 MB کی ایک فائل، انسٹالیشن کی ضرورت نہیں؛ سیٹنگز اسی کے ساتھ رہتی ہیں
 - انٹرفیس کی 26 زبانیں اور لے آؤٹ، شارٹ کٹ، پیمانے، فونٹ، رنگوں وغیرہ کی ترتیبات
+- اختیاری موڈز: پلگ اِنز کی بڑی فہرست، کھلا کیٹلاگ، سیکھنے والے باریک استعمال، پیش نظارہ درخت اور حالت کی رنگین پٹیاں۔ انہیں ترتیبات کے ڈیٹا حصے میں فعال کریں۔
 
 ## فوری آغاز
 

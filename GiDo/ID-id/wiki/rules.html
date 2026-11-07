@@ -5,23 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aturan sendiri | FODB</title>
 <meta name="description" content="Pengatur portabel untuk basis data plugin FL Studio. Menata plugin ke dalam folder menurut vendor, kegunaan, atau keduanya, dengan tampilan yang menyatu dengan FL Studio.">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../ID-id/index.html">FODB</a>
+<a class="name" href="../../ID-id/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../ID-id/index.html">Beranda</a>
 <a href="../../ID-id/wiki/index.html">Wiki</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">Unduh FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">Kode sumber</a>
 <details class="langs"><summary>Bahasa: Indonesia</summary><ul><li><a href="../../EN-en/wiki/rules.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/rules.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/rules.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/rules.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/rules.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/rules.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/rules.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/rules.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/rules.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/rules.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/rules.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/rules.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/rules.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/rules.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/rules.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/rules.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/rules.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/rules.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/rules.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/rules.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/rules.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/rules.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/rules.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/rules.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/rules.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/rules.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../ID-id/wiki/start.html">Mulai cepat</a></li><li><a href="../../ID-id/wiki/layouts.html">Tata letak folder</a></li><li><a href="../../ID-id/wiki/filters.html">Filter</a></li><li><span class="here">Aturan sendiri</span></li><li><a href="../../ID-id/wiki/safety.html">Keamanan</a></li><li><a href="../../ID-id/wiki/themes.html">Tema FL Studio</a></li><li><a href="../../ID-id/wiki/settings.html">Pengaturan</a></li><li><a href="../../ID-id/wiki/hotkeys.html">Tombol pintas</a></li><li><a href="../../ID-id/wiki/build.html">Bangun dari sumber</a></li></ul></nav><div class="page"><h1>Aturan sendiri</h1><p>Mengenali kegunaan tiap plugin: reverb, EQ, dinamika, synth, dan 18 kegunaan lain</p><p>Tambahkan aturan di tab Pengaturan atau FODB.json untuk menentukan kegunaan menurut nama atau vendor dengan ekspresi reguler:</p><pre>&quot;purpose_rules&quot;: [
+<div class="wiki"><nav><ul><li><a href="../../ID-id/wiki/start.html">Mulai cepat</a></li><li><a href="../../ID-id/wiki/layouts.html">Tata letak folder</a></li><li><a href="../../ID-id/wiki/filters.html">Filter</a></li><li><span class="here">Aturan sendiri</span></li><li><a href="../../ID-id/wiki/safety.html">Keamanan</a></li><li><a href="../../ID-id/wiki/themes.html">Tema FL Studio</a></li><li><a href="../../ID-id/wiki/settings.html">Pengaturan</a></li><li><a href="../../ID-id/wiki/hotkeys.html">Tombol pintas</a></li><li><a href="../../ID-id/wiki/mods.html">Mod</a></li><li><a href="../../ID-id/wiki/build.html">Bangun dari sumber</a></li></ul></nav><div class="page"><h1>Aturan sendiri</h1><p>Mengenali kegunaan tiap plugin: reverb, EQ, dinamika, synth, dan 18 kegunaan lain</p><p>Tambahkan aturan di tab Pengaturan atau FODB.json untuk menentukan kegunaan menurut nama atau vendor dengan ekspresi reguler:</p><pre>&quot;purpose_rules&quot;: [
   { &quot;purpose&quot;: &quot;drums&quot;, &quot;name&quot;: &quot;kick|808&quot; },
   { &quot;purpose&quot;: &quot;vocal&quot;, &quot;vendor&quot;: &quot;antares&quot; }
 ]</pre><p>Aturan pertama yang cocok mengalahkan deteksi otomatis. Syarat menerima ekspresi reguler.</p><h2>Kegunaan</h2><ul><li>Channel strip</li><li>Delay</li><li>Dinamika</li><li>Distorsi dan saturasi</li><li>Drum</li><li>EQ</li><li>Efek kreatif</li><li>Filter</li><li>Instrumen</li><li>Kontroler dan MIDI</li><li>Lainnya</li><li>Mastering</li><li>Modulasi</li><li>Nada</li><li>Penganalisis</li><li>Restorasi</li><li>Reverb</li><li>Sampler</li><li>Stereo dan ruang</li><li>Synth</li><li>Utilitas</li><li>Vokal</li></ul></div></div>
 </main>
-<footer><p>Berdasarkan FL Studio Automatic Plugin Organizer oleh Magabes dan kontributor, di bawah Lisensi MIT.</p><p>Proyek independen, tidak terafiliasi dengan Image-Line. FL Studio adalah merek dagang Image-Line.</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>Berdasarkan FL Studio Automatic Plugin Organizer oleh Magabes dan kontributor, di bawah Lisensi MIT.</p><p>Proyek independen, tidak terafiliasi dengan Image-Line. FL Studio adalah merek dagang Image-Line.</p></footer>
 </body>
 </html>

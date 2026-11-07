@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe डाउनलोड करें</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/HI-in/wiki/index.html"><b>विकी</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio प्लगइन डेटाबेस के लिए एक पोर्टेबल ऑर्गनाइज़र। यह प्लगइन को निर्माता, उपयोग या दोनों के अनुसार फ़ोल्डरों में रखता है और FL Studio के साथ घुल-मिल जाता है।
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ FL Studio प्लगइन डेटाबेस के लिए एक प�
 - स्वचालित बैकअप, एक क्लिक में पूर्ववत, कुछ भी डेटाबेस फ़ोल्डर से बाहर नहीं जाता
 - 10 MB की एक फ़ाइल, इंस्टॉलेशन की ज़रूरत नहीं; सेटिंग्स उसी के पास रहती हैं
 - 26 इंटरफ़ेस भाषाएँ और लेआउट, हॉटकी, स्केल, फ़ॉन्ट, रंग आदि की सेटिंग्स
+- वैकल्पिक मॉड: प्लगइन की बड़ी सूची, खुला कैटलॉग, सीखने वाले बारीक उपयोग, पूर्वावलोकन ट्री और स्थिति पट्टियाँ। इन्हें सेटिंग्स के डेटा भाग में चालू करें।
 
 ## त्वरित शुरुआत
 

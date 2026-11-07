@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Sčitati FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/ISV-sl/wiki/index.html"><b>Wiki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 Prenosny organizator bazy pluginov FL Studio. Raspolaga pluginy v papkah po proizvoditelju, po naznačenju ili po oboma, i izgledaje kako rodna čast FL Studio.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ Prenosny organizator bazy pluginov FL Studio. Raspolaga pluginy v papkah po proi
 - Avtomatične rezervne kopije, odvołanje jednym klikom, ničto ne izlazi iz papky bazy
 - Jedin fajl 10 MB bez instalacije; nastavjenja ostajut poblizu njego
 - 26 jezykov interfejsa i nastavjenja raspoloženja, klavišev, mašty, šriftov, barv i ino
+- Neobvęzne mody: veći spis pluginov, otvorjeny katalog, točnějša naznačenja s učenjem, drěvo pregleda i barvne znaky. Vključajut se v nastavjenjah, v razdělu Dane.
 
 ## Bystry start
 

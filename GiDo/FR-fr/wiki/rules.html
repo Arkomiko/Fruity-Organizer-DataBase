@@ -5,23 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vos propres règles | FODB</title>
 <meta name="description" content="Un organiseur portable pour la base de plugins de FL Studio. Il range les plugins dans des dossiers par éditeur, par usage ou les deux, avec une apparence qui s&#x27;accorde à FL Studio.">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../FR-fr/index.html">FODB</a>
+<a class="name" href="../../FR-fr/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../FR-fr/index.html">Accueil</a>
 <a href="../../FR-fr/wiki/index.html">Wiki</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">Télécharger FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">Code source</a>
 <details class="langs"><summary>Langue: Français</summary><ul><li><a href="../../EN-en/wiki/rules.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/rules.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/rules.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/rules.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/rules.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/rules.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/rules.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/rules.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/rules.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/rules.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/rules.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/rules.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/rules.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/rules.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/rules.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/rules.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/rules.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/rules.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/rules.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/rules.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/rules.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/rules.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/rules.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/rules.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/rules.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/rules.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../FR-fr/wiki/start.html">Démarrage rapide</a></li><li><a href="../../FR-fr/wiki/layouts.html">Dispositions de dossiers</a></li><li><a href="../../FR-fr/wiki/filters.html">Filtres</a></li><li><span class="here">Vos propres règles</span></li><li><a href="../../FR-fr/wiki/safety.html">Sécurité</a></li><li><a href="../../FR-fr/wiki/themes.html">Thèmes FL Studio</a></li><li><a href="../../FR-fr/wiki/settings.html">Réglages</a></li><li><a href="../../FR-fr/wiki/hotkeys.html">Raccourcis clavier</a></li><li><a href="../../FR-fr/wiki/build.html">Compiler depuis les sources</a></li></ul></nav><div class="page"><h1>Vos propres règles</h1><p>Détermine l&#x27;usage de chaque plugin : réverbe, égaliseur, dynamique, synthé et 18 autres</p><p>Ajoutez des règles dans l&#x27;onglet Paramètres ou dans FODB.json pour définir l&#x27;usage par nom ou éditeur, avec des expressions régulières :</p><pre>&quot;purpose_rules&quot;: [
+<div class="wiki"><nav><ul><li><a href="../../FR-fr/wiki/start.html">Démarrage rapide</a></li><li><a href="../../FR-fr/wiki/layouts.html">Dispositions de dossiers</a></li><li><a href="../../FR-fr/wiki/filters.html">Filtres</a></li><li><span class="here">Vos propres règles</span></li><li><a href="../../FR-fr/wiki/safety.html">Sécurité</a></li><li><a href="../../FR-fr/wiki/themes.html">Thèmes FL Studio</a></li><li><a href="../../FR-fr/wiki/settings.html">Réglages</a></li><li><a href="../../FR-fr/wiki/hotkeys.html">Raccourcis clavier</a></li><li><a href="../../FR-fr/wiki/mods.html">Mods</a></li><li><a href="../../FR-fr/wiki/build.html">Compiler depuis les sources</a></li></ul></nav><div class="page"><h1>Vos propres règles</h1><p>Détermine l&#x27;usage de chaque plugin : réverbe, égaliseur, dynamique, synthé et 18 autres</p><p>Ajoutez des règles dans l&#x27;onglet Paramètres ou dans FODB.json pour définir l&#x27;usage par nom ou éditeur, avec des expressions régulières :</p><pre>&quot;purpose_rules&quot;: [
   { &quot;purpose&quot;: &quot;drums&quot;, &quot;name&quot;: &quot;kick|808&quot; },
   { &quot;purpose&quot;: &quot;vocal&quot;, &quot;vendor&quot;: &quot;antares&quot; }
 ]</pre><p>La première règle qui correspond l&#x27;emporte sur la détection automatique. Les conditions acceptent les expressions régulières.</p><h2>Usage</h2><ul><li>Analyseurs</li><li>Autres</li><li>Batteries</li><li>Contrôleurs et MIDI</li><li>Distorsion et saturation</li><li>Dynamique</li><li>Délai</li><li>Effets créatifs</li><li>Filtres</li><li>Hauteur</li><li>Instruments</li><li>Mastering</li><li>Modulation</li><li>Restauration</li><li>Réverbe</li><li>Stéréo et espace</li><li>Synthétiseurs</li><li>Tranches de console</li><li>Utilitaires</li><li>Voix</li><li>Échantillonneurs</li><li>Égaliseurs</li></ul></div></div>
 </main>
-<footer><p>Basé sur FL Studio Automatic Plugin Organizer de Magabes et ses contributeurs, sous licence MIT.</p><p>Projet indépendant, sans lien avec Image-Line. FL Studio est une marque d&#x27;Image-Line.</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>Basé sur FL Studio Automatic Plugin Organizer de Magabes et ses contributeurs, sous licence MIT.</p><p>Projet indépendant, sans lien avec Image-Line. FL Studio est une marque d&#x27;Image-Line.</p></footer>
 </body>
 </html>

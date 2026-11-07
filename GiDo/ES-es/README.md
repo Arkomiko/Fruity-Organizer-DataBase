@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Descargar FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/ES-es/wiki/index.html"><b>Wiki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 Un organizador portátil para la base de datos de plugins de FL Studio. Ordena los plugins en carpetas por fabricante, por función o por ambos, con un aspecto que encaja con FL Studio.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ Un organizador portátil para la base de datos de plugins de FL Studio. Ordena l
 - Copias de seguridad automáticas, deshacer con un clic, nada sale de la carpeta de la base de datos
 - Un solo archivo de 10 MB sin instalación; los ajustes se guardan a su lado
 - 26 idiomas de interfaz y ajustes de distribución, atajos, escala, fuentes, colores y más
+- Mods opcionales: una lista mayor de plugins, un catálogo abierto, usos más finos que aprenden de ti, un árbol de vista previa y marcas de estado. Se activan en Ajustes, Datos.
 
 ## Inicio rápido
 

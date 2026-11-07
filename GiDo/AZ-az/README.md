@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe yüklə</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/AZ-az/wiki/index.html"><b>Viki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio plagin bazası üçün portativ orqanayzer. Plaginləri qovluqlara istehsalçı, təyinat və ya hər ikisinə görə düzür və FL Studio-nun öz hissəsi kimi görünür.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ FL Studio plagin bazası üçün portativ orqanayzer. Plaginləri qovluqlara ist
 - Avtomatik ehtiyat nüsxələr, bir kliklə geri alma, heç nə baza qovluğundan çıxmır
 - Quraşdırmasız 10 MB bir fayl; tənzimləmələr onun yanında saxlanır
 - 26 interfeys dili, həmçinin düzülüş, düymə, miqyas, şrift və rəng tənzimləmələri
+- İstəyə bağlı modlar: daha böyük plagin siyahısı, açıq kataloq, öyrənən dəqiq təyinatlar, önizləmə ağacı və status zolaqları. Tənzimləmələrin Məlumatlar bölməsində açılır.
 
 ## Sürətli başlanğıc
 

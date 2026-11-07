@@ -1,0 +1,11 @@
+{
+ "name": "Status Indicators (experimentally)",
+ "type": "UX/UI",
+ "version": "1.0",
+ "author": "Arkomiko",
+ "description": {
+  "EN-en": "Adds a color stripe to the list rows. Green: already organized. Gold: in a folder named Favorites. Blue: new and not organized yet (in the New folder or installed in the last 14 days).",
+  "RU-ru": "Добавляет цветную полоску к строкам списка. Зелёная: уже организован. Золотая: лежит в папке с названием «Избранное» или Favorites. Синяя: новый и ещё не организован (в папке New или установлен за последние 14 дней)."
+ },
+ "entry": "mod.py"
+}

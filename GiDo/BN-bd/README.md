@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe ডাউনলোড করুন</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/BN-bd/wiki/index.html"><b>উইকি</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio প্লাগইন ডেটাবেসের জন্য একটি পোর্টেবল অর্গানাইজার। এটি প্লাগইনগুলোকে নির্মাতা, ব্যবহার বা উভয় অনুযায়ী ফোল্ডারে সাজায় এবং FL Studio-র সঙ্গে মানানসই দেখায়।
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ FL Studio প্লাগইন ডেটাবেসের জন্য এক�
 - স্বয়ংক্রিয় ব্যাকআপ, এক ক্লিকে পূর্বাবস্থা, কিছুই ডেটাবেস ফোল্ডারের বাইরে যায় না
 - ৯ MB-র একটি ফাইল, ইনস্টলেশন লাগে না; সেটিংস তার পাশেই থাকে
 - 26টি ইন্টারফেস ভাষা এবং বিন্যাস, হটকি, স্কেল, ফন্ট, রং ইত্যাদির সেটিংস
+- ঐচ্ছিক মড: প্লাগইনের বড় তালিকা, উন্মুক্ত ক্যাটালগ, শেখার ক্ষমতাসহ সূক্ষ্ম ব্যবহার, প্রিভিউ ট্রি ও অবস্থার রঙিন দাগ। সেটিংসের ডেটা অংশে চালু করুন।
 
 ## দ্রুত শুরু
 

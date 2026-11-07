@@ -1,0 +1,122 @@
+/* Оформление сайта FODB. Исходник лежит в tools/site, gen_site.py копирует его в GiDo. */
+
+/* Цвета и размеры в одном месте. */
+:root{
+  color-scheme:dark;
+  --back:#22272b;      /* фон страницы */
+  --panel:#2c3338;     /* фон карточек */
+  --line:#3a4349;      /* линии и рамки */
+  --text:#d5dbdf;      /* основной текст */
+  --dim:#9aa4aa;       /* второстепенный текст */
+  --accent:#ffb23e;    /* оранжевый, как в программе */
+  --pad-off:#3c454b;   /* погасшая ячейка логотипа */
+  --ease:cubic-bezier(.2,.7,.2,1); /* плавное замедление в конце всех анимаций */
+}
+
+/* Плавный переход между страницами сайта в браузерах, которые это умеют. */
+@view-transition{navigation:auto}
+
+/* Основа страницы. */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--back);color:var(--text);font:16px/1.65 "Segoe UI",system-ui,sans-serif}
+a{color:var(--accent);text-underline-offset:3px;transition:color .2s}
+a:hover{color:#ffd28a}
+img{max-width:100%;height:auto;display:block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Шапка: прилипает к верху и слегка размывает то, что под ней. */
+header{position:sticky;top:0;z-index:5;background:rgba(30,35,38,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar,main,footer{max-width:1020px;margin:0 auto;padding-inline:20px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;padding-block:10px}
+.bar .name{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--text);text-decoration:none;margin-inline-end:auto}
+.bar .name img{width:24px;height:24px;border-radius:5px}
+.bar a:not(.name){position:relative;text-decoration:none;color:var(--text)}
+/* Оранжевая линия вырастает под ссылкой при наведении. */
+.bar a:not(.name)::after{content:"";position:absolute;inset-inline:0;bottom:-3px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .25s var(--ease)}
+.bar a:not(.name):hover::after{transform:scaleX(1)}
+
+/* Выбор языка: выпадающий список в шапке. */
+.langs{position:relative}
+.langs summary{cursor:pointer;color:var(--dim);transition:color .2s}
+.langs summary:hover{color:var(--text)}
+.langs ul{position:absolute;inset-inline-end:0;z-index:6;width:min(520px,90vw);margin:8px 0 0;padding:12px;list-style:none;columns:2;background:var(--panel);border:1px solid var(--line);border-radius:6px;box-shadow:0 12px 32px rgba(0,0,0,.4);animation:drop .2s var(--ease)}
+@keyframes drop{from{opacity:0;transform:translateY(-6px)}}
+
+/* Содержимое страницы. */
+main{padding-block:28px 56px}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.15;margin:0 0 14px;color:#fff;text-wrap:balance}
+h2{font-size:22px;margin:40px 0 12px;color:#fff}
+.lead{color:var(--dim);margin:0 0 22px;max-width:62ch;font-size:18px}
+
+/* Первый экран: живой логотип и главная кнопка. */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:36px;align-items:center;padding-block:28px 12px}
+.pads{display:grid;grid-template-columns:repeat(4,auto);gap:12px;direction:ltr;padding:18px;background:var(--panel);border-radius:10px}
+.letter{display:grid;grid-template-columns:repeat(4,12px);grid-auto-rows:12px;gap:2px}
+.letter i{border-radius:2px;background:var(--pad-off)}
+/* Горящие ячейки: по логотипу бежит волна, задержка задана у каждой ячейки. */
+.letter .on{background:var(--accent);animation:wave 3.2s var(--ease) infinite;animation-delay:var(--d)}
+@keyframes wave{0%,70%,100%{background:var(--accent);transform:none}8%{background:#ffe0b2;transform:scale(1.14)}}
+
+/* Кнопка скачивания. */
+.download{display:inline-block;padding:12px 24px;background:var(--accent);color:#1a1d20;border-radius:6px;font-weight:600;text-decoration:none;transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s}
+.download:hover{color:#1a1d20;background:#ffc264;transform:translateY(-2px);box-shadow:0 8px 22px rgba(255,178,62,.28)}
+
+/* Снимок программы. */
+.shot{border:1px solid var(--line);border-radius:8px;margin-block:30px 12px;box-shadow:0 18px 44px rgba(0,0,0,.4)}
+
+/* Карточки возможностей: сетка подстраивается под ширину экрана. */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;padding:0;margin:0;list-style:none}
+.cards li{padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-radius:8px;transition:transform .25s var(--ease),border-color .25s}
+.cards li:hover{transform:translateY(-3px);border-color:var(--accent)}
+
+/* Появление при прокрутке. Класс js ставит скрипт: без него всё видно сразу. */
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* Код и таблицы. */
+pre{direction:ltr;text-align:left;overflow-x:auto;padding:14px;background:#1b1f22;border:1px solid var(--line);border-radius:6px;font:14px/1.5 Consolas,monospace}
+table{border-collapse:collapse;width:100%}
+td,th{padding:7px 10px;border:1px solid var(--line);text-align:start}
+th{background:var(--panel);font-weight:600}
+tr{transition:background .15s}
+tr:hover td{background:rgba(255,255,255,.03)}
+
+/* Вики: содержание слева, текст справа. */
+.wiki{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}
+.wiki nav ul{position:sticky;top:72px;list-style:none;margin:0;padding:0}
+.wiki nav li{margin-bottom:2px}
+.wiki nav a,.wiki nav .here{display:block;padding:5px 10px;border-radius:5px;text-decoration:none;transition:background .2s,color .2s}
+.wiki nav a{color:var(--text)}
+.wiki nav a:hover{background:var(--panel);color:var(--accent)}
+.wiki nav .here{background:var(--panel);color:var(--accent);font-weight:600}
+.page{min-width:0;animation:rise .45s var(--ease)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.mod{padding:14px 18px;margin-bottom:12px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.mod h3{margin:0 0 2px;font-size:17px;color:#fff}
+.mod small{color:var(--dim)}
+.mod p{margin:6px 0 0}
+
+/* Подвал. */
+footer{padding-block:20px 32px;color:var(--dim);font-size:14px;border-top:1px solid var(--line)}
+footer p{margin:4px 0}
+footer .author{color:var(--text);font-weight:600}
+
+/* Подпись автора под кнопкой скачивания. */
+.by{margin:14px 0 0;color:var(--dim)}
+
+/* Узкие экраны: всё в одну колонку. */
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .wiki{grid-template-columns:minmax(0,1fr)}
+  .wiki nav ul{position:static}
+  .langs ul{columns:1;inset-inline:0 auto}
+  .letter{grid-template-columns:repeat(4,9px);grid-auto-rows:9px}
+}
+
+/* Кто попросил систему не показывать движение, тот его не увидит. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+  @view-transition{navigation:none}
+}

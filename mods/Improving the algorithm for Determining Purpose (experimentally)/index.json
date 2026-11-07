@@ -1,0 +1,11 @@
+{
+ "name": "Improving the algorithm for Determining Purpose (experimentally)",
+ "type": "optimization",
+ "version": "1.0",
+ "author": "Arkomiko",
+ "description": {
+  "EN-en": "Adds finer purposes: saturation, transient shaper, algorithmic and convolution reverb, compressor, limiter. Learns from you: when you set a purpose by hand or move a plugin to a folder named after a purpose, other plugins of the same vendor and family get it automatically. New purposes are named in English and Russian.",
+  "RU-ru": "Добавляет более тонкие назначения: сатурация, транзиент-шейпер, алгоритмический и конволюционный реверб, компрессор, лимитер. Учится на ваших действиях: если назначить плагину назначение вручную или перенести его в папку с названием назначения, другие плагины того же производителя и семейства получат его сами. Новые назначения названы на английском и русском."
+ },
+ "entry": "mod.py"
+}

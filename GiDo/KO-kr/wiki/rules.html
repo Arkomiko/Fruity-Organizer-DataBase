@@ -5,23 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>나만의 규칙 | FODB</title>
 <meta name="description" content="FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입니다. 플러그인을 제조사, 용도 또는 둘 다에 따라 폴더로 정리하며 FL Studio와 잘 어울리는 모습으로 동작합니다.">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../KO-kr/index.html">FODB</a>
+<a class="name" href="../../KO-kr/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../KO-kr/index.html">홈</a>
 <a href="../../KO-kr/wiki/index.html">위키</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">FODB.exe 다운로드</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">소스 코드</a>
 <details class="langs"><summary>언어: 한국어</summary><ul><li><a href="../../EN-en/wiki/rules.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/rules.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/rules.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/rules.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/rules.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/rules.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/rules.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/rules.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/rules.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/rules.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/rules.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/rules.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/rules.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/rules.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/rules.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/rules.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/rules.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/rules.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/rules.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/rules.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/rules.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/rules.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/rules.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/rules.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/rules.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/rules.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../KO-kr/wiki/start.html">빠른 시작</a></li><li><a href="../../KO-kr/wiki/layouts.html">폴더 구성</a></li><li><a href="../../KO-kr/wiki/filters.html">필터</a></li><li><span class="here">나만의 규칙</span></li><li><a href="../../KO-kr/wiki/safety.html">안전</a></li><li><a href="../../KO-kr/wiki/themes.html">FL Studio 테마</a></li><li><a href="../../KO-kr/wiki/settings.html">설정</a></li><li><a href="../../KO-kr/wiki/hotkeys.html">단축키</a></li><li><a href="../../KO-kr/wiki/build.html">소스에서 빌드</a></li></ul></nav><div class="page"><h1>나만의 규칙</h1><p>플러그인 용도 판별: 리버브, EQ, 다이내믹, 신스 등 총 22가지</p><p>설정 탭이나 FODB.json에서 규칙을 추가해 정규식으로 이름이나 제조사별 용도를 지정하세요:</p><pre>&quot;purpose_rules&quot;: [
+<div class="wiki"><nav><ul><li><a href="../../KO-kr/wiki/start.html">빠른 시작</a></li><li><a href="../../KO-kr/wiki/layouts.html">폴더 구성</a></li><li><a href="../../KO-kr/wiki/filters.html">필터</a></li><li><span class="here">나만의 규칙</span></li><li><a href="../../KO-kr/wiki/safety.html">안전</a></li><li><a href="../../KO-kr/wiki/themes.html">FL Studio 테마</a></li><li><a href="../../KO-kr/wiki/settings.html">설정</a></li><li><a href="../../KO-kr/wiki/hotkeys.html">단축키</a></li><li><a href="../../KO-kr/wiki/mods.html">모드</a></li><li><a href="../../KO-kr/wiki/build.html">소스에서 빌드</a></li></ul></nav><div class="page"><h1>나만의 규칙</h1><p>플러그인 용도 판별: 리버브, EQ, 다이내믹, 신스 등 총 22가지</p><p>설정 탭이나 FODB.json에서 규칙을 추가해 정규식으로 이름이나 제조사별 용도를 지정하세요:</p><pre>&quot;purpose_rules&quot;: [
   { &quot;purpose&quot;: &quot;drums&quot;, &quot;name&quot;: &quot;kick|808&quot; },
   { &quot;purpose&quot;: &quot;vocal&quot;, &quot;vendor&quot;: &quot;antares&quot; }
 ]</pre><p>처음 일치한 규칙이 자동 판별보다 우선합니다. 조건에는 정규식을 쓸 수 있습니다.</p><h2>용도</h2><ul><li>EQ</li><li>기타</li><li>다이내믹</li><li>드럼</li><li>디스토션과 새추레이션</li><li>딜레이</li><li>리버브</li><li>마스터링</li><li>모듈레이션</li><li>보컬</li><li>복원</li><li>분석기</li><li>샘플러</li><li>스테레오와 공간</li><li>신스</li><li>악기</li><li>유틸리티</li><li>채널 스트립</li><li>컨트롤러와 MIDI</li><li>크리에이티브 이펙트</li><li>피치</li><li>필터</li></ul></div></div>
 </main>
-<footer><p>Magabes와 기여자들의 FL Studio Automatic Plugin Organizer를 기반으로 하며 MIT 라이선스를 따릅니다.</p><p>독립 프로젝트이며 Image-Line과 관련이 없습니다. FL Studio는 Image-Line의 상표입니다.</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>Magabes와 기여자들의 FL Studio Automatic Plugin Organizer를 기반으로 하며 MIT 라이선스를 따릅니다.</p><p>독립 프로젝트이며 Image-Line과 관련이 없습니다. FL Studio는 Image-Line의 상표입니다.</p></footer>
 </body>
 </html>

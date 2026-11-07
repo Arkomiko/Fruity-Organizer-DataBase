@@ -19,7 +19,17 @@ from gen_docs import EXAMPLE, QUERY, RULES, TOKENS, write  # noqa: E402
 REPO = "https://github.com/Arkomiko/Fruity-Organizer-DataBase"
 # Страницы вики: адрес файла и заголовок (ключ из docs_text.py или строка интерфейса).
 WIKI = (("start", "quick"), ("layouts", "layouts"), ("filters", "filters"), ("rules", "advanced"), ("safety", "safety"),
-        ("themes", "themes"), ("settings", "Настройки"), ("hotkeys", "Горячие клавиши"), ("build", "build"))
+        ("themes", "themes"), ("settings", "Настройки"), ("hotkeys", "Горячие клавиши"), ("mods", "Моды"), ("build", "build"))
+# Логотип из тех же букв, что в программе: 4 столбца на 7 строк.
+LETTERS = {"F": ("####", "#...", "#...", "###.", "#...", "#...", "#..."), "O": (".##.", "#..#", "#..#", "#..#", "#..#", "#..#", ".##."),
+           "D": ("###.", "#..#", "#..#", "#..#", "#..#", "#..#", "###."), "B": ("###.", "#..#", "#..#", "###.", "#..#", "#..#", "###.")}
+MOD_EXAMPLE = """# mods/My mod/index.json
+{"name": "My mod", "type": "optimization", "version": "1.0", "author": "Me", "entry": "mod.py",
+ "description": {"EN-en": "What it does"}}
+
+# mods/My mod/mod.py
+def activate(api):
+    api.add_purpose_hook(lambda plugin: ["reverb"] if "hall" in plugin.name.casefold() else None)"""
 # Подписи из интерфейса программы: уже переведены на все языки.
 OPTIONS = (
     ("Одна копия плагина", "Если плагин есть в нескольких форматах, копируется один. Порядок форматов задаётся в настройках."),
@@ -43,37 +53,6 @@ SETTINGS = (
     ("Клавиши", ("Дважды щёлкните строку, чтобы назначить другое сочетание.",)),
     ("Данные", ("Журнал действий", "Экспорт в файл", "Импорт из файла", "Проверить обновления")),
 )
-STYLE = """:root{color-scheme:dark;--back:#2b3136;--panel:#3c454b;--line:#273036;--text:#d5dbdf;--dim:#9aa4aa;--accent:#ffb23e}
-*{box-sizing:border-box}
-body{margin:0;background:var(--back);color:var(--text);font:16px/1.6 "Segoe UI",system-ui,sans-serif}
-a{color:var(--accent)}
-img{max-width:100%;height:auto;display:block}
-header{background:#262b2f;border-bottom:1px solid var(--line)}
-.bar,main,footer{max-width:960px;margin:0 auto;padding:0 16px}
-.bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;padding-block:10px}
-.bar .name{font-weight:600;color:var(--text);text-decoration:none;margin-inline-end:auto}
-.bar a{text-decoration:none}
-.langs{position:relative}
-.langs summary{cursor:pointer;color:var(--dim)}
-.langs ul{position:absolute;inset-inline-end:0;z-index:1;width:min(520px,90vw);margin:6px 0 0;padding:10px;list-style:none;columns:2;background:var(--panel);border:1px solid var(--line);border-radius:4px}
-main{padding-block:24px 40px}
-h1{font-size:28px;line-height:1.25;margin:0 0 12px}
-h2{font-size:20px;margin:28px 0 8px}
-.lead{color:var(--dim);margin-top:0}
-.download{display:inline-block;margin:6px 0 22px;padding:9px 18px;background:var(--accent);color:#1a1d20;border-radius:4px;font-weight:600;text-decoration:none}
-.shot{border:1px solid var(--line);border-radius:4px;margin-bottom:12px}
-pre{direction:ltr;text-align:left;overflow-x:auto;padding:12px;background:#262b2f;border:1px solid var(--line);border-radius:4px;font:14px/1.5 Consolas,monospace}
-table{border-collapse:collapse;width:100%}
-td,th{padding:6px 10px;border:1px solid var(--line);text-align:start}
-th{background:var(--panel);font-weight:600}
-.wiki{display:grid;grid-template-columns:220px 1fr;gap:28px}
-.wiki nav ul{list-style:none;margin:0;padding:0}
-.wiki nav li{margin-bottom:6px}
-.wiki nav .here{color:var(--text);font-weight:600}
-.page{min-width:0}
-footer{padding-block:16px 28px;color:var(--dim);font-size:14px;border-top:1px solid var(--line)}
-@media (max-width:720px){.wiki{grid-template-columns:1fr}.langs ul{columns:1;inset-inline:0 auto}}
-"""
 
 
 def table_of(code: str) -> dict:
@@ -121,21 +100,30 @@ class Site:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{heading} | FODB</title>
 <meta name="description" content="{self.text("intro")}">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="{prefix}favicon.ico">
 <link rel="stylesheet" href="{prefix}site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="{prefix}site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="{self.link(prefix, None)}">FODB</a>
+<a class="name" href="{self.link(prefix, None)}"><img src="{prefix}favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="{self.link(prefix, None)}">{self.text("home")}</a>
 <a href="{self.link(prefix, "wiki")}">{self.text("wiki")}</a>
 <a href="{REPO}/releases/latest">{self.text("download")}</a>
 <a href="{REPO}">{self.text("source")}</a>
 <details class="langs"><summary>{self.tr("Язык")}: {escape(lang["name"])}</summary><ul>{choices}</ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
 {body}
 </main>
-<footer><p>{self.text("credits_t")}</p><p>{self.text("disclaimer")}</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>{self.text("credits_t")}</p><p>{self.text("disclaimer")}</p></footer>
 </body>
 </html>
 '''
@@ -144,21 +132,62 @@ class Site:
         """Главная страница."""
         lang = self.lang
         demo = "demo-ru.gif" if self.code in ("RU-ru", "UK-ua", "BE-by", "KK-kz") else "demo-en.gif"
-        features = "".join(f"<li>{self.text(f'f{i}')}</li>" for i in range(1, 8))
+        features = "".join(f"<li>{self.text(f'f{i}')}</li>" for i in range(1, 9))
         steps = "".join(f"<li>{self.text(f'q{i}')}</li>" for i in range(1, 4))
         pages = "".join(f'<li><a href="{self.link(prefix, slug)}">{self.title(key)}</a></li>' for slug, key in WIKI)
-        body = f'''<img class="logo" src="{prefix}logo.svg" alt="FODB" width="240">
+        body = f'''<!-- Первый экран: лозунг, кнопка и живой логотип -->
+<section class="hero">
+<div>
 <h1>{escape(lang["taglines"][0])}</h1>
 <p class="lead">{self.text("intro")}</p>
 <a class="download" href="{REPO}/releases/latest">{self.text("download")}</a>
-<img class="shot" src="{prefix}{demo}" alt="FODB">
+<p class="by">By <a href="https://arkomiko.net">Arkomiko</a></p>
+</div>
+{self.pads()}
+</section>
+<img class="shot reveal" src="{prefix}{demo}" alt="FODB">
+<!-- Возможности программы -->
+<section class="reveal">
 <h2>{self.text("features")}</h2>
-<ul>{features}</ul>
+<ul class="cards">{features}</ul>
+</section>
+<!-- Быстрый старт -->
+<section class="reveal">
 <h2>{self.text("quick")}</h2>
 <ol>{steps}</ol>
+</section>
+<!-- Ссылки на страницы вики -->
+<section class="reveal">
 <h2>{self.text("wiki")}</h2>
-<ul>{pages}</ul>'''
+<ul>{pages}</ul>
+</section>'''
         return self.shell(prefix, None, "Fruity Organizer DataBase", body)
+
+    @staticmethod
+    def pads() -> str:
+        """Логотип FODB из ячеек. Задержка растёт слева направо: по буквам бежит волна."""
+        letters = []
+        for index, letter in enumerate("FODB"):
+            cells = ""
+            for row in LETTERS[letter]:
+                for column, value in enumerate(row):
+                    cells += f'<i class="on" style="--d:{(index * 4 + column) * 0.06:.2f}s"></i>' if value == "#" else "<i></i>"
+            letters.append(f'<div class="letter">{cells}</div>')
+        return f'<div class="pads" role="img" aria-label="FODB">{"".join(letters)}</div>'
+
+    def mods_page(self) -> str:
+        """Страница о модах: описание каждого мода берётся из его index.json."""
+        cards = ""
+        folder = os.path.join(ROOT, "mods")
+        for name in sorted(os.listdir(folder)):
+            path = os.path.join(folder, name, "index.json")
+            if os.path.exists(path):
+                with open(path, encoding="utf-8") as f:
+                    info = json.load(f)
+                about = info["description"].get(self.code) or info["description"]["EN-en"]
+                cards += f'<div class="mod"><h3 dir="ltr">{escape(info["name"])}</h3><small dir="ltr">{escape(info["type"])}</small><p>{escape(about)}</p></div>'
+        return (f'<p>{self.text("f8")}</p>{cards}<h2>{self.tr("Модификации")}</h2>'
+                f'<p>{self.text("mods_how")}</p><pre>{escape(MOD_EXAMPLE)}</pre>')
 
     def wiki_body(self, slug: str) -> str:
         """Содержимое одной страницы вики."""
@@ -188,9 +217,11 @@ class Site:
                     + items(tr(name) for name in ("Масштаб интерфейса", "Шрифт", "Размер шрифта", "Мягкие переходы и анимация")))
         if slug == "settings":
             return "".join(f"<h2>{tr(section)}</h2>" + items(tr(entry) for entry in entries) for section, entries in SETTINGS)
+        if slug == "mods":
+            return self.mods_page()
         if slug == "hotkeys":
             rows = "".join(f'<tr><td>{tr(label)}</td><td dir="ltr">{default}</td></tr>' for _action, label, default in hotkeys.ACTIONS)
-            return (f'<p>{tr("Дважды щёлкните строку, чтобы назначить другое сочетание.")}</p>'
+            return (f'<p>{tr("Дважды щёлкните строку, чтобы назначить другое сочетание.")}</p><p>{tr("Сочетания работают на любой раскладке: важна сама клавиша, а не её буква.")}</p>'
                     f'<table><tr><th>{tr("Действие")}</th><th>{tr("Клавиши")}</th></tr>{rows}</table>')
         return f"<p>{text('build_t')}</p><pre>./packaging/build.ps1</pre>"
 
@@ -216,7 +247,9 @@ class Site:
 
 def main(out: str = os.path.join(ROOT, "GiDo")) -> int:
     """Создаёт сайт и возвращает число языков."""
-    write(os.path.join(out, "site.css"), STYLE)
+    for name in ("site.css", "site.js"):  # оформление и скрипт лежат в tools/site, там их и правьте
+        with open(os.path.join(ROOT, "tools", "site", name), encoding="utf-8") as f:
+            write(os.path.join(out, name), f.read())
     for code in LANGUAGES:
         Site(code, out).build()
     write(os.path.join(out, "index.html"), Site("EN-en", out).home(""))

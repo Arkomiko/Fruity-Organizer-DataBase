@@ -1,0 +1,11 @@
+{
+ "name": "Advenced purpose rules (experimentally)",
+ "type": "optimization",
+ "version": "1.0",
+ "author": "Arkomiko",
+ "description": {
+  "EN-en": "A larger list of popular plugins (302 names: Serum, Kontakt, FabFilter and more), so their purpose is detected without manual edits. Add your own lines to rules.json.",
+  "RU-ru": "Большой список популярных плагинов (302 названий: Serum, Kontakt, FabFilter и другие), чтобы назначение определялось без ручной правки. Свои строки можно дописать в rules.json."
+ },
+ "entry": "mod.py"
+}

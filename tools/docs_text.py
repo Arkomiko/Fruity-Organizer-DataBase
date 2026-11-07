@@ -652,3 +652,9 @@ LANGUAGES = {
         vendor="יצרן", purpose="ייעוד", reverb="הדהוד", delay="דיליי", synth="סינתיסייזרים", installed="Installed", organized="מאורגנים",
         caption_themes="עוקב אחרי ערכת הנושא הפעילה"),
 }
+
+# Раздел о модах лежит отдельно: f8 это строка списка возможностей, mods_how это как поставить свой мод.
+from docs_mods import MODS  # noqa: E402
+
+for _code, (_summary, _how) in MODS.items():
+    LANGUAGES[_code].update(f8=_summary, mods_how=_how)

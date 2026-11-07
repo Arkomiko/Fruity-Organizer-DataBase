@@ -5,24 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>โครงสร้างโฟลเดอร์ | FODB</title>
 <meta name="description" content="เครื่องมือจัดระเบียบแบบพกพาสำหรับฐานข้อมูลปลั๊กอินของ FL Studio จัดปลั๊กอินลงโฟลเดอร์ตามผู้ผลิต ตามการใช้งาน หรือทั้งสองอย่าง พร้อมหน้าตาที่เข้ากับ FL Studio">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../TH-th/index.html">FODB</a>
+<a class="name" href="../../TH-th/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../TH-th/index.html">หน้าแรก</a>
 <a href="../../TH-th/wiki/index.html">วิกิ</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">ดาวน์โหลด FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">ซอร์สโค้ด</a>
 <details class="langs"><summary>ภาษา: ไทย</summary><ul><li><a href="../../EN-en/wiki/layouts.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/layouts.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/layouts.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/layouts.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/layouts.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/layouts.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/layouts.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/layouts.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/layouts.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/layouts.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/layouts.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/layouts.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/layouts.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/layouts.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/layouts.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/layouts.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/layouts.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/layouts.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/layouts.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/layouts.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/layouts.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/layouts.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/layouts.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/layouts.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/layouts.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/layouts.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../TH-th/wiki/start.html">เริ่มต้นอย่างรวดเร็ว</a></li><li><span class="here">โครงสร้างโฟลเดอร์</span></li><li><a href="../../TH-th/wiki/filters.html">ตัวกรอง</a></li><li><a href="../../TH-th/wiki/rules.html">กฎของคุณเอง</a></li><li><a href="../../TH-th/wiki/safety.html">ความปลอดภัย</a></li><li><a href="../../TH-th/wiki/themes.html">ธีม FL Studio</a></li><li><a href="../../TH-th/wiki/settings.html">การตั้งค่า</a></li><li><a href="../../TH-th/wiki/hotkeys.html">ปุ่มลัด</a></li><li><a href="../../TH-th/wiki/build.html">สร้างจากซอร์สโค้ด</a></li></ul></nav><div class="page"><h1>โครงสร้างโฟลเดอร์</h1><p>เลือกค่าสำเร็จรูปหรือเขียนเทมเพลตเองจากส่วนต่อไปนี้:</p><pre>{vendor}  {purpose}  {format}  {bits}  {letter}  {kind}
+<div class="wiki"><nav><ul><li><a href="../../TH-th/wiki/start.html">เริ่มต้นอย่างรวดเร็ว</a></li><li><span class="here">โครงสร้างโฟลเดอร์</span></li><li><a href="../../TH-th/wiki/filters.html">ตัวกรอง</a></li><li><a href="../../TH-th/wiki/rules.html">กฎของคุณเอง</a></li><li><a href="../../TH-th/wiki/safety.html">ความปลอดภัย</a></li><li><a href="../../TH-th/wiki/themes.html">ธีม FL Studio</a></li><li><a href="../../TH-th/wiki/settings.html">การตั้งค่า</a></li><li><a href="../../TH-th/wiki/hotkeys.html">ปุ่มลัด</a></li><li><a href="../../TH-th/wiki/mods.html">ม็อด</a></li><li><a href="../../TH-th/wiki/build.html">สร้างจากซอร์สโค้ด</a></li></ul></nav><div class="page"><h1>โครงสร้างโฟลเดอร์</h1><p>เลือกค่าสำเร็จรูปหรือเขียนเทมเพลตเองจากส่วนต่อไปนี้:</p><pre>{vendor}  {purpose}  {format}  {bits}  {letter}  {kind}
 
 {vendor}\{purpose}
 {purpose}\{vendor}
 USER\{format}\{vendor}</pre><ul><li>ผู้ผลิต</li><li>การใช้งาน</li><li>ผู้ผลิต \ การใช้งาน</li><li>การใช้งาน \ ผู้ผลิต</li><li>รูปแบบ \ ผู้ผลิต</li><li>รูปแบบ \ การใช้งาน</li><li>อักษรตัวแรก</li><li>USER \ ผู้ผลิต</li><li>USER \ การใช้งาน \ ผู้ผลิต</li></ul><h2>ตัวเลือกการจัด</h2><ul><li><b>หนึ่งสำเนาต่อปลั๊กอิน</b>: หากปลั๊กอินมีหลายรูปแบบ จะคัดลอกหนึ่งรูปแบบ ลำดับกำหนดได้ในการตั้งค่า</li><li><b>ข้ามปลั๊กอินที่ผิดพลาด</b>: ไม่คัดลอกปลั๊กอินที่ FL Studio สแกนไม่สำเร็จ</li><li><b>ข้ามปลั๊กอินที่จัดแล้ว</b>: ปลั๊กอินที่มีดาวอยู่ใน Effects หรือ Generators แล้ว จึงไม่คัดลอกซ้ำ</li><li><b>จัดเรียงปลั๊กอินที่จัดแล้วใหม่</b>: ย้ายปลั๊กอินที่มีดาวไปยังโฟลเดอร์ของโครงสร้างปัจจุบัน ปุ่มเลิกทำจะย้อนกลับได้</li><li><b>เขียนทับไฟล์เดิม</b>: แทนที่ไฟล์ที่มีอยู่แล้วในโฟลเดอร์ผู้ผลิต</li><li><b>เฉพาะปลั๊กอินในรายการ</b>: จัดเฉพาะที่รายการแสดงหลังกรองและค้นหา</li><li><b>ย้ายจากโฟลเดอร์ New</b>: เมื่อจัดแล้ว ปลั๊กอินจะออกจากรายการ New ของ FL Studio ปุ่มเลิกทำจะนำกลับมา</li></ul></div></div>
 </main>
-<footer><p>พัฒนาต่อจาก FL Studio Automatic Plugin Organizer โดย Magabes และผู้ร่วมพัฒนา ภายใต้สัญญาอนุญาต MIT</p><p>เป็นโครงการอิสระ ไม่มีส่วนเกี่ยวข้องกับ Image-Line โดย FL Studio เป็นเครื่องหมายการค้าของ Image-Line</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>พัฒนาต่อจาก FL Studio Automatic Plugin Organizer โดย Magabes และผู้ร่วมพัฒนา ภายใต้สัญญาอนุญาต MIT</p><p>เป็นโครงการอิสระ ไม่มีส่วนเกี่ยวข้องกับ Image-Line โดย FL Studio เป็นเครื่องหมายการค้าของ Image-Line</p></footer>
 </body>
 </html>

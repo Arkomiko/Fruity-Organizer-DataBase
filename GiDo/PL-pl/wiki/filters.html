@@ -5,23 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Filtry | FODB</title>
 <meta name="description" content="Przenośny organizer bazy wtyczek FL Studio. Układa wtyczki w folderach według producenta, przeznaczenia lub obu naraz i wygląda jak naturalna część FL Studio.">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../PL-pl/index.html">FODB</a>
+<a class="name" href="../../PL-pl/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../PL-pl/index.html">Strona główna</a>
 <a href="../../PL-pl/wiki/index.html">Wiki</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">Pobierz FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">Kod źródłowy</a>
 <details class="langs"><summary>Język: Polski</summary><ul><li><a href="../../EN-en/wiki/filters.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/filters.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/filters.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/filters.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/filters.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/filters.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/filters.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/filters.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/filters.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/filters.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/filters.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/filters.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/filters.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/filters.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/filters.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/filters.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/filters.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/filters.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/filters.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/filters.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/filters.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/filters.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/filters.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/filters.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/filters.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/filters.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../PL-pl/wiki/start.html">Szybki start</a></li><li><a href="../../PL-pl/wiki/layouts.html">Układy folderów</a></li><li><span class="here">Filtry</span></li><li><a href="../../PL-pl/wiki/rules.html">Własne reguły</a></li><li><a href="../../PL-pl/wiki/safety.html">Bezpieczeństwo</a></li><li><a href="../../PL-pl/wiki/themes.html">Motywy FL Studio</a></li><li><a href="../../PL-pl/wiki/settings.html">Ustawienia</a></li><li><a href="../../PL-pl/wiki/hotkeys.html">Skróty klawiszowe</a></li><li><a href="../../PL-pl/wiki/build.html">Budowanie ze źródeł</a></li></ul></nav><div class="page"><h1>Filtry</h1><p>Zaznacz wartości w menu Filtry lub wpisz warunki w polu wyszukiwania:</p><pre>purpose:reverb,delay                 reverb OR delay
+<div class="wiki"><nav><ul><li><a href="../../PL-pl/wiki/start.html">Szybki start</a></li><li><a href="../../PL-pl/wiki/layouts.html">Układy folderów</a></li><li><span class="here">Filtry</span></li><li><a href="../../PL-pl/wiki/rules.html">Własne reguły</a></li><li><a href="../../PL-pl/wiki/safety.html">Bezpieczeństwo</a></li><li><a href="../../PL-pl/wiki/themes.html">Motywy FL Studio</a></li><li><a href="../../PL-pl/wiki/settings.html">Ustawienia</a></li><li><a href="../../PL-pl/wiki/hotkeys.html">Skróty klawiszowe</a></li><li><a href="../../PL-pl/wiki/mods.html">Mody</a></li><li><a href="../../PL-pl/wiki/build.html">Budowanie ze źródeł</a></li></ul></nav><div class="page"><h1>Filtry</h1><p>Zaznacz wartości w menu Filtry lub wpisz warunki w polu wyszukiwania:</p><pre>purpose:reverb,delay                 reverb OR delay
 vendor:&quot;plugin alliance&quot; -format:vst  one vendor, without VST2
 organized:no kind:synth               synths not organized yet
 age:30d bits:64                       64-bit, dated in the last 30 days</pre><h2>Filtry</h2><ul><li>Efekt/Syntezator</li><li>Format</li><li>Bity</li><li>Stan</li><li>Uporządkowana</li><li>Formaty na wtyczkę</li><li>Data pliku</li><li>Rozmiar pliku</li><li>Jak ustalono przeznaczenie</li><li>Przeznaczenie</li><li>Producent</li></ul></div></div>
 </main>
-<footer><p>Oparte na FL Studio Automatic Plugin Organizer autorstwa Magabes i współtwórców, na licencji MIT.</p><p>Niezależny projekt, niezwiązany z Image-Line. FL Studio jest znakiem towarowym Image-Line.</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>Oparte na FL Studio Automatic Plugin Organizer autorstwa Magabes i współtwórców, na licencji MIT.</p><p>Niezależny projekt, niezwiązany z Image-Line. FL Studio jest znakiem towarowym Image-Line.</p></footer>
 </body>
 </html>

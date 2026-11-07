@@ -12,6 +12,7 @@ import re
 import time
 from dataclasses import dataclass, field
 
+import i18n
 from i18n import tr, tr_in
 
 # --------------------------------------------------------------------------------------------
@@ -28,8 +29,34 @@ PURPOSES = {
 INSTRUMENT_PURPOSES = {"synth", "drums", "sampler", "instrument"}
 
 
+EXTRA_LABELS: dict[str, dict] = {}  # подписи назначений, которые добавили моды
+
+
+def add_purpose(purpose_id: str, labels: dict) -> None:
+    """Добавляет назначение из мода. labels: подписи по кодам языков."""
+    PURPOSES[purpose_id] = labels.get("RU-ru") or labels["EN-en"]
+    EXTRA_LABELS[purpose_id] = labels
+
+
+def remove_purpose(purpose_id: str) -> None:
+    """Убирает назначение выключенного мода."""
+    PURPOSES.pop(purpose_id, None)
+    EXTRA_LABELS.pop(purpose_id, None)
+
+
+def _label_in(language: str, purpose_id: str) -> str:
+    """Название назначения на заданном языке. Пустой язык значит язык интерфейса."""
+    extra = EXTRA_LABELS.get(purpose_id)
+    if extra:
+        return extra.get(language or i18n.LANG) or extra["EN-en"]
+    return tr_in(language, PURPOSES.get(purpose_id, purpose_id))
+
+
 def purpose_label(purpose_id: str) -> str:
     """Название назначения на языке интерфейса."""
+    extra = EXTRA_LABELS.get(purpose_id)
+    if extra:
+        return _label_in("", purpose_id)
     return tr(PURPOSES.get(purpose_id, PURPOSES["other"]))
 
 
@@ -169,14 +196,21 @@ def _known_match(name: str, known: str) -> bool:
     return len(name) == len(known) or not name[len(known)].isalpha()
 
 
-def classify(plugin, overrides: dict | None = None, rules: list[Rule] | None = None) -> tuple[list[str], str]:
-    """Возвращает (назначения, источник). Первое назначение выбирает папку, все участвуют в фильтрах."""
+def classify(plugin, overrides: dict | None = None, rules: list[Rule] | None = None, hooks=()) -> tuple[list[str], str]:
+    """Возвращает (назначения, источник). Первое назначение выбирает папку, все участвуют в фильтрах.
+
+    hooks: обработчики модов. Ручной выбор и правила пользователя важнее них.
+    """
     forced = (overrides or {}).get(plugin.name_id)
     if forced in PURPOSES:
         return [forced], "manual"
     for rule in rules or ():
         if rule.matches(plugin):
             return [rule.purpose], "rule"
+    for hook in hooks:
+        answer = hook(plugin)
+        if answer:
+            return list(answer), "mod"
     name = plugin.name.casefold()
     # Сначала длинные записи: "valhallaubermod" важнее "valhalla", "serumfx" важнее "serum".
     stripped = re.sub(r"^(fruity|fabfilter|khs|kilohearts|unfiltered audio)\s+", "", name)
@@ -260,7 +294,7 @@ def layout_parts(template: str, plugin, language: str = "", strip_suffix: bool =
     purpose = plugin.purposes[0] if plugin.purposes else "other"
     values = {
         "vendor": clean_vendor(plugin.vendor) if strip_suffix else plugin.vendor,
-        "purpose": tr_in(language, PURPOSES.get(purpose, purpose)),
+        "purpose": _label_in(language, purpose),
         "format": primary.format if primary else "", "bits": primary.bits if primary else "",
         "letter": _first_letter(plugin.name), "kind": plugin.kind,
     }

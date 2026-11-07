@@ -226,6 +226,8 @@ def readme(code, lang, to_root, art):
 
 <p align="center"><a href="{REPO}/releases/latest"><b>⬇ {escape(lang["download"])}</b></a> &nbsp;|&nbsp; <a href="{SITE}{code}/wiki/index.html"><b>{escape(lang["wiki"])}</b></a> &nbsp;|&nbsp; <a href="{REPO}/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 {lang["intro"]}
 
 <p align="center"><img src="{to_root}GiDo/{demo}" alt="FODB" width="100%"></p>
@@ -239,6 +241,7 @@ def readme(code, lang, to_root, art):
 - {lang["f5"]}
 - {lang["f6"]}
 - {lang["f7"]}
+- {lang["f8"]}
 
 ## {lang["quick"]}
 

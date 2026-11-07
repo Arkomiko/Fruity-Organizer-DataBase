@@ -5,24 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>文件夹布局 | FODB</title>
 <meta name="description" content="一款便携式 FL Studio 插件数据库整理工具。可按厂商、用途或两者组合把插件归入文件夹，界面风格与 FL Studio 浑然一体。">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../ZH-cn/index.html">FODB</a>
+<a class="name" href="../../ZH-cn/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../ZH-cn/index.html">首页</a>
 <a href="../../ZH-cn/wiki/index.html">维基</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">下载 FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">源代码</a>
 <details class="langs"><summary>语言: 简体中文</summary><ul><li><a href="../../EN-en/wiki/layouts.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/layouts.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/layouts.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/layouts.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/layouts.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/layouts.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/layouts.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/layouts.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/layouts.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/layouts.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/layouts.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/layouts.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/layouts.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/layouts.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/layouts.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/layouts.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/layouts.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/layouts.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/layouts.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/layouts.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/layouts.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/layouts.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/layouts.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/layouts.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/layouts.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/layouts.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../ZH-cn/wiki/start.html">快速开始</a></li><li><span class="here">文件夹布局</span></li><li><a href="../../ZH-cn/wiki/filters.html">筛选</a></li><li><a href="../../ZH-cn/wiki/rules.html">自定义规则</a></li><li><a href="../../ZH-cn/wiki/safety.html">安全</a></li><li><a href="../../ZH-cn/wiki/themes.html">FL Studio 主题</a></li><li><a href="../../ZH-cn/wiki/settings.html">设置</a></li><li><a href="../../ZH-cn/wiki/hotkeys.html">快捷键</a></li><li><a href="../../ZH-cn/wiki/build.html">从源码构建</a></li></ul></nav><div class="page"><h1>文件夹布局</h1><p>选择预设，或用以下部分编写自己的模板：</p><pre>{vendor}  {purpose}  {format}  {bits}  {letter}  {kind}
+<div class="wiki"><nav><ul><li><a href="../../ZH-cn/wiki/start.html">快速开始</a></li><li><span class="here">文件夹布局</span></li><li><a href="../../ZH-cn/wiki/filters.html">筛选</a></li><li><a href="../../ZH-cn/wiki/rules.html">自定义规则</a></li><li><a href="../../ZH-cn/wiki/safety.html">安全</a></li><li><a href="../../ZH-cn/wiki/themes.html">FL Studio 主题</a></li><li><a href="../../ZH-cn/wiki/settings.html">设置</a></li><li><a href="../../ZH-cn/wiki/hotkeys.html">快捷键</a></li><li><a href="../../ZH-cn/wiki/mods.html">模组</a></li><li><a href="../../ZH-cn/wiki/build.html">从源码构建</a></li></ul></nav><div class="page"><h1>文件夹布局</h1><p>选择预设，或用以下部分编写自己的模板：</p><pre>{vendor}  {purpose}  {format}  {bits}  {letter}  {kind}
 
 {vendor}\{purpose}
 {purpose}\{vendor}
 USER\{format}\{vendor}</pre><ul><li>厂商</li><li>用途</li><li>厂商 \ 用途</li><li>用途 \ 厂商</li><li>格式 \ 厂商</li><li>格式 \ 用途</li><li>首字母</li><li>USER \ 厂商</li><li>USER \ 用途 \ 厂商</li></ul><h2>整理选项</h2><ul><li><b>每个插件一份</b>: 插件有多种格式时只复制一种。格式顺序在设置中指定。</li><li><b>跳过出错的插件</b>: 不复制 FL Studio 未能扫描的插件。</li><li><b>跳过已整理的插件</b>: 带星标的插件已在 Effects 或 Generators 中，不再复制。</li><li><b>重新排列已整理插件</b>: 把带星标的插件移到当前布局的文件夹中，可用“撤销”恢复。</li><li><b>覆盖现有文件</b>: 替换厂商文件夹中已有的文件。</li><li><b>仅列表中的插件</b>: 只整理筛选和搜索后列表显示的插件。</li><li><b>从 New 文件夹移出</b>: 整理后，插件会从 FL Studio 的 New 列表消失。“撤销”按钮可恢复。</li></ul></div></div>
 </main>
-<footer><p>基于 Magabes 及贡献者的 FL Studio Automatic Plugin Organizer，采用 MIT 许可证。</p><p>独立项目，与 Image-Line 无关。FL Studio 是 Image-Line 的商标。</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>基于 Magabes 及贡献者的 FL Studio Automatic Plugin Organizer，采用 MIT 许可证。</p><p>独立项目，与 Image-Line 无关。FL Studio 是 Image-Line 的商标。</p></footer>
 </body>
 </html>

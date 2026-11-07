@@ -963,6 +963,7 @@ class Settings:
         "theme_mode": "fl", "custom_colors": {}, "ui_scale": 100, "font_family": "Segoe UI", "font_size": 11,
         "animations": True, "hidden_columns": [], "hotkeys": {}, "find_text": "", "main_tab": "plugins", "side_page": "options",
         "selected": [], "status_style": "text", "status_ok": "", "status_error": "", "maximized": False,
+        "mods_enabled": False, "mods_active": [], "sequencer_patterns": [],
     }
     # Значения этого компьютера: в файл экспорта они не попадают.
     LOCAL_KEYS = ("db", "geometry", "maximized", "custom_sources")

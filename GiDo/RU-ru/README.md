@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Скачать FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/RU-ru/wiki/index.html"><b>Вики</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 Портативный органайзер базы плагинов FL Studio. Раскладывает плагины по папкам: по производителю, по назначению или сразу по обоим, а выглядит как родная часть FL Studio.
 
 <p align="center"><img src="../../GiDo/demo-ru.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@
 - Автоматические бэкапы, отмена в один клик, ничего не выходит за пределы папки базы
 - Один файл на 10 МБ без установки; настройки хранятся рядом с ним
 - 26 языков интерфейса и настройки раскладок, клавиш, масштаба, шрифтов, цветов и не только
+- Необязательные моды: большой список плагинов, открытый каталог, более тонкие назначения с обучением, дерево предпросмотра и цветные метки. Включаются в разделе «Данные» настроек.
 
 ## Быстрый старт
 

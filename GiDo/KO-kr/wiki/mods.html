@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모드 | FODB</title>
+<meta name="description" content="FL Studio 플러그인 데이터베이스를 위한 포터블 정리 도구입니다. 플러그인을 제조사, 용도 또는 둘 다에 따라 폴더로 정리하며 FL Studio와 잘 어울리는 모습으로 동작합니다.">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
+<link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
+</head>
+<body>
+<!-- Шапка: название, разделы и выбор языка -->
+<header><div class="bar">
+<a class="name" href="../../KO-kr/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
+<a href="../../KO-kr/index.html">홈</a>
+<a href="../../KO-kr/wiki/index.html">위키</a>
+<a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">FODB.exe 다운로드</a>
+<a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">소스 코드</a>
+<details class="langs"><summary>언어: 한국어</summary><ul><li><a href="../../EN-en/wiki/mods.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/mods.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/mods.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/mods.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/mods.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/mods.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/mods.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/mods.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/mods.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/mods.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/mods.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/mods.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/mods.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/mods.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/mods.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/mods.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/mods.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/mods.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/mods.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/mods.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/mods.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/mods.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/mods.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/mods.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/mods.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/mods.html" lang="he">עברית</a></li></ul></details>
+</div></header>
+<!-- Содержимое страницы -->
+<main>
+<div class="wiki"><nav><ul><li><a href="../../KO-kr/wiki/start.html">빠른 시작</a></li><li><a href="../../KO-kr/wiki/layouts.html">폴더 구성</a></li><li><a href="../../KO-kr/wiki/filters.html">필터</a></li><li><a href="../../KO-kr/wiki/rules.html">나만의 규칙</a></li><li><a href="../../KO-kr/wiki/safety.html">안전</a></li><li><a href="../../KO-kr/wiki/themes.html">FL Studio 테마</a></li><li><a href="../../KO-kr/wiki/settings.html">설정</a></li><li><a href="../../KO-kr/wiki/hotkeys.html">단축키</a></li><li><span class="here">모드</span></li><li><a href="../../KO-kr/wiki/build.html">소스에서 빌드</a></li></ul></nav><div class="page"><h1>모드</h1><p>선택형 모드: 더 큰 플러그인 목록, 공개 카탈로그, 학습하는 세분화된 용도, 미리 보기 트리, 상태 색 띠. 설정의 데이터에서 켭니다.</p><div class="mod"><h3 dir="ltr">Advenced purpose rules (experimentally)</h3><small dir="ltr">optimization</small><p>A larger list of popular plugins (302 names: Serum, Kontakt, FabFilter and more), so their purpose is detected without manual edits. Add your own lines to rules.json.</p></div><div class="mod"><h3 dir="ltr">Improving the algorithm for Determining Purpose (experimentally)</h3><small dir="ltr">optimization</small><p>Adds finer purposes: saturation, transient shaper, algorithmic and convolution reverb, compressor, limiter. Learns from you: when you set a purpose by hand or move a plugin to a folder named after a purpose, other plugins of the same vendor and family get it automatically. New purposes are named in English and Russian.</p></div><div class="mod"><h3 dir="ltr">Other Integration BD (experimentally)</h3><small dir="ltr">optimization</small><p>Fills in a missing vendor, purpose and search tags by plugin name from an open catalog. The catalog ships with the mod. The update button downloads a fresh copy from the project&#x27;s GitHub and sends nothing about your plugins.</p></div><div class="mod"><h3 dir="ltr">Preview Tree</h3><small dir="ltr">UX/UI</small><p>Replaces the preview list with a folder tree. Drag a plugin to another folder and the structure changes at once. Clicking a folder collapses it. Only the folders of this run are shown, and Effects cannot be moved to Generators.</p></div><div class="mod"><h3 dir="ltr">Status Indicators (experimentally)</h3><small dir="ltr">UX/UI</small><p>Adds a color stripe to the list rows. Green: already organized. Gold: in a folder named Favorites. Blue: new and not organized yet (in the New folder or installed in the last 14 days).</p></div><h2>모드</h2><p>모드는 index.json과, 코드가 필요하면 mod.py가 든 폴더입니다. 직접 만든 모드는 FODB.exe 옆 mods 폴더에 넣으세요. 모드는 프로그램의 일부로 실행되므로 신뢰하는 것만 설치하세요.</p><pre># mods/My mod/index.json
+{&quot;name&quot;: &quot;My mod&quot;, &quot;type&quot;: &quot;optimization&quot;, &quot;version&quot;: &quot;1.0&quot;, &quot;author&quot;: &quot;Me&quot;, &quot;entry&quot;: &quot;mod.py&quot;,
+ &quot;description&quot;: {&quot;EN-en&quot;: &quot;What it does&quot;}}
+
+# mods/My mod/mod.py
+def activate(api):
+    api.add_purpose_hook(lambda plugin: [&quot;reverb&quot;] if &quot;hall&quot; in plugin.name.casefold() else None)</pre></div></div>
+</main>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>Magabes와 기여자들의 FL Studio Automatic Plugin Organizer를 기반으로 하며 MIT 라이선스를 따릅니다.</p><p>독립 프로젝트이며 Image-Line과 관련이 없습니다. FL Studio는 Image-Line의 상표입니다.</p></footer>
+</body>
+</html>

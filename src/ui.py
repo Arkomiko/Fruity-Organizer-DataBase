@@ -29,13 +29,15 @@ import assets_data
 import core
 import hotkeys
 import i18n
+import mods
 import rules
 import theme as fltheme
 from i18n import plural, tr
 from theme import mix as lerp
 
 APP_TITLE = "Fruity Organizer DataBase"
-VERSION = "1.1.0.0611-a2"
+VERSION = "1.1.0.0711-a1"
+AUTHOR_URL = "https://arkomiko.net"
 PROJECT_REPO = "Arkomiko/Fruity-Organizer-DataBase"
 PROJECT_URL = "https://github.com/" + PROJECT_REPO
 SITE_URL = "https://arkomiko.github.io/Fruity-Organizer-DataBase/"
@@ -105,6 +107,22 @@ user32.MonitorFromPoint.argtypes = [wintypes.POINT, wintypes.DWORD]
 ctypes.windll.gdi32.CreateRoundRectRgn.restype = wintypes.HRGN
 ctypes.windll.gdi32.CreateRoundRectRgn.argtypes = [ctypes.c_int] * 6
 user32.SetForegroundWindow.argtypes = [wintypes.HWND]
+# Снимок окна для плавной смены темы и языка.
+user32.GetDC.restype = wintypes.HDC
+user32.GetDC.argtypes = [wintypes.HWND]
+user32.ReleaseDC.argtypes = [wintypes.HWND, wintypes.HDC]
+user32.PrintWindow.argtypes = [wintypes.HWND, wintypes.HDC, wintypes.UINT]
+user32.DestroyWindow.argtypes = [wintypes.HWND]
+user32.ShowWindow.argtypes = [wintypes.HWND, ctypes.c_int]
+user32.UpdateLayeredWindow.argtypes = [wintypes.HWND, wintypes.HDC, ctypes.c_void_p, ctypes.c_void_p, wintypes.HDC, ctypes.c_void_p, wintypes.COLORREF, ctypes.c_void_p, wintypes.DWORD]
+ctypes.windll.gdi32.CreateCompatibleDC.restype = wintypes.HDC
+ctypes.windll.gdi32.CreateCompatibleDC.argtypes = [wintypes.HDC]
+ctypes.windll.gdi32.CreateCompatibleBitmap.restype = wintypes.HBITMAP
+ctypes.windll.gdi32.CreateCompatibleBitmap.argtypes = [wintypes.HDC, ctypes.c_int, ctypes.c_int]
+ctypes.windll.gdi32.SelectObject.restype = wintypes.HGDIOBJ
+ctypes.windll.gdi32.SelectObject.argtypes = [wintypes.HDC, wintypes.HGDIOBJ]
+ctypes.windll.gdi32.DeleteDC.argtypes = [wintypes.HDC]
+ctypes.windll.gdi32.GetDeviceCaps.argtypes = [wintypes.HDC, ctypes.c_int]
 
 
 class MONITORINFO(ctypes.Structure):
@@ -191,6 +209,49 @@ class Curtain:
     def hide(self) -> None:
         """Скрывает панель."""
         user32.ShowWindow(self.window, 0)
+
+
+class _Blend(ctypes.Structure):
+    """Структура Windows BLENDFUNCTION."""
+    _fields_ = [("op", ctypes.c_ubyte), ("flags", ctypes.c_ubyte), ("alpha", ctypes.c_ubyte), ("format", ctypes.c_ubyte)]
+
+
+class Snapshot:
+    """Снимок окна поверх него. Пока он плавно гаснет, под ним уже новое окно: получается смена без мигания."""
+
+    def __init__(self, window: tk.Misc):
+        """Снимает окно и показывает снимок. Клики проходят сквозь него."""
+        gdi32 = ctypes.windll.gdi32
+        self.hwnd = hwnd_of(window)
+        self.w, self.h = window.winfo_width(), window.winfo_height()
+        self.position = wintypes.POINT(window.winfo_rootx(), window.winfo_rooty())
+        self.screen = user32.GetDC(None)
+        self.dc = gdi32.CreateCompatibleDC(self.screen)
+        self.bitmap = gdi32.CreateCompatibleBitmap(self.screen, self.w, self.h)
+        self.old = gdi32.SelectObject(self.dc, self.bitmap)
+        user32.PrintWindow(self.hwnd, self.dc, 2)
+        instance = ctypes.windll.kernel32.GetModuleHandleW(None)
+        proc = ctypes.cast(user32.DefWindowProcW, ctypes.c_void_p)
+        user32.RegisterClassW(ctypes.byref(_WindowClass(proc=proc, instance=instance, name="FODBSnapshot")))
+        self.window = user32.CreateWindowExW(0x80000 | 0x20 | 0x8000000 | 0x80, "FODBSnapshot", None, 0x80000000, self.position.x, self.position.y,
+                                             self.w, self.h, self.hwnd, None, instance, None)
+        self.alpha(1.0)
+        user32.ShowWindow(self.window, 8)  # показать, не забирая фокус
+
+    def alpha(self, value: float) -> None:
+        """Задаёт непрозрачность от 0 до 1."""
+        blend = _Blend(0, 0, round(255 * value), 0)
+        user32.UpdateLayeredWindow(self.window, self.screen, ctypes.byref(self.position), ctypes.byref(wintypes.SIZE(self.w, self.h)), self.dc,
+                                   ctypes.byref(wintypes.POINT(0, 0)), 0, ctypes.byref(blend), 2)
+
+    def close(self) -> None:
+        """Убирает снимок и освобождает память."""
+        gdi32 = ctypes.windll.gdi32
+        user32.DestroyWindow(self.window)
+        gdi32.SelectObject(self.dc, self.old)
+        gdi32.DeleteObject(self.bitmap)
+        gdi32.DeleteDC(self.dc)
+        user32.ReleaseDC(None, self.screen)
 
 
 class Motion:
@@ -917,6 +978,8 @@ class PopupMenu:
 class Grid:
     """Таблица плагинов. На холсте существуют только видимые строки, поэтому длинный список не тормозит."""
 
+    marker = None  # функция из мода: цвет полоски у строки или None
+
     def __init__(self, parent: tk.Misc, theme: Theme, widths: dict, sort: list, on_select, on_star, on_menu, order=None, hidden=None):
         """Запоминает данные и подключает события."""
         self.t = theme
@@ -1048,6 +1111,7 @@ class Grid:
             y = 1 + self.head_h + r * self.row_h
             row = {"bg": c.create_rectangle(1, y, right, y + self.row_h, fill=ROW_A, outline=""), "cells": {}, "values": {},
                    "plugin": None, "fill": None}
+            row["mark"] = c.create_rectangle(1, y, 1 + t.p(3), y + self.row_h, fill="", outline="", state="hidden")
             for key, _, x, w in self.cols:
                 if key == "fav":
                     row["star"] = c.create_image(x + w // 2 + t.p(1), y + self.row_h // 2, image=t.images["star_off"], state="hidden")
@@ -1228,6 +1292,10 @@ class Grid:
             if row["fill"] != fill:
                 c.itemconfigure(row["bg"], fill=fill)
                 row["fill"] = fill
+            mark = self.marker(plugin) if plugin is not None and self.marker else None
+            if row.get("mark_value") != mark:
+                c.itemconfigure(row["mark"], fill=mark or "", state="normal" if mark else "hidden")
+                row["mark_value"] = mark
             star = None if plugin is None else ("star_on" if plugin.organized_in else "star_off", fill)
             if row.get("star_value") != star:
                 if star:
@@ -1885,7 +1953,11 @@ class App:
         self.s["filters"] = {k: list(v) for k, v in self.s["filters"].items() if k in rules.FIELDS and v}
         self.query = rules.parse_query("")
         self.filter_panel = None
-        self.main_tab = settings["main_tab"] if settings["main_tab"] in ("plugins", "settings", "about") else "plugins"
+        self.main_tab = settings["main_tab"] if settings["main_tab"] in ("plugins", "settings", "about", "mods") else "plugins"
+        if self.main_tab == "mods" and not settings["mods_enabled"]:
+            self.main_tab = "plugins"
+        self.mods = mods.Manager(self)
+        self.mods.reload()
         self.theme_path = None
         self.theme_stamp = None
         self._load_palette()
@@ -1948,8 +2020,9 @@ class App:
         if not self.worker and not self.root.grab_current():
             self.rebuild_ui()
 
-    def rebuild_ui(self) -> None:
-        """Перестраивает окно после смены палитры, масштаба, шрифта или языка."""
+    def rebuild_ui(self, fade: bool = True) -> None:
+        """Перестраивает окно после смены палитры, масштаба, шрифта или языка. fade: плавно, через снимок окна."""
+        snapshot = Snapshot(self.root) if fade and self.motion.enabled and self.root.winfo_viewable() else None
         self._save_layout()
         selected, page, anchor = set(self.grid.selected), self.page, self.grid.anchor
         if self.filter_panel:
@@ -1971,6 +2044,9 @@ class App:
             self.update_view()
             self._update_undo_button()
         self.show_page(page)
+        if snapshot:
+            self.root.update_idletasks()  # новое окно уже нарисовано под снимком
+            self.motion.run("window_fade", 260, lambda share: snapshot.alpha((1 - share) ** 2), snapshot.close)
 
     def set_scale(self, percent: int) -> None:
         """Меняет масштаб интерфейса и пропорционально размер окна."""
@@ -1986,7 +2062,7 @@ class App:
             width = min(w, round(self.root.winfo_width() * new / old))
             height = min(h, round(self.root.winfo_height() * new / old))
             self.root.geometry(f"{width}x{height}")
-        self.rebuild_ui()
+        self.rebuild_ui(fade=False)  # окно изменило размер, снимок уже не совпадёт
 
     def apply_motion(self) -> None:
         """Включает или выключает анимации."""
@@ -2085,6 +2161,56 @@ class App:
         """Клавиша: вкладка «Настройки»."""
         self.show_tab("settings")
 
+    def _do_tab_mods(self) -> None:
+        """Клавиша: вкладка «Моды», если они включены."""
+        if self.s["mods_enabled"]:
+            self.show_tab("mods")
+
+    def _do_restore(self) -> None:
+        """Клавиша: восстановить из бэкапа."""
+        self.restore_click()
+
+    def _do_star(self) -> None:
+        """Клавиша: поставить или снять звезду."""
+        self._star_selected()
+
+    def _do_open_folder(self) -> None:
+        """Клавиша: открыть папку выбранного плагина."""
+        selection = self.grid.selection()
+        if selection and selection[0].primary:
+            self._open(os.path.dirname(selection[0].primary.filename))
+
+    def _do_clear_filters(self) -> None:
+        """Клавиша: снять все фильтры."""
+        if self.filter_panel:
+            self.filter_panel.close()
+        self.s["filters"] = {}
+        self.filters_changed()
+
+    def _do_zoom_in(self) -> None:
+        """Клавиша: крупнее."""
+        self.set_scale(min(200, self.s["ui_scale"] + 10))
+
+    def _do_zoom_out(self) -> None:
+        """Клавиша: мельче."""
+        self.set_scale(max(75, self.s["ui_scale"] - 10))
+
+    def _do_zoom_reset(self) -> None:
+        """Клавиша: обычный масштаб."""
+        self.set_scale(100)
+
+    def _do_maximize(self) -> None:
+        """Клавиша: развернуть или вернуть окно."""
+        self.toggle_maximize()
+
+    def _do_help(self) -> None:
+        """Клавиша: обучение."""
+        self.show_tutorial()
+
+    def _do_wiki(self) -> None:
+        """Клавиша: справка."""
+        self.open_wiki()
+
     def _do_tab_about(self) -> None:
         """Клавиша: вкладка «О программе»."""
         self.show_tab("about")
@@ -2160,18 +2286,26 @@ class App:
         self.split.pack(side="left", fill="y")
         self.split.bind("<Configure>", self._draw_split)
         self.split.bind("<B1-Motion>", self._split_drag)
-        self.split.bind("<ButtonRelease-1>", lambda e: self._save_layout())
-        right = tk.Frame(self.body, bg=PANEL)
+        self.split.bind("<ButtonRelease-1>", self._split_release)
+        self.split_target = None
+        self.split_job = None
+        self.split_rest_job = None
+        self.list_floating = False
+        right = self.list_box = tk.Frame(self.body, bg=PANEL)
         right.pack(side="left", fill="both", expand=True, pady=(p(6), 0))
         self.grid = Grid(right, t, self.s["column_widths"], list(self.s["sort"]), self._selection_changed, self._star_click, self._context_menu,
                          self.s["column_order"], self.s["hidden_columns"])
         self.grid.on_layout = self._save_layout
         self.grid.on_double = self._double_click
         self.grid.on_header_menu = self._header_menu
+        self.grid.marker = self.mods.marker if self.mods.hooks.get("marker") else None
         self.grid.c.pack(fill="both", expand=True)
         self._build_bottom(right)
         self.settings_page = tk.Canvas(self.frame, bg=PANEL, highlightthickness=0)
         self.about_page = tk.Canvas(self.frame, bg=PANEL, highlightthickness=0)
+        self.mods_page = tk.Canvas(self.frame, bg=PANEL, highlightthickness=0)
+        import mods_page
+        self.mods_view = mods_page.ModsPage(self.mods_page, self)
         self.about = about.AboutPage(self.about_page, self.t, globals(), APP_TITLE, VERSION, self)
         import settings_page
         self.settings_view = settings_page.SettingsPage(self.settings_page, self)
@@ -2193,7 +2327,10 @@ class App:
         c.pack(fill="x", padx=p(5))
         self.tab_items = {}
         x = p(6)
-        for name, label in (("plugins", tr("Плагины")), ("settings", tr("Настройки")), ("about", tr("О программе"))):
+        tabs = [("plugins", tr("Плагины")), ("settings", tr("Настройки"))]
+        if self.s["mods_enabled"]:
+            tabs.append(("mods", tr("Моды")))
+        for name, label in (*tabs, ("about", tr("О программе"))):
             w = t.font.measure(label) + p(22)
             rect = c.create_rectangle(x, p(5), x + w, p(30), fill=TAB_OFF, outline=TAB_LINE, tags=f"win_{name}")
             text = c.create_text(x + w // 2, p(17), text=label, fill=TEXT, font=t.font, tags=f"win_{name}")
@@ -2220,7 +2357,11 @@ class App:
             self.fade_rect(self.frame.winfo_rootx(), self.tabs.winfo_rooty() + self.tabs.winfo_height(), self.frame.winfo_width(),
                            self.frame.winfo_rooty() + self.frame.winfo_height() - self.tabs.winfo_rooty() - self.tabs.winfo_height())
         self.main_tab = name
+        if name != "plugins" and self.filter_panel:  # окно фильтров относится только к списку плагинов
+            self.filter_panel.close()
         pages = {"plugins": self.body, "settings": self.settings_page, "about": self.about_page}
+        if self.s["mods_enabled"]:
+            pages["mods"] = self.mods_page
         for key, page in pages.items():
             page.pack_forget()
             on = key == name
@@ -2234,6 +2375,8 @@ class App:
         if name == "settings" and hasattr(self.settings_view, "status"):
             self.settings_view.draw_section()
         self.root.update_idletasks()
+        if name == "mods":
+            self.mods_view.draw()
         if name == "about":
             self.about.show()
         else:
@@ -2334,15 +2477,62 @@ class App:
             c.create_rectangle(p(4), y, p(6), y + p(2), fill=DOTS, outline="")
 
     def _split_drag(self, event) -> None:
-        """Меняет ширину левой панели."""
+        """Запоминает новую ширину. Мышь присылает событий больше, чем успевает нарисоваться, поэтому берём последнее."""
         p = self.t.p
         width = self.split.winfo_rootx() + event.x - self.body.winfo_rootx()
-        width = max(p(270), min(p(520), width))
-        if width != self.left_w:
-            self.left_w = width
-            self.left_box.configure(width=width)
-            self.left.place_configure(width=width)
+        self.split_target = max(p(270), min(p(520), width))
+        if self.split_job is None:
+            self.split_job = self.root.after(12, self._apply_split)
+
+    def _apply_split(self) -> None:
+        """Двигает разделитель и список. Левая панель перестроится, когда мышь остановится."""
+        self.split_job = None
+        if self.split_target != self.left_w:
+            if not self.list_floating:
+                self._float_list()
+            self.left_w = self.split_target
+            self.left_box.configure(width=self.left_w)
+            self.left.place_configure(width=self.left_w)
+            self.list_box.place_configure(x=self.left_w + self.split.winfo_width())
+            if self.split_rest_job is not None:
+                self.root.after_cancel(self.split_rest_job)
+            self.split_rest_job = self.root.after(120, self._split_rest)
+
+    def _float_list(self) -> None:
+        """Начало сдвига: список получает наибольшую ширину и дальше только едет.
+
+        Перерисовать список занимает десятки миллисекунд, а сдвинуть готовую картинку около двух.
+        """
+        p = self.t.p
+        top = p(6)
+        room = self.body.winfo_width() - p(270) - self.split.winfo_width()
+        self.list_floating = True
+        self.list_box.pack_forget()
+        self.list_box.place(x=self.left_w + self.split.winfo_width(), y=top, width=room, height=self.body.winfo_height() - top)
+
+    def _dock_list(self) -> None:
+        """Конец сдвига: список занимает своё точное место."""
+        self.list_floating = False
+        self.list_box.place_forget()
+        self.list_box.pack(side="left", fill="both", expand=True, pady=(self.t.p(6), 0))
+
+    def _split_rest(self) -> None:
+        """Мышь остановилась: панель дорисовывается под новую ширину."""
+        self.split_rest_job = None
+        if self.left_built != self.left_w:
             self._build_left()
+
+    def _split_release(self, _event) -> None:
+        """Кнопка отпущена: завершаем сдвиг и запоминаем ширину."""
+        if self.split_job is not None:
+            self.root.after_cancel(self.split_job)
+            self._apply_split()
+        if self.split_rest_job is not None:
+            self.root.after_cancel(self.split_rest_job)
+        self._split_rest()
+        if self.list_floating:
+            self._dock_list()
+        self._save_layout()
 
     # ------------------------------------------------------------------ левая панель
     def _group(self, y: int, h: int, title: str, tag: str, text_x: int = 3, x0: int | None = None, x1: int | None = None) -> None:
@@ -2393,6 +2583,7 @@ class App:
     def _build_left(self) -> None:
         """Левая панель: главная кнопка, вкладки и страницы."""
         self.paint = self.left
+        self.left_built = self.left_w  # под какую ширину панель нарисована
         c, t = self.left, self.t
         p = t.p
         c.delete("all")
@@ -2564,9 +2755,9 @@ class App:
         label(y + p(147), tr("Файл пресета"))
         field(y + p(172), "preset", label_x)
         y += p(202)
-        self._group(y, p(89), "", tag, text_x=23)
+        self._group(y, p(89), tr("Организован"), tag, text_x=23)
+        c.addtag_withtag("org_led", c.find_all()[-1])  # подпись в заголовке тоже нажимается
         self.star_led = c.create_image(x0 + p(4), y + p(10), anchor="w", image=t.images["led_off"], tags=(tag, "org_led"))
-        c.create_text(x0 + p(23), y + p(10), text=tr("Организован"), anchor="w", fill=TEXT, font=t.font, tags=(tag, "org_led"))
         c.tag_bind("org_led", "<Button-1>", lambda e: self._star_selected())
         label(y + p(40), tr("Папка"))
         field(y + p(40), "folder")
@@ -2786,6 +2977,8 @@ class App:
         organized, folders = core.scan_organized(self.db) if self.db else ({}, {})
         for p in plugins:
             p.organized_in = organized.get((p.kind, p.name_id))
+        if self.mods.after_load(plugins):
+            self._apply_vendors(plugins)  # мод чему-то научился: назначения надо пересчитать
         return {"plugins": plugins, "sources": sources, "error": error, "folders": folders}
 
     def _use_database(self, data: dict) -> None:
@@ -2808,12 +3001,13 @@ class App:
         aliases = {source.casefold(): target for source, target in self.s["vendor_aliases"].items()}
         purpose_overrides = self.s["purpose_overrides"]
         purpose_rules = rules.load_rules(self.s["purpose_rules"])
+        hooks = self.mods.purpose_hooks()
         for p in self.plugins if plugins is None else plugins:
-            p.vendor = overrides.get(p.name_id) or rules.apply_alias(p.raw_vendor, aliases) or (core.UNKNOWN_VENDOR if p.ok else "")
+            p.vendor = overrides.get(p.name_id) or rules.apply_alias(p.raw_vendor, aliases) or self.mods.vendor(p) or (core.UNKNOWN_VENDOR if p.ok else "")
             p.vendor_edited = p.name_id in overrides
-            p.purposes, p.purpose_source = rules.classify(p, purpose_overrides, purpose_rules)
+            p.purposes, p.purpose_source = rules.classify(p, purpose_overrides, purpose_rules, hooks)
             labels = " ".join(rules.purpose_label(x) for x in p.purposes)
-            p.search = f"{p.name} {p.vendor} {p.filename} {p.formats} {labels}".casefold()
+            p.search = f"{p.name} {p.vendor} {p.filename} {p.formats} {labels} {self.mods.search(p)}".casefold()
 
     def source_plugins(self) -> list[core.Plugin]:
         """Плагины из включённых источников."""
@@ -2952,6 +3146,7 @@ class App:
                 overrides[p.name_id] = purpose
             else:
                 overrides.pop(p.name_id, None)
+        self.mods.purpose_changed(selection, purpose)
         self._after_vendor_edit(selection)
 
     def _menu(self) -> PopupMenu:
@@ -3194,8 +3389,36 @@ class App:
         self._ask_open(tr("Открыть в браузере справку?"), f"{SITE_URL}{i18n.LANG}/wiki/index.html")
 
     def open_project(self) -> None:
-        """Кнопка «Страница проекта»: сайт, после вопроса."""
-        self._ask_open(tr("Открыть в браузере страницу проекта?"), SITE_URL)
+        """Значок GitHub: страница проекта."""
+        self._open(PROJECT_URL)
+
+    def mods_switch(self) -> None:
+        """Переключатель модов в настройках. Перед включением предупреждает о чужом коде."""
+        if self.s["mods_enabled"]:
+            text = tr("Моды работают как часть программы и могут менять файлы на компьютере. Включайте только те, которым доверяете.")
+            if Dialog(self.root, self.t, tr("Модификации"), text, [tr("Включить"), tr("Отмена")], width=520).result != 0:
+                self.s["mods_enabled"] = False
+        self.s.save()
+        self.mods.reload()
+        self.rebuild_ui()
+        self.refresh()
+
+    def toggle_mod(self, mod_id: str) -> None:
+        """Включает или выключает один мод."""
+        if self.worker or self.loading:
+            return
+        active = set(self.s["mods_active"])
+        active.symmetric_difference_update({mod_id})
+        self.s["mods_active"] = sorted(active)
+        self.s.save()
+        self.mods.reload()
+        self.grid.marker = self.mods.marker if self.mods.hooks.get("marker") else None
+        self.refresh()
+        self.mods_view.draw()
+
+    def show_message(self, text: str) -> None:
+        """Окно с сообщением."""
+        Dialog(self.root, self.t, tr("Готово"), text, [tr("Понятно")])
 
     def _ask_open(self, question: str, url: str) -> None:
         """Спрашивает и открывает адрес в браузере."""
@@ -3301,9 +3524,11 @@ class App:
                 header += "\n" + tr("Перед началом будет создан бэкап базы.")
             if skipped:
                 header += "\n\n" + skipped
-            dialog = Dialog(self.root, self.t, tr("Предпросмотр"), header, [tr("Организовать"), tr("Отмена")],
-                            rows=[(name, str(count)) for name, count in vendors.items()], width=520)
-            if dialog.result != 0:
+            answer = self.mods.preview(plan, header)
+            if answer is None:
+                answer = Dialog(self.root, self.t, tr("Предпросмотр"), header, [tr("Организовать"), tr("Отмена")],
+                                rows=[(name, str(count)) for name, count in vendors.items()], width=520).result == 0
+            if not answer:
                 return
         self.cancel_flag.clear()
         self.main_btn.set_text(tr("Отмена"))

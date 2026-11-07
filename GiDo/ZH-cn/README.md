@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ 下载 FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/ZH-cn/wiki/index.html"><b>维基</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 一款便携式 FL Studio 插件数据库整理工具。可按厂商、用途或两者组合把插件归入文件夹，界面风格与 FL Studio 浑然一体。
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@
 - 自动备份，一键撤销，所有操作都不会超出数据库文件夹
 - 单个 10 MB 文件，无需安装，设置保存在程序旁边
 - 26 种界面语言，并可设置布局、快捷键、缩放、字体、颜色等
+- 可选模组：更大的插件列表、开放目录、可学习的细分用途、预览树和状态色条。在“设置”的“数据”中启用。
 
 ## 快速开始
 

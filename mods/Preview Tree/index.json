@@ -1,0 +1,11 @@
+{
+ "name": "Preview Tree",
+ "type": "UX/UI",
+ "version": "1.0",
+ "author": "Arkomiko",
+ "description": {
+  "EN-en": "Replaces the preview list with a folder tree. Drag a plugin to another folder and the structure changes at once. Clicking a folder collapses it. Only the folders of this run are shown, and Effects cannot be moved to Generators.",
+  "RU-ru": "Заменяет список предпросмотра деревом папок. Перетащите плагин в другую папку, и структура сразу изменится. Щелчок по папке сворачивает её. Показаны только папки этого запуска, а эффекты нельзя перенести в генераторы."
+ },
+ "entry": "mod.py"
+}

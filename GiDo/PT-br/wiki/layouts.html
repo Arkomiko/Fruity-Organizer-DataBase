@@ -5,24 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Layouts de pastas | FODB</title>
 <meta name="description" content="Um organizador portátil para o banco de plugins do FL Studio. Coloca os plugins em pastas por fabricante, por finalidade ou ambos, com um visual que combina com o FL Studio.">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../PT-br/index.html">FODB</a>
+<a class="name" href="../../PT-br/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../PT-br/index.html">Início</a>
 <a href="../../PT-br/wiki/index.html">Wiki</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">Baixar FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">Código-fonte</a>
 <details class="langs"><summary>Idioma: Português</summary><ul><li><a href="../../EN-en/wiki/layouts.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/layouts.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/layouts.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/layouts.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/layouts.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/layouts.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/layouts.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/layouts.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/layouts.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/layouts.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/layouts.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/layouts.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/layouts.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/layouts.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/layouts.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/layouts.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/layouts.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/layouts.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/layouts.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/layouts.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/layouts.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/layouts.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/layouts.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/layouts.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/layouts.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/layouts.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../PT-br/wiki/start.html">Início rápido</a></li><li><span class="here">Layouts de pastas</span></li><li><a href="../../PT-br/wiki/filters.html">Filtros</a></li><li><a href="../../PT-br/wiki/rules.html">Suas próprias regras</a></li><li><a href="../../PT-br/wiki/safety.html">Segurança</a></li><li><a href="../../PT-br/wiki/themes.html">Temas do FL Studio</a></li><li><a href="../../PT-br/wiki/settings.html">Configurações</a></li><li><a href="../../PT-br/wiki/hotkeys.html">Teclas de atalho</a></li><li><a href="../../PT-br/wiki/build.html">Compilar do código-fonte</a></li></ul></nav><div class="page"><h1>Layouts de pastas</h1><p>Escolha uma predefinição ou escreva seu modelo com estas partes:</p><pre>{vendor}  {purpose}  {format}  {bits}  {letter}  {kind}
+<div class="wiki"><nav><ul><li><a href="../../PT-br/wiki/start.html">Início rápido</a></li><li><span class="here">Layouts de pastas</span></li><li><a href="../../PT-br/wiki/filters.html">Filtros</a></li><li><a href="../../PT-br/wiki/rules.html">Suas próprias regras</a></li><li><a href="../../PT-br/wiki/safety.html">Segurança</a></li><li><a href="../../PT-br/wiki/themes.html">Temas do FL Studio</a></li><li><a href="../../PT-br/wiki/settings.html">Configurações</a></li><li><a href="../../PT-br/wiki/hotkeys.html">Teclas de atalho</a></li><li><a href="../../PT-br/wiki/mods.html">Mods</a></li><li><a href="../../PT-br/wiki/build.html">Compilar do código-fonte</a></li></ul></nav><div class="page"><h1>Layouts de pastas</h1><p>Escolha uma predefinição ou escreva seu modelo com estas partes:</p><pre>{vendor}  {purpose}  {format}  {bits}  {letter}  {kind}
 
 {vendor}\{purpose}
 {purpose}\{vendor}
 USER\{format}\{vendor}</pre><ul><li>Fabricante</li><li>Finalidade</li><li>Fabricante \ Finalidade</li><li>Finalidade \ Fabricante</li><li>Formato \ Fabricante</li><li>Formato \ Finalidade</li><li>Primeira letra</li><li>USER \ Fabricante</li><li>USER \ Finalidade \ Fabricante</li></ul><h2>Opções de organização</h2><ul><li><b>Uma cópia por plugin</b>: Se um plugin existir em vários formatos, um é copiado. A ordem é definida nas Configurações.</li><li><b>Ignorar plugins com erro</b>: Não copiar plugins que o FL Studio não conseguiu verificar.</li><li><b>Ignorar já organizados</b>: Um plugin com estrela já está em Effects ou Generators e não é copiado de novo.</li><li><b>Reorganizar os organizados</b>: Mover plugins com estrela para as pastas do layout atual. O botão Desfazer reverte.</li><li><b>Substituir arquivos existentes</b>: Substituir um arquivo que já esteja na pasta do fabricante.</li><li><b>Só plugins da lista</b>: Organizar só o que a lista mostra após filtros e busca.</li><li><b>Mover da pasta New</b>: Depois de organizado, o plugin sai da lista New do FL Studio. O botão Desfazer o traz de volta.</li></ul></div></div>
 </main>
-<footer><p>Baseado no FL Studio Automatic Plugin Organizer de Magabes e colaboradores, sob licença MIT.</p><p>Projeto independente, sem vínculo com a Image-Line. FL Studio é uma marca da Image-Line.</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>Baseado no FL Studio Automatic Plugin Organizer de Magabes e colaboradores, sob licença MIT.</p><p>Projeto independente, sem vínculo com a Image-Line. FL Studio é uma marca da Image-Line.</p></footer>
 </body>
 </html>

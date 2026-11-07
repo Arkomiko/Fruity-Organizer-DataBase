@@ -5,20 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>בנייה מקוד המקור | FODB</title>
 <meta name="description" content="מארגן נייד למאגר התוספים של FL Studio. ממיין תוספים לתיקיות לפי יצרן, לפי ייעוד או לפי שניהם, ונראה כחלק טבעי מ-FL Studio.">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../HE-il/index.html">FODB</a>
+<a class="name" href="../../HE-il/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../HE-il/index.html">דף הבית</a>
 <a href="../../HE-il/wiki/index.html">ויקי</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">הורדת FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">קוד מקור</a>
 <details class="langs"><summary>שפה: עברית</summary><ul><li><a href="../../EN-en/wiki/build.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/build.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/build.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/build.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/build.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/build.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/build.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/build.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/build.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/build.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/build.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/build.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/build.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/build.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/build.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/build.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/build.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/build.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/build.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/build.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/build.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/build.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/build.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/build.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/build.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/build.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../HE-il/wiki/start.html">התחלה מהירה</a></li><li><a href="../../HE-il/wiki/layouts.html">סידורי תיקיות</a></li><li><a href="../../HE-il/wiki/filters.html">מסננים</a></li><li><a href="../../HE-il/wiki/rules.html">כללים משלך</a></li><li><a href="../../HE-il/wiki/safety.html">בטיחות</a></li><li><a href="../../HE-il/wiki/themes.html">ערכות נושא של FL Studio</a></li><li><a href="../../HE-il/wiki/settings.html">הגדרות</a></li><li><a href="../../HE-il/wiki/hotkeys.html">מקשי קיצור</a></li><li><span class="here">בנייה מקוד המקור</span></li></ul></nav><div class="page"><h1>בנייה מקוד המקור</h1><p>נדרשים Windows ו-Python 3.13. התוכנה עצמה משתמשת רק בספרייה הסטנדרטית.</p><pre>./packaging/build.ps1</pre></div></div>
+<div class="wiki"><nav><ul><li><a href="../../HE-il/wiki/start.html">התחלה מהירה</a></li><li><a href="../../HE-il/wiki/layouts.html">סידורי תיקיות</a></li><li><a href="../../HE-il/wiki/filters.html">מסננים</a></li><li><a href="../../HE-il/wiki/rules.html">כללים משלך</a></li><li><a href="../../HE-il/wiki/safety.html">בטיחות</a></li><li><a href="../../HE-il/wiki/themes.html">ערכות נושא של FL Studio</a></li><li><a href="../../HE-il/wiki/settings.html">הגדרות</a></li><li><a href="../../HE-il/wiki/hotkeys.html">מקשי קיצור</a></li><li><a href="../../HE-il/wiki/mods.html">מודים</a></li><li><span class="here">בנייה מקוד המקור</span></li></ul></nav><div class="page"><h1>בנייה מקוד המקור</h1><p>נדרשים Windows ו-Python 3.13. התוכנה עצמה משתמשת רק בספרייה הסטנדרטית.</p><pre>./packaging/build.ps1</pre></div></div>
 </main>
-<footer><p>מבוסס על FL Studio Automatic Plugin Organizer מאת Magabes ותורמים, ברישיון MIT.</p><p>פרויקט עצמאי שאינו קשור ל-Image-Line. FL Studio הוא סימן מסחרי של Image-Line.</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>מבוסס על FL Studio Automatic Plugin Organizer מאת Magabes ותורמים, ברישיון MIT.</p><p>פרויקט עצמאי שאינו קשור ל-Image-Line. FL Studio הוא סימן מסחרי של Image-Line.</p></footer>
 </body>
 </html>

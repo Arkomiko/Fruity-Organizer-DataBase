@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe yuklab olish</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/UZ-uz/wiki/index.html"><b>Viki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio plaginlar bazasi uchun portativ organayzer. Plaginlarni papkalarga ishlab chiqaruvchi, vazifa yoki ikkalasi boʻyicha joylaydi va FL Studio'ning oʻz qismidek koʻrinadi.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ FL Studio plaginlar bazasi uchun portativ organayzer. Plaginlarni papkalarga ish
 - Avtomatik zaxiralar, bir bosishda bekor qilish, hech narsa baza papkasidan chiqmaydi
 - Oʻrnatishsiz 10 MB bitta fayl; sozlamalar uning yonida saqlanadi
 - 26 interfeys tili hamda joylashuv, tugmalar, masshtab, shrift va ranglar sozlamalari
+- Ixtiyoriy modlar: kattaroq plaginlar roʻyxati, ochiq katalog, oʻrganadigan aniq vazifalar, oldindan koʻrish daraxti va holat belgilari. Sozlamalarning «Maʼlumotlar» boʻlimida yoqiladi.
 
 ## Tez boshlash
 

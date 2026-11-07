@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe indir</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/TR-tr/wiki/index.html"><b>Wiki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio eklenti veritabanı için taşınabilir bir düzenleyici. Eklentileri üreticiye, kullanım amacına veya her ikisine göre klasörlere yerleştirir ve FL Studio ile uyumlu görünür.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ FL Studio eklenti veritabanı için taşınabilir bir düzenleyici. Eklentileri 
 - Otomatik yedekler, tek tıkla geri alma, hiçbir şey veritabanı klasörünün dışına çıkmaz
 - Kurulum gerektirmeyen tek bir 10 MB dosya; ayarlar yanında durur
 - 26 arayüz dili ve yerleşim, kısayol, ölçek, yazı tipi, renk gibi ayarlar
+- İsteğe bağlı modlar: daha geniş eklenti listesi, açık katalog, sizden öğrenen ayrıntılı kullanımlar, önizleme ağacı ve durum şeritleri. Ayarlar, Veri bölümünden açılır.
 
 ## Hızlı başlangıç
 

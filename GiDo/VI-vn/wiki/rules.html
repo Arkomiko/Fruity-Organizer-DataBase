@@ -5,23 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quy tắc riêng | FODB</title>
 <meta name="description" content="Công cụ sắp xếp di động cho cơ sở dữ liệu plugin của FL Studio. Sắp plugin vào thư mục theo hãng, theo công dụng hoặc cả hai, với giao diện hòa hợp cùng FL Studio.">
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../../site.js" defer></script>
 </head>
 <body>
+<!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
-<a class="name" href="../../VI-vn/index.html">FODB</a>
+<a class="name" href="../../VI-vn/index.html"><img src="../../favicon.svg" alt="" width="24" height="24">FODB</a>
 <a href="../../VI-vn/index.html">Trang chủ</a>
 <a href="../../VI-vn/wiki/index.html">Wiki</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">Tải FODB.exe</a>
 <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">Mã nguồn</a>
 <details class="langs"><summary>Ngôn ngữ: Tiếng Việt</summary><ul><li><a href="../../EN-en/wiki/rules.html" lang="en">English</a></li><li><a href="../../RU-ru/wiki/rules.html" lang="ru">Русский</a></li><li><a href="../../ZH-cn/wiki/rules.html" lang="zh-CN">简体中文</a></li><li><a href="../../ES-es/wiki/rules.html" lang="es">Español</a></li><li><a href="../../HI-in/wiki/rules.html" lang="hi">हिन्दी</a></li><li><a href="../../FR-fr/wiki/rules.html" lang="fr">Français</a></li><li><a href="../../BN-bd/wiki/rules.html" lang="bn">বাংলা</a></li><li><a href="../../PT-br/wiki/rules.html" lang="pt-BR">Português</a></li><li><a href="../../UR-pk/wiki/rules.html" lang="ur">اردو</a></li><li><a href="../../ID-id/wiki/rules.html" lang="id">Indonesia</a></li><li><a href="../../DE-de/wiki/rules.html" lang="de">Deutsch</a></li><li><a href="../../JA-jp/wiki/rules.html" lang="ja">日本語</a></li><li><a href="../../TR-tr/wiki/rules.html" lang="tr">Türkçe</a></li><li><a href="../../KO-kr/wiki/rules.html" lang="ko">한국어</a></li><li><a href="../../VI-vn/wiki/rules.html" lang="vi">Tiếng Việt</a></li><li><a href="../../IT-it/wiki/rules.html" lang="it">Italiano</a></li><li><a href="../../PL-pl/wiki/rules.html" lang="pl">Polski</a></li><li><a href="../../UK-ua/wiki/rules.html" lang="uk">Українська</a></li><li><a href="../../TH-th/wiki/rules.html" lang="th">ไทย</a></li><li><a href="../../KK-kz/wiki/rules.html" lang="kk">Қазақша</a></li><li><a href="../../UZ-uz/wiki/rules.html" lang="uz">Oʻzbekcha</a></li><li><a href="../../BE-by/wiki/rules.html" lang="be">Беларуская</a></li><li><a href="../../AZ-az/wiki/rules.html" lang="az">Azərbaycanca</a></li><li><a href="../../HY-am/wiki/rules.html" lang="hy">Հայերեն</a></li><li><a href="../../ISV-sl/wiki/rules.html" lang="isv">Medžuslovjansky</a></li><li><a href="../../HE-il/wiki/rules.html" lang="he">עברית</a></li></ul></details>
 </div></header>
+<!-- Содержимое страницы -->
 <main>
-<div class="wiki"><nav><ul><li><a href="../../VI-vn/wiki/start.html">Bắt đầu nhanh</a></li><li><a href="../../VI-vn/wiki/layouts.html">Bố cục thư mục</a></li><li><a href="../../VI-vn/wiki/filters.html">Bộ lọc</a></li><li><span class="here">Quy tắc riêng</span></li><li><a href="../../VI-vn/wiki/safety.html">An toàn</a></li><li><a href="../../VI-vn/wiki/themes.html">Giao diện FL Studio</a></li><li><a href="../../VI-vn/wiki/settings.html">Cài đặt</a></li><li><a href="../../VI-vn/wiki/hotkeys.html">Phím tắt</a></li><li><a href="../../VI-vn/wiki/build.html">Dựng từ mã nguồn</a></li></ul></nav><div class="page"><h1>Quy tắc riêng</h1><p>Xác định công dụng của từng plugin: reverb, EQ, dynamics, synth và 18 loại khác</p><p>Thêm quy tắc trong thẻ Cài đặt hoặc FODB.json để đặt công dụng theo tên hay nhà sản xuất bằng biểu thức chính quy:</p><pre>&quot;purpose_rules&quot;: [
+<div class="wiki"><nav><ul><li><a href="../../VI-vn/wiki/start.html">Bắt đầu nhanh</a></li><li><a href="../../VI-vn/wiki/layouts.html">Bố cục thư mục</a></li><li><a href="../../VI-vn/wiki/filters.html">Bộ lọc</a></li><li><span class="here">Quy tắc riêng</span></li><li><a href="../../VI-vn/wiki/safety.html">An toàn</a></li><li><a href="../../VI-vn/wiki/themes.html">Giao diện FL Studio</a></li><li><a href="../../VI-vn/wiki/settings.html">Cài đặt</a></li><li><a href="../../VI-vn/wiki/hotkeys.html">Phím tắt</a></li><li><a href="../../VI-vn/wiki/mods.html">Mod</a></li><li><a href="../../VI-vn/wiki/build.html">Dựng từ mã nguồn</a></li></ul></nav><div class="page"><h1>Quy tắc riêng</h1><p>Xác định công dụng của từng plugin: reverb, EQ, dynamics, synth và 18 loại khác</p><p>Thêm quy tắc trong thẻ Cài đặt hoặc FODB.json để đặt công dụng theo tên hay nhà sản xuất bằng biểu thức chính quy:</p><pre>&quot;purpose_rules&quot;: [
   { &quot;purpose&quot;: &quot;drums&quot;, &quot;name&quot;: &quot;kick|808&quot; },
   { &quot;purpose&quot;: &quot;vocal&quot;, &quot;vendor&quot;: &quot;antares&quot; }
 ]</pre><p>Quy tắc khớp đầu tiên được ưu tiên hơn nhận diện tự động. Điều kiện hỗ trợ biểu thức chính quy.</p><h2>Công dụng</h2><ul><li>Bộ lọc</li><li>Bộ phân tích</li><li>Bộ điều khiển và MIDI</li><li>Cao độ</li><li>Channel strip</li><li>Delay</li><li>Dynamics</li><li>EQ</li><li>Giọng hát</li><li>Hiệu ứng sáng tạo</li><li>Khác</li><li>Mastering</li><li>Méo tiếng và bão hòa</li><li>Nhạc cụ</li><li>Phục hồi</li><li>Reverb</li><li>Sampler</li><li>Stereo và không gian</li><li>Synth</li><li>Tiện ích</li><li>Trống</li><li>Điều biến</li></ul></div></div>
 </main>
-<footer><p>Dựa trên FL Studio Automatic Plugin Organizer của Magabes và các cộng tác viên, theo giấy phép MIT.</p><p>Dự án độc lập, không liên kết với Image-Line. FL Studio là thương hiệu của Image-Line.</p></footer>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>Dựa trên FL Studio Automatic Plugin Organizer của Magabes và các cộng tác viên, theo giấy phép MIT.</p><p>Dự án độc lập, không liên kết với Image-Line. FL Studio là thương hiệu của Image-Line.</p></footer>
 </body>
 </html>

@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ FODB.exe жүктеу</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/KK-kz/wiki/index.html"><b>Уики</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio плагин базасына арналған портативті органайзер. Плагиндерді қалталарға өндіруші, мақсат немесе екеуі бойынша бірден реттейді, әрі FL Studio-ның өз бөлігіндей көрінеді.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ FL Studio плагин базасына арналған портативті о
 - Автоматты бэкаптар, бір басумен болдырмау, ештеңе база қалтасынан шықпайды
 - Орнатусыз 10 МБ бір файл; баптаулар оның жанында сақталады
 - 26 интерфейс тілі және орналасу, перне, масштаб, қаріп, түс баптаулары
+- Қосымша модтар: плагиндердің үлкен тізімі, ашық каталог, үйренетін нақты мақсаттар, алдын ала қарау ағашы және күй белгілері. Баптаулардың «Деректер» бөлімінде қосылады.
 
 ## Жылдам бастау
 

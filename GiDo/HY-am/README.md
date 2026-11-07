@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Ներբեռնել FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/HY-am/wiki/index.html"><b>Վիքի</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 FL Studio պլագինների բազայի դյուրակիր կազմակերպիչ։ Պլագինները դասավորում է պանակներում՝ ըստ արտադրողի, նշանակության կամ երկուսի, և տեսքով կարծես FL Studio-ի մաս լինի։
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ FL Studio պլագինների բազայի դյուրակիր կազմակեր�
 - Ավտոմատ պահուստներ, հետարկում մեկ սեղմումով, ոչինչ դուրս չի գալիս բազայի պանակից
 - 10 ՄԲ մեկ ֆայլ՝ առանց տեղադրման. կարգավորումները պահվում են կողքին
 - Ինտերֆեյսի 26 լեզու և դասավորության, ստեղների, մասշտաբի, տառատեսակների, գույների կարգավորումներ
+- Ոչ պարտադիր մոդեր՝ պլագինների մեծ ցանկ, բաց կատալոգ, սովորող ճշգրիտ նշանակություններ, նախադիտման ծառ և վիճակի գունավոր շերտեր։ Միացվում են կարգավորումների «Տվյալներ» բաժնում։
 
 ## Արագ մեկնարկ
 

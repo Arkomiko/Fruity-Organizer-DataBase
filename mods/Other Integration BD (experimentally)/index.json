@@ -1,0 +1,11 @@
+{
+ "name": "Other Integration BD (experimentally)",
+ "type": "optimization",
+ "version": "1.0",
+ "author": "Arkomiko",
+ "description": {
+  "EN-en": "Fills in a missing vendor, purpose and search tags by plugin name from an open catalog. The catalog ships with the mod. The update button downloads a fresh copy from the project's GitHub and sends nothing about your plugins.",
+  "RU-ru": "Заполняет пустого производителя, назначение и слова для поиска по имени плагина из открытого каталога. Каталог идёт вместе с модом. Кнопка обновления скачивает свежую копию с GitHub проекта и ничего не отправляет о ваших плагинах."
+ },
+ "entry": "mod.py"
+}

@@ -89,6 +89,8 @@ class HotkeyTests(unittest.TestCase):
         self.assertEqual(hotkeys.shortcut(116, 0), "F5")
         self.assertEqual(hotkeys.shortcut(70, 0), "", "простая буква нужна для ввода текста")
         self.assertEqual(hotkeys.shortcut(17, hotkeys.CTRL), "")
+        self.assertEqual(hotkeys.shortcut(187, hotkeys.CTRL), "Ctrl+=", "знаки тоже можно назначать")
+        self.assertTrue(hotkeys.display("Ctrl+F").startswith("Ctrl+F"))
 
     def test_assigning_takes_the_shortcut_from_another_action(self):
         saved = hotkeys.assign({}, "tab_about", "Ctrl+1")

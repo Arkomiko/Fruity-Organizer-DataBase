@@ -31,6 +31,8 @@
 
 <p align="center"><a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest"><b>⬇ Pobierz FODB.exe</b></a> &nbsp;|&nbsp; <a href="https://arkomiko.github.io/Fruity-Organizer-DataBase/PL-pl/wiki/index.html"><b>Wiki</b></a> &nbsp;|&nbsp; <a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
+<p align="center">By <a href="https://arkomiko.net"><b>Arkomiko</b></a></p>
+
 Przenośny organizer bazy wtyczek FL Studio. Układa wtyczki w folderach według producenta, przeznaczenia lub obu naraz i wygląda jak naturalna część FL Studio.
 
 <p align="center"><img src="../../GiDo/demo-en.gif" alt="FODB" width="100%"></p>
@@ -44,6 +46,7 @@ Przenośny organizer bazy wtyczek FL Studio. Układa wtyczki w folderach według
 - Automatyczne kopie zapasowe, cofanie jednym kliknięciem, nic nie opuszcza folderu bazy
 - Jeden plik 10 MB bez instalacji; ustawienia leżą obok niego
 - 26 języków interfejsu oraz ustawienia układu, skrótów, skali, czcionek, kolorów i nie tylko
+- Opcjonalne mody: większa lista wtyczek, otwarty katalog, dokładniejsze przeznaczenia uczące się od Ciebie, drzewo podglądu i paski stanu. Włącza się je w Ustawieniach, w sekcji Dane.
 
 ## Szybki start
 

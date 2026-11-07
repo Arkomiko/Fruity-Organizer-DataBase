@@ -1,0 +1,2116 @@
+{
+ "abbey road": {
+  "vendor": "Waves",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "absynth": {
+  "vendor": "Native Instruments",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "ace": {
+  "vendor": "u-he",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "acustica": {
+  "vendor": "Acustica Audio",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "addictive drums": {
+  "vendor": "XLN Audio",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "addictive keys": {
+  "vendor": "XLN Audio",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "air vocal": {
+  "vendor": "AIR Music Technology",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "alterboy": {
+  "vendor": "Soundtoys",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "altiverb": {
+  "vendor": "Audio Ease",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "ampeg svt": {
+  "vendor": "Plugin Alliance",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "ample bass": {
+  "vendor": "Ample Sound",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "ample guitar": {
+  "vendor": "Ample Sound",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "amplitube": {
+  "vendor": "IK Multimedia",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "ana 2": {
+  "vendor": "Sonic Academy",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "analog lab": {
+  "vendor": "Arturia",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "antresol": {
+  "vendor": "D16 Group",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "archetype": {
+  "vendor": "Neural DSP",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "audio inpainting": {
+  "vendor": "iZotope",
+  "purpose": "restoration",
+  "tags": [
+   "restoration"
+  ]
+ },
+ "augmented strings": {
+  "vendor": "Arturia",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "auto-tune": {
+  "vendor": "Antares",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "avenger": {
+  "vendor": "Vengeance Sound",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "avox": {
+  "vendor": "Antares",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "bassroom": {
+  "vendor": "Mastering The Mix",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "battery": {
+  "vendor": "Native Instruments",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "bazille": {
+  "vendor": "u-he",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "bbc symphony": {
+  "vendor": "Spitfire Audio",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "bias amp": {
+  "vendor": "Positive Grid",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "bias fx": {
+  "vendor": "Positive Grid",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "black box analog": {
+  "vendor": "Plugin Alliance",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "blackhole": {
+  "vendor": "Eventide",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "bloom": {
+  "vendor": "oeksound",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "breaktweaker": {
+  "vendor": "iZotope",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "bx_cleansweep": {
+  "vendor": "Plugin Alliance",
+  "purpose": "filter",
+  "tags": [
+   "filter"
+  ]
+ },
+ "bx_console": {
+  "vendor": "Plugin Alliance",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "bx_digital": {
+  "vendor": "Plugin Alliance",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "bx_masterdesk": {
+  "vendor": "Plugin Alliance",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "bx_saturator": {
+  "vendor": "Plugin Alliance",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "carve eq": {
+  "vendor": "Kilohearts",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "cassette": {
+  "vendor": "Wavesfactory",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "cla drums": {
+  "vendor": "Waves",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "cla vocals": {
+  "vendor": "Waves",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "cla-2a": {
+  "vendor": "Waves",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "cla-3a": {
+  "vendor": "Waves",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "cla-76": {
+  "vendor": "Waves",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "codex": {
+  "vendor": "Waves",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "crystallizer": {
+  "vendor": "Soundtoys",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "cs-80 v": {
+  "vendor": "Arturia",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "cthulhu": {
+  "vendor": "Xfer Records",
+  "purpose": "controller",
+  "tags": [
+   "controller"
+  ]
+ },
+ "decapitator": {
+  "vendor": "Soundtoys",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "decimort": {
+  "vendor": "D16 Group",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "devastor": {
+  "vendor": "D16 Group",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "devil-loc": {
+  "vendor": "Soundtoys",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "dexed": {
+  "vendor": "Digital Suburban",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "dimension expander": {
+  "vendor": "Xfer Records",
+  "purpose": "stereo",
+  "tags": [
+   "stereo"
+  ]
+ },
+ "disperser": {
+  "vendor": "Kilohearts",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "diva": {
+  "vendor": "u-he",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "drumazon": {
+  "vendor": "D16 Group",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "dune": {
+  "vendor": "Synapse Audio",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "dx7 v": {
+  "vendor": "Arturia",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "echoboy": {
+  "vendor": "Soundtoys",
+  "purpose": "delay",
+  "tags": [
+   "delay"
+  ]
+ },
+ "edna": {
+  "vendor": "Spitfire Audio",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "effectrack": {
+  "vendor": "Soundtoys",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "electra": {
+  "vendor": "Tone2",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "element": {
+  "vendor": "Waves",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "elysia": {
+  "vendor": "Plugin Alliance",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "expose": {
+  "vendor": "Mastering The Mix",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "ez drummer": {
+  "vendor": "Toontrack",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "ezbass": {
+  "vendor": "Toontrack",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "ezdrummer": {
+  "vendor": "Toontrack",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "ezkeys": {
+  "vendor": "Toontrack",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "ezmix": {
+  "vendor": "Toontrack",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "falcon": {
+  "vendor": "UVI",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "faturator": {
+  "vendor": "Kilohearts",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "filterfreak": {
+  "vendor": "Soundtoys",
+  "purpose": "filter",
+  "tags": [
+   "filter"
+  ]
+ },
+ "filtershaper": {
+  "vendor": "Cableguys",
+  "purpose": "filter",
+  "tags": [
+   "filter"
+  ]
+ },
+ "fm8": {
+  "vendor": "Native Instruments",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "gladiator": {
+  "vendor": "Tone2",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "grand rhapsody": {
+  "vendor": "Waves",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "guitar rig": {
+  "vendor": "Native Instruments",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "gullfoss": {
+  "vendor": "Soundtheory",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "h-comp": {
+  "vendor": "Waves",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "h-delay": {
+  "vendor": "Waves",
+  "purpose": "delay",
+  "tags": [
+   "delay"
+  ]
+ },
+ "h-eq": {
+  "vendor": "Waves",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "h-reverb": {
+  "vendor": "Waves",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "h3000": {
+  "vendor": "Eventide",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "h910": {
+  "vendor": "Eventide",
+  "purpose": "pitch",
+  "tags": [
+   "pitch"
+  ]
+ },
+ "halftime": {
+  "vendor": "Cableguys",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "harmony engine": {
+  "vendor": "Antares",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "helix native": {
+  "vendor": "Line 6",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "helm": {
+  "vendor": "Matt Tytel",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "hive": {
+  "vendor": "u-he",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "hive 2": {
+  "vendor": "u-he",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "hybrid": {
+  "vendor": "AIR Music Technology",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "icarus": {
+  "vendor": "Tone2",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "imager": {
+  "vendor": "iZotope",
+  "purpose": "stereo",
+  "tags": [
+   "stereo"
+  ]
+ },
+ "indoor": {
+  "vendor": "Audio Ease",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "insight": {
+  "vendor": "iZotope",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "iris": {
+  "vendor": "iZotope",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "j37": {
+  "vendor": "Waves",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "jup-8 v": {
+  "vendor": "Arturia",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "keyscape": {
+  "vendor": "Spectrasonics",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "kick 2": {
+  "vendor": "Sonic Academy",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "kick 3": {
+  "vendor": "Sonic Academy",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "kickstart": {
+  "vendor": "Nicky Romero",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "komplete kontrol": {
+  "vendor": "Native Instruments",
+  "purpose": "controller",
+  "tags": [
+   "controller"
+  ]
+ },
+ "kontakt": {
+  "vendor": "Native Instruments",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "kramer": {
+  "vendor": "Waves",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "l1": {
+  "vendor": "Waves",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "l2": {
+  "vendor": "Waves",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "l3": {
+  "vendor": "Waves",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "labs": {
+  "vendor": "Spitfire Audio",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "levels": {
+  "vendor": "Mastering The Mix",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "lexicon": {
+  "vendor": "Lexicon",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "lfotool": {
+  "vendor": "Xfer Records",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "life": {
+  "vendor": "XLN Audio",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "limitless": {
+  "vendor": "Mastering The Mix",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "lindell": {
+  "vendor": "Plugin Alliance",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "little alterboy": {
+  "vendor": "Soundtoys",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "loopcloud": {
+  "vendor": "Loopmasters",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "loudness meter": {
+  "vendor": "Youlean",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "maag eq": {
+  "vendor": "Plugin Alliance",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "mangledverb": {
+  "vendor": "Eventide",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "maschine": {
+  "vendor": "Native Instruments",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "massive": {
+  "vendor": "Native Instruments",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "massive x": {
+  "vendor": "Native Instruments",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "melodyne": {
+  "vendor": "Celemony",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "metric ab": {
+  "vendor": "ADPTR Audio",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "micro": {
+  "vendor": "FabFilter",
+  "purpose": "filter",
+  "tags": [
+   "filter"
+  ]
+ },
+ "microshift": {
+  "vendor": "Soundtoys",
+  "purpose": "stereo",
+  "tags": [
+   "stereo"
+  ]
+ },
+ "mini grand": {
+  "vendor": "AIR Music Technology",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "mini v": {
+  "vendor": "Arturia",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "modo bass": {
+  "vendor": "IK Multimedia",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "modo drum": {
+  "vendor": "IK Multimedia",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "multipass": {
+  "vendor": "Kilohearts",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "nectar": {
+  "vendor": "iZotope",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "nepheton": {
+  "vendor": "D16 Group",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "neural dsp": {
+  "vendor": "Neural DSP",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "neutron": {
+  "vendor": "iZotope",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "nexus": {
+  "vendor": "reFX",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "nicky romero": {
+  "vendor": "Nicky Romero",
+  "purpose": "utility",
+  "tags": [
+   "utility"
+  ]
+ },
+ "obsession": {
+  "vendor": "Synapse Audio",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "omnipressor": {
+  "vendor": "Eventide",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "omnisphere": {
+  "vendor": "Spectrasonics",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "one": {
+  "vendor": "FabFilter",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "opus": {
+  "vendor": "EastWest",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "ott": {
+  "vendor": "Xfer Records",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "oxford eq": {
+  "vendor": "Sonnox",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "oxford inflator": {
+  "vendor": "Sonnox",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "oxford limiter": {
+  "vendor": "Sonnox",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "oxford reverb": {
+  "vendor": "Sonnox",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "ozone": {
+  "vendor": "iZotope",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "ozone imager": {
+  "vendor": "iZotope",
+  "purpose": "stereo",
+  "tags": [
+   "stereo"
+  ]
+ },
+ "pancake": {
+  "vendor": "Cableguys",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "panman": {
+  "vendor": "Soundtoys",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "phalanx": {
+  "vendor": "Vengeance Sound",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "phase 4": {
+  "vendor": "Arturia",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "phase plant": {
+  "vendor": "Kilohearts",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "phasemistress": {
+  "vendor": "Soundtoys",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "phaseplant": {
+  "vendor": "Kilohearts",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "phoscyon": {
+  "vendor": "D16 Group",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "physion": {
+  "vendor": "Eventide",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "pigments": {
+  "vendor": "Arturia",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "play": {
+  "vendor": "EastWest",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "presswerk": {
+  "vendor": "u-he",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "primaltap": {
+  "vendor": "Soundtoys",
+  "purpose": "delay",
+  "tags": [
+   "delay"
+  ]
+ },
+ "pro-c": {
+  "vendor": "FabFilter",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "pro-ds": {
+  "vendor": "FabFilter",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "pro-g": {
+  "vendor": "FabFilter",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "pro-l": {
+  "vendor": "FabFilter",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "pro-mb": {
+  "vendor": "FabFilter",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "pro-q": {
+  "vendor": "FabFilter",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "pro-r": {
+  "vendor": "FabFilter",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "prophet v": {
+  "vendor": "Arturia",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "puigchild": {
+  "vendor": "Waves",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "punchbox": {
+  "vendor": "D16 Group",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "pure:eq": {
+  "vendor": "sonible",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "radiator": {
+  "vendor": "Soundtoys",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "rapid": {
+  "vendor": "Tone2",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "raum": {
+  "vendor": "Native Instruments",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "rbass": {
+  "vendor": "Waves",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "rc-20": {
+  "vendor": "XLN Audio",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "rc-20 retro color": {
+  "vendor": "XLN Audio",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "rcompressor": {
+  "vendor": "Waves",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "reacomp": {
+  "vendor": "Cockos",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "reaeq": {
+  "vendor": "Cockos",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "reafir": {
+  "vendor": "Cockos",
+  "purpose": "restoration",
+  "tags": [
+   "restoration"
+  ]
+ },
+ "reagate": {
+  "vendor": "Cockos",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "reaktor": {
+  "vendor": "Native Instruments",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "reapitch": {
+  "vendor": "Cockos",
+  "purpose": "pitch",
+  "tags": [
+   "pitch"
+  ]
+ },
+ "reasamplomatic": {
+  "vendor": "Cockos",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "reatune": {
+  "vendor": "Cockos",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "reaverb": {
+  "vendor": "Cockos",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "redoptor": {
+  "vendor": "D16 Group",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "reference": {
+  "vendor": "Mastering The Mix",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "renaissance": {
+  "vendor": "Waves",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "replika": {
+  "vendor": "Native Instruments",
+  "purpose": "delay",
+  "tags": [
+   "delay"
+  ]
+ },
+ "repro": {
+  "vendor": "u-he",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "req": {
+  "vendor": "Waves",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "reveal": {
+  "vendor": "Reveal Sound",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "revoice": {
+  "vendor": "Synchro Arts",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "rverb": {
+  "vendor": "Waves",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "rvox": {
+  "vendor": "Waves",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "rx": {
+  "vendor": "iZotope",
+  "purpose": "restoration",
+  "tags": [
+   "restoration"
+  ]
+ },
+ "s1 stereo imager": {
+  "vendor": "Waves",
+  "purpose": "stereo",
+  "tags": [
+   "stereo"
+  ]
+ },
+ "sampletank": {
+  "vendor": "IK Multimedia",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "satin": {
+  "vendor": "u-he",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "saturn": {
+  "vendor": "FabFilter",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "sausage fattener": {
+  "vendor": "Dada Life",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "scaler": {
+  "vendor": "Plugin Boutique",
+  "purpose": "controller",
+  "tags": [
+   "controller"
+  ]
+ },
+ "serato pitch": {
+  "vendor": "Serato",
+  "purpose": "pitch",
+  "tags": [
+   "pitch"
+  ]
+ },
+ "serato sample": {
+  "vendor": "Serato",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "serum": {
+  "vendor": "Xfer Records",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "serumfx": {
+  "vendor": "Xfer Records",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "shadow hills": {
+  "vendor": "Plugin Alliance",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "shaperbox": {
+  "vendor": "Cableguys",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "shimmerverb": {
+  "vendor": "Eventide",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "sie-q": {
+  "vendor": "Soundtoys",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "sigmund": {
+  "vendor": "D16 Group",
+  "purpose": "delay",
+  "tags": [
+   "delay"
+  ]
+ },
+ "simplon": {
+  "vendor": "FabFilter",
+  "purpose": "filter",
+  "tags": [
+   "filter"
+  ]
+ },
+ "slice eq": {
+  "vendor": "Kilohearts",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "slick eq": {
+  "vendor": "Tokyo Dawn Labs",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "smart:comp": {
+  "vendor": "sonible",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "smart:eq": {
+  "vendor": "sonible",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "smart:limit": {
+  "vendor": "sonible",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "smart:reverb": {
+  "vendor": "sonible",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "snap heap": {
+  "vendor": "Kilohearts",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "soniqwave": {
+  "vendor": "Voxengo",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "sonnox oxford": {
+  "vendor": "Sonnox",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "soothe": {
+  "vendor": "oeksound",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "span": {
+  "vendor": "Voxengo",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "speakerphone": {
+  "vendor": "Audio Ease",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "spiff": {
+  "vendor": "oeksound",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "spire": {
+  "vendor": "Reveal Sound",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "spl transient designer": {
+  "vendor": "Plugin Alliance",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "ssl e-channel": {
+  "vendor": "Waves",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "ssl g-channel": {
+  "vendor": "Waves",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "ssl g-master": {
+  "vendor": "Waves",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "strike": {
+  "vendor": "AIR Music Technology",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "structure": {
+  "vendor": "AIR Music Technology",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "stutter edit": {
+  "vendor": "iZotope",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "stylus rmx": {
+  "vendor": "Spectrasonics",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "supercharger": {
+  "vendor": "Native Instruments",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "superior drummer": {
+  "vendor": "Toontrack",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "superplate": {
+  "vendor": "Soundtoys",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "surge": {
+  "vendor": "Surge Synth Team",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "surge xt": {
+  "vendor": "Surge Synth Team",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "sylenth1": {
+  "vendor": "LennarDigital",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "syntronik": {
+  "vendor": "IK Multimedia",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "t-racks": {
+  "vendor": "IK Multimedia",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "tal-chorus": {
+  "vendor": "TAL Software",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "tal-noisemaker": {
+  "vendor": "TAL Software",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "tal-reverb": {
+  "vendor": "TAL Software",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "tal-u-no-lx": {
+  "vendor": "TAL Software",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "tal-vocoder": {
+  "vendor": "TAL Software",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "tdr kotelnikov": {
+  "vendor": "Tokyo Dawn Labs",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "tdr limiter": {
+  "vendor": "Tokyo Dawn Labs",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "tdr molot": {
+  "vendor": "Tokyo Dawn Labs",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "tdr nova": {
+  "vendor": "Tokyo Dawn Labs",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "tdr vos slickeq": {
+  "vendor": "Tokyo Dawn Labs",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "the legend": {
+  "vendor": "Synapse Audio",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "timeless": {
+  "vendor": "FabFilter",
+  "purpose": "delay",
+  "tags": [
+   "delay"
+  ]
+ },
+ "timeshaper": {
+  "vendor": "Cableguys",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "tonal balance control": {
+  "vendor": "iZotope",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "toraverb": {
+  "vendor": "D16 Group",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "trackspacer": {
+  "vendor": "Wavesfactory",
+  "purpose": "eq",
+  "tags": [
+   "eq"
+  ]
+ },
+ "transient master": {
+  "vendor": "Native Instruments",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "trash": {
+  "vendor": "iZotope",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "tremolator": {
+  "vendor": "Soundtoys",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "trilian": {
+  "vendor": "Spectrasonics",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "tune real-time": {
+  "vendor": "Waves",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "twangstrom": {
+  "vendor": "u-he",
+  "purpose": "distortion",
+  "tags": [
+   "distortion"
+  ]
+ },
+ "twin": {
+  "vendor": "FabFilter",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "ultimate": {
+  "vendor": "Voxengo",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "ultrachannel": {
+  "vendor": "Eventide",
+  "purpose": "channel",
+  "tags": [
+   "channel"
+  ]
+ },
+ "vacuum": {
+  "vendor": "AIR Music Technology",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "valhalladelay": {
+  "vendor": "Valhalla DSP",
+  "purpose": "delay",
+  "tags": [
+   "delay"
+  ]
+ },
+ "valhallafreqecho": {
+  "vendor": "Valhalla DSP",
+  "purpose": "delay",
+  "tags": [
+   "delay"
+  ]
+ },
+ "valhallaplate": {
+  "vendor": "Valhalla DSP",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "valhallaroom": {
+  "vendor": "Valhalla DSP",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "valhallashimmer": {
+  "vendor": "Valhalla DSP",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "valhallasupermassive": {
+  "vendor": "Valhalla DSP",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "valhallaubermod": {
+  "vendor": "Valhalla DSP",
+  "purpose": "modulation",
+  "tags": [
+   "modulation"
+  ]
+ },
+ "valhallavintageverb": {
+  "vendor": "Valhalla DSP",
+  "purpose": "reverb",
+  "tags": [
+   "reverb"
+  ]
+ },
+ "velvet": {
+  "vendor": "AIR Music Technology",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "vinyl": {
+  "vendor": "iZotope",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "vital": {
+  "vendor": "Vital Audio",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "vitamin": {
+  "vendor": "Waves",
+  "purpose": "mastering",
+  "tags": [
+   "mastering"
+  ]
+ },
+ "vocalign": {
+  "vendor": "Synchro Arts",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "vocalsynth": {
+  "vendor": "iZotope",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "volcano": {
+  "vendor": "FabFilter",
+  "purpose": "filter",
+  "tags": [
+   "filter"
+  ]
+ },
+ "volumeshaper": {
+  "vendor": "Cableguys",
+  "purpose": "dynamics",
+  "tags": [
+   "dynamics"
+  ]
+ },
+ "vps avenger": {
+  "vendor": "Vengeance Sound",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "vsl": {
+  "vendor": "Vienna Symphonic Library",
+  "purpose": "instrument",
+  "tags": [
+   "instrument"
+  ]
+ },
+ "wavebox": {
+  "vendor": "Cableguys",
+  "purpose": "creative",
+  "tags": [
+   "creative"
+  ]
+ },
+ "waves nx": {
+  "vendor": "Waves",
+  "purpose": "stereo",
+  "tags": [
+   "stereo"
+  ]
+ },
+ "waves tune": {
+  "vendor": "Waves",
+  "purpose": "vocal",
+  "tags": [
+   "vocal"
+  ]
+ },
+ "workstation": {
+  "vendor": "UVI",
+  "purpose": "sampler",
+  "tags": [
+   "sampler"
+  ]
+ },
+ "xo": {
+  "vendor": "XLN Audio",
+  "purpose": "drums",
+  "tags": [
+   "drums"
+  ]
+ },
+ "xpand": {
+  "vendor": "AIR Music Technology",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "youlean": {
+  "vendor": "Youlean",
+  "purpose": "analyzer",
+  "tags": [
+   "analyzer"
+  ]
+ },
+ "zebra": {
+  "vendor": "u-he",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ },
+ "zebra2": {
+  "vendor": "u-he",
+  "purpose": "synth",
+  "tags": [
+   "synth"
+  ]
+ }
+}

@@ -556,6 +556,7 @@ class SettingsPage:
         Slider(self.c, self.t, self.x0 + p(250), y0, p(260), 75, 200, s["ui_scale"], "{value} %", app.set_scale)
         self.label(self.x0 + p(14), y0 + p(36), tr("Шрифт"))
         self.button(self.x0 + p(250), y0 + p(23), p(260), self.t.fit(s["font_family"], p(240)), self._pick_font)
+        self.button(self.x0 + p(518), y0 + p(23), p(110), tr("Сбросить"), self._reset_font)
         self.label(self.x0 + p(14), y0 + p(68), tr("Размер шрифта"))
         def size(value):
             """Меняет размер шрифта и перестраивает окно."""
@@ -661,6 +662,13 @@ class SettingsPage:
             self.app.s.save()
             self.app.rebuild_ui()
 
+    def _reset_font(self) -> None:
+        """Возврат к стандартному шрифту и размеру."""
+        s = self.app.s
+        s["font_family"], s["font_size"] = s.DEFAULTS["font_family"], s.DEFAULTS["font_size"]
+        s.save()
+        self.app.rebuild_ui()
+
     def _keys(self) -> None:
         """Раздел «Клавиши»."""
         p = self.t.p
@@ -668,11 +676,12 @@ class SettingsPage:
         self.group(p(10), bottom - p(10), tr("Горячие клавиши"))
         self.label(self.x0 + p(14), p(42), tr("Дважды щёлкните строку, чтобы назначить другое сочетание."), U.TEXT_DIM)
         saved = self.app.s["hotkeys"]
-        rows = [(tr(label), saved.get(action, default) or "—") for action, label, default in hotkeys.ACTIONS]
+        rows = [(tr(label), hotkeys.display(saved.get(action, default)) if saved.get(action, default) else "—") for action, label, default in hotkeys.ACTIONS]
         box = (self.x0 + p(12), p(56), self.x1 - p(12), bottom - p(42))
         self.key_table = Table(self.c, self.t, box, ((tr("Действие"), 0.6), (tr("Клавиши"), 0.4)), rows, self._capture_key)
         self.tables.append(self.key_table)
         self._table_buttons(bottom - p(34), ((tr("Изменить"), self._capture_key), (tr("Сбросить"), self._reset_keys)))
+        self.label(self.x0 + p(250), bottom - p(21), self.t.fit(tr("Сочетания работают на любой раскладке: важна сама клавиша, а не её буква."), self.x1 - self.x0 - p(262)), U.TEXT_DIM)
 
     def _capture_key(self) -> None:
         """Ждёт новое сочетание для выбранного действия."""
@@ -731,6 +740,9 @@ class SettingsPage:
         self.group(y, p(66), tr("Обновления"))
         self.update_btn = self.button(self.x0 + p(12), y + p(30), bw, tr("Проверить обновления"), app.check_updates)
         self.label(self.x0 + p(12) + bw + p(12), y + p(43), tr("Версия {version}").format(version=U.VERSION) + ". " + tr("Единственное обращение программы к сети, только по этой кнопке."), U.TEXT_DIM)
+        y += p(74)
+        self.group(y, p(58), tr("Модификации"))
+        self.led(self.x0 + p(14), y + p(38), tr("Использовать сторонние модификации"), "mods_enabled", "", lambda: app.root.after(1, app.mods_switch))
 
     def _show_log(self) -> None:
         """Окно журнала действий."""

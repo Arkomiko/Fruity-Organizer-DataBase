@@ -2,6 +2,7 @@
 import base64
 import math
 import os
+import re
 import zlib
 
 from PIL import Image, ImageDraw
@@ -215,6 +216,42 @@ def icon_scale():
     return _icon_line([(1.5, 14), (5, 14), (5, 10), (8.8, 10), (8.8, 6), (12.5, 6), (12.5, 2), (15, 2)])
 
 
+# Знак GitHub (Octicons, лицензия MIT): один контур из кривых Безье.
+GITHUB_PATH = ("M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13"
+               "-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15"
+               "-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15"
+               " 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z")
+
+
+def icon_github():
+    """Значок GitHub: кривые заменяются ломаной из коротких отрезков."""
+    tokens = re.findall(r"[a-zA-Z]|-?\d*\.?\d+", GITHUB_PATH)
+    points, x, y, command, index = [], 0.0, 0.0, "", 0
+    while index < len(tokens):
+        if tokens[index].isalpha():
+            command = tokens[index]
+            index += 1
+            if command == "z":
+                continue
+        if command == "M":
+            x, y = float(tokens[index]), float(tokens[index + 1])
+            points.append((x, y))
+            index += 2
+            continue
+        values = [float(value) for value in tokens[index:index + 6]]
+        index += 6
+        base_x, base_y = (x, y) if command == "c" else (0.0, 0.0)
+        x1, y1, x2, y2, x3, y3 = [value + (base_x if i % 2 == 0 else base_y) for i, value in enumerate(values)]
+        for step in range(1, 13):
+            t = step / 12
+            a, b, c, d = (1 - t) ** 3, 3 * (1 - t) ** 2 * t, 3 * (1 - t) * t ** 2, t ** 3
+            points.append((a * x + b * x1 + c * x2 + d * x3, a * y + b * y1 + c * y2 + d * y3))
+        x, y = x3, y3
+    img = canvas(24)
+    ImageDraw.Draw(img).polygon([(px * 1.375 * SS + SS, py * 1.375 * SS + SS) for px, py in points], fill=(255, 255, 255, 255))
+    return img
+
+
 def icon_help():
     """Знак вопроса."""
     img = canvas(16)
@@ -300,7 +337,7 @@ GLYPHS = {
     "ic_play": icon_play, "ic_stop": icon_stop, "ic_sound": lambda: icon_sound(False), "ic_mute": lambda: icon_sound(True),
     "ic_wav": icon_wav, "ic_midi": icon_midi,
     "ic_prev": lambda: icon_arrow(False), "ic_next": lambda: icon_arrow(True), "ic_done": icon_done,
-    "ic_help": icon_help, "ic_web": icon_web,
+    "ic_help": icon_help, "ic_web": icon_web, "ic_github": icon_github,
     "ic_sine": icon_sine, "ic_triangle": icon_triangle, "ic_square": icon_square, "ic_bell": icon_bell, "ic_scale": icon_scale,
     "ic_play_big": icon_play_big, "ic_stop_big": icon_stop_big,
     "star_on": lambda: star(True), "star_off": lambda: star(False),
@@ -355,6 +392,23 @@ def logo_svg(text_line=True):
             + "".join(rects) + caption + "</svg>\n")
 
 
+def favicon_svg():
+    """Значок сайта: F и B в 4 столбца, как значок программы."""
+    pad, gap, letter_gap, margin = 8, 1, 3, 6
+    letter_w = 4 * pad + 3 * gap
+    width = 2 * letter_w + letter_gap + 2 * margin
+    grid_h = 7 * pad + 6 * gap
+    top = (width - grid_h) // 2
+    rects = []
+    for index, letter in enumerate("FB"):
+        for row, pattern in enumerate(LETTERS[letter]):
+            for col, value in enumerate(pattern):
+                x, y = margin + index * (letter_w + letter_gap) + col * (pad + gap), top + row * (pad + gap)
+                rects.append(f'<rect x="{x}" y="{y}" width="{pad}" height="{pad}" rx="1.500" fill="{LIT if value == "#" else DIM}"/>')
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {width}"><rect width="{width}" height="{width}" rx="14" fill="{BACK}"/>'
+            + "".join(rects) + "</svg>\n")
+
+
 def app_icon():
     """Значок программы: F и B такими же буквами в 4 столбца, как в логотипе."""
     size = 512
@@ -395,6 +449,9 @@ def main():
     icon = app_icon()
     icon.save(os.path.join(ROOT, "assets", "app.ico"), sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
     os.makedirs(os.path.join(ROOT, "GiDo"), exist_ok=True)
+    icon.save(os.path.join(ROOT, "GiDo", "favicon.ico"), sizes=[(16, 16), (32, 32), (48, 48)])
+    with open(os.path.join(ROOT, "GiDo", "favicon.svg"), "w", encoding="ascii", newline="\n") as f:
+        f.write(favicon_svg())
     for name, with_text in (("logo.svg", True), ("logo-mark.svg", False)):
         with open(os.path.join(ROOT, "GiDo", name), "w", encoding="ascii", newline="\n") as f:
             f.write(logo_svg(with_text))
