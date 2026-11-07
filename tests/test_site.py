@@ -38,6 +38,13 @@ class SiteTests(unittest.TestCase):
             for name, _info in gen_site.mod_folders():
                 self.assertIn(name + "/index.json", archive.namelist())
 
+    def test_style_and_script_addresses_carry_a_fingerprint(self):
+        for page in self.pages:
+            with open(page, encoding="utf-8") as f:
+                html = f.read()
+            self.assertRegex(html, r'site\.css\?v=[0-9a-f]{10}"', page)
+            self.assertRegex(html, r'site\.js\?v=[0-9a-f]{10}"', page)
+
     def test_internal_links_point_to_real_pages(self):
         for page in self.pages:
             with open(page, encoding="utf-8") as f:

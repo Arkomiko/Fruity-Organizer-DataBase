@@ -3,6 +3,7 @@
 Тексты берутся из docs_text.py и language/*.json, поэтому отдельно переводить сайт не нужно.
 Запуск: python tools/gen_site.py
 """
+import hashlib
 import json
 import os
 import re
@@ -58,6 +59,12 @@ SETTINGS = (
     ("Клавиши", ("Дважды щёлкните строку, чтобы назначить другое сочетание.",)),
     ("Данные", ("Журнал действий", "Экспорт в файл", "Импорт из файла", "Проверить обновления")),
 )
+
+
+def fingerprint(name: str) -> str:
+    """Отпечаток файла из tools/site. Он стоит в адресе: файл изменился, и браузер не возьмёт старую копию из памяти."""
+    with open(os.path.join(ROOT, "tools", "site", name), "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()[:10]
 
 
 def mod_folders() -> list[tuple[str, dict]]:
@@ -157,10 +164,10 @@ class Site:
 {language_script}<!-- Значок вкладки браузера -->
 <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="{prefix}favicon.ico">
-<link rel="stylesheet" href="{prefix}site.css">
+<link rel="stylesheet" href="{prefix}site.css?v={fingerprint("site.css")}">
 <!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
 <script>document.documentElement.classList.add("js")</script>
-<script src="{prefix}site.js" defer></script>
+<script src="{prefix}site.js?v={fingerprint("site.js")}" defer></script>
 </head>
 <body>
 <!-- Шапка: название, разделы и выбор языка -->
