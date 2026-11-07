@@ -4,6 +4,7 @@ import re
 import sys
 import tempfile
 import unittest
+import zipfile
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 sys.path.insert(0, os.path.join(ROOT, "tools"))
@@ -25,8 +26,17 @@ class SiteTests(unittest.TestCase):
         cls.tmp.cleanup()
 
     def test_every_language_has_every_page(self):
-        expected = self.languages * (2 + len(gen_site.WIKI)) + 1
+        expected = self.languages * (3 + len(gen_site.WIKI)) + 1  # главная, раздел модов, содержание вики и её страницы
         self.assertEqual(len(self.pages), expected)
+
+    def test_mod_archives_exist_and_hold_named_folders(self):
+        folder = os.path.join(self.tmp.name, "mods")
+        for name, _info in gen_site.mod_folders():
+            with zipfile.ZipFile(os.path.join(folder, gen_site.zip_name(name))) as archive:
+                self.assertIn(name + "/index.json", archive.namelist())
+        with zipfile.ZipFile(os.path.join(folder, gen_site.PACK)) as archive:
+            for name, _info in gen_site.mod_folders():
+                self.assertIn(name + "/index.json", archive.namelist())
 
     def test_internal_links_point_to_real_pages(self):
         for page in self.pages:

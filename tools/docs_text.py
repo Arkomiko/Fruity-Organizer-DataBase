@@ -658,3 +658,9 @@ from docs_mods import MODS  # noqa: E402
 
 for _code, (_summary, _how) in MODS.items():
     LANGUAGES[_code].update(f8=_summary, mods_how=_how)
+
+# Блок «Что нового» и кнопки раздела модов на сайте.
+from docs_news import NEWS  # noqa: E402
+
+for _code, _news in NEWS.items():
+    LANGUAGES[_code].update(news=_news[0], n1=_news[1], n2=_news[2], n3=_news[3], n4=_news[4], n5=_news[5], mod_get=_news[6], mod_pack=_news[7], mod_install=_news[8])

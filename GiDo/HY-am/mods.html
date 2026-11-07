@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="hy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Մոդեր | FODB</title>
+<meta name="description" content="FL Studio պլագինների բազայի դյուրակիր կազմակերպիչ։ Պլագինները դասավորում է պանակներում՝ ըստ արտադրողի, նշանակության կամ երկուսի, և տեսքով կարծես FL Studio-ի մաս լինի։">
+<!-- Тема, выбранная кнопкой, ставится до отрисовки, чтобы страница не мигала другим цветом -->
+<script>try{const t=localStorage.getItem("fodb-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<!-- Значок вкладки браузера -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="stylesheet" href="../site.css">
+<!-- Отмечаем, что скрипты работают: только тогда блоки появляются плавно -->
+<script>document.documentElement.classList.add("js")</script>
+<script src="../site.js" defer></script>
+</head>
+<body>
+<!-- Шапка: название, разделы и выбор языка -->
+<header><div class="bar">
+<a class="name" href="../HY-am/index.html"><img src="../favicon.svg" alt="" width="24" height="24">FODB</a>
+<nav class="links">
+<a href="../HY-am/index.html">Գլխավոր</a>
+<a href="../HY-am/mods.html">Մոդեր</a>
+<a href="../HY-am/wiki/index.html">Վիքի</a>
+<a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase/releases/latest">Ներբեռնել FODB.exe</a>
+<a href="https://github.com/Arkomiko/Fruity-Organizer-DataBase">Սկզբնական կոդ</a>
+</nav>
+<button class="theme" type="button" title="Թեմա" aria-label="Թեմա">
+<svg class="sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.500M8 13.500V15M1 8h1.500M13.500 8H15M3 3l1 1M12 12l1 1M3 13l1-1M12 4l1-1"/></svg>
+<svg class="moon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.500 10.500A6 6 0 0 1 5.500 2.500a6 6 0 1 0 8 8z"/></svg>
+</button>
+<details class="langs"><summary><img class="flag" src="../flags/HY-am.svg" alt="" width="18" height="18"><span class="current">Հայերեն</span></summary><ul><li><a href="../EN-en/mods.html" lang="en" data-code="EN-en"><img class="flag" src="../flags/EN-en.svg" alt="" width="18" height="18">English</a></li><li><a href="../RU-ru/mods.html" lang="ru" data-code="RU-ru"><img class="flag" src="../flags/RU-ru.svg" alt="" width="18" height="18">Русский</a></li><li><a href="../ZH-cn/mods.html" lang="zh-CN" data-code="ZH-cn"><img class="flag" src="../flags/ZH-cn.svg" alt="" width="18" height="18">简体中文</a></li><li><a href="../ES-es/mods.html" lang="es" data-code="ES-es"><img class="flag" src="../flags/ES-es.svg" alt="" width="18" height="18">Español</a></li><li><a href="../HI-in/mods.html" lang="hi" data-code="HI-in"><img class="flag" src="../flags/HI-in.svg" alt="" width="18" height="18">हिन्दी</a></li><li><a href="../FR-fr/mods.html" lang="fr" data-code="FR-fr"><img class="flag" src="../flags/FR-fr.svg" alt="" width="18" height="18">Français</a></li><li><a href="../BN-bd/mods.html" lang="bn" data-code="BN-bd"><img class="flag" src="../flags/BN-bd.svg" alt="" width="18" height="18">বাংলা</a></li><li><a href="../PT-br/mods.html" lang="pt-BR" data-code="PT-br"><img class="flag" src="../flags/PT-br.svg" alt="" width="18" height="18">Português</a></li><li><a href="../UR-pk/mods.html" lang="ur" data-code="UR-pk"><img class="flag" src="../flags/UR-pk.svg" alt="" width="18" height="18">اردو</a></li><li><a href="../ID-id/mods.html" lang="id" data-code="ID-id"><img class="flag" src="../flags/ID-id.svg" alt="" width="18" height="18">Indonesia</a></li><li><a href="../DE-de/mods.html" lang="de" data-code="DE-de"><img class="flag" src="../flags/DE-de.svg" alt="" width="18" height="18">Deutsch</a></li><li><a href="../JA-jp/mods.html" lang="ja" data-code="JA-jp"><img class="flag" src="../flags/JA-jp.svg" alt="" width="18" height="18">日本語</a></li><li><a href="../TR-tr/mods.html" lang="tr" data-code="TR-tr"><img class="flag" src="../flags/TR-tr.svg" alt="" width="18" height="18">Türkçe</a></li><li><a href="../KO-kr/mods.html" lang="ko" data-code="KO-kr"><img class="flag" src="../flags/KO-kr.svg" alt="" width="18" height="18">한국어</a></li><li><a href="../VI-vn/mods.html" lang="vi" data-code="VI-vn"><img class="flag" src="../flags/VI-vn.svg" alt="" width="18" height="18">Tiếng Việt</a></li><li><a href="../IT-it/mods.html" lang="it" data-code="IT-it"><img class="flag" src="../flags/IT-it.svg" alt="" width="18" height="18">Italiano</a></li><li><a href="../PL-pl/mods.html" lang="pl" data-code="PL-pl"><img class="flag" src="../flags/PL-pl.svg" alt="" width="18" height="18">Polski</a></li><li><a href="../UK-ua/mods.html" lang="uk" data-code="UK-ua"><img class="flag" src="../flags/UK-ua.svg" alt="" width="18" height="18">Українська</a></li><li><a href="../TH-th/mods.html" lang="th" data-code="TH-th"><img class="flag" src="../flags/TH-th.svg" alt="" width="18" height="18">ไทย</a></li><li><a href="../KK-kz/mods.html" lang="kk" data-code="KK-kz"><img class="flag" src="../flags/KK-kz.svg" alt="" width="18" height="18">Қазақша</a></li><li><a href="../UZ-uz/mods.html" lang="uz" data-code="UZ-uz"><img class="flag" src="../flags/UZ-uz.svg" alt="" width="18" height="18">Oʻzbekcha</a></li><li><a href="../BE-by/mods.html" lang="be" data-code="BE-by"><img class="flag" src="../flags/BE-by.svg" alt="" width="18" height="18">Беларуская</a></li><li><a href="../AZ-az/mods.html" lang="az" data-code="AZ-az"><img class="flag" src="../flags/AZ-az.svg" alt="" width="18" height="18">Azərbaycanca</a></li><li><a href="../HY-am/mods.html" lang="hy" data-code="HY-am"><img class="flag" src="../flags/HY-am.svg" alt="" width="18" height="18">Հայերեն</a></li><li><a href="../ISV-sl/mods.html" lang="isv" data-code="ISV-sl"><img class="flag" src="../flags/ISV-sl.svg" alt="" width="18" height="18">Medžuslovjansky</a></li><li><a href="../HE-il/mods.html" lang="he" data-code="HE-il"><img class="flag" src="../flags/HE-il.svg" alt="" width="18" height="18">עברית</a></li></ul></details>
+</div></header>
+<!-- Содержимое страницы -->
+<main>
+<!-- Заголовок раздела и общий пак -->
+<section class="section-head">
+<h1>Մոդեր</h1>
+<p class="lead">Ոչ պարտադիր մոդեր՝ պլագինների մեծ ցանկ, բաց կատալոգ, սովորող ճշգրիտ նշանակություններ, նախադիտման ծառ և վիճակի գունավոր շերտեր։ Միացվում են կարգավորումների «Տվյալներ» բաժնում։</p>
+<a class="download" href="../mods/FODB-mods-pack.zip" download>Ներբեռնել մոդերի փաթեթը</a>
+<p class="note">Արխիվը բացեք Backups-ի կողքի Mods պանակում և վերագործարկեք ծրագիրը։</p>
+</section>
+<!-- Каждый мод можно скачать отдельно -->
+<div class="mods-grid"><div class="mod reveal"><h3 dir="ltr">Advenced purpose rules (experimentally)</h3><small dir="ltr">optimization / 1.0 / Arkomiko</small><p>A larger list of popular plugins (302 names: Serum, Kontakt, FabFilter and more), so their purpose is detected without manual edits. Add your own lines to rules.json.</p><a class="download small" href="../mods/advenced-purpose-rules-experimentally.zip" download>Ներբեռնել</a></div><div class="mod reveal"><h3 dir="ltr">Improving the algorithm for Determining Purpose (experimentally)</h3><small dir="ltr">optimization / 1.0 / Arkomiko</small><p>Adds finer purposes: saturation, transient shaper, algorithmic and convolution reverb, compressor, limiter. Learns from you: when you set a purpose by hand or move a plugin to a folder named after a purpose, other plugins of the same vendor and family get it automatically. New purposes are named in English and Russian.</p><a class="download small" href="../mods/improving-the-algorithm-for-determining-purpose-experimentally.zip" download>Ներբեռնել</a></div><div class="mod reveal"><h3 dir="ltr">Other Integration BD (experimentally)</h3><small dir="ltr">optimization / 1.0 / Arkomiko</small><p>Fills in a missing vendor, purpose and search tags by plugin name from an open catalog. The catalog ships with the mod. The update button downloads a fresh copy from the project&#x27;s GitHub and sends nothing about your plugins.</p><a class="download small" href="../mods/other-integration-bd-experimentally.zip" download>Ներբեռնել</a></div><div class="mod reveal"><h3 dir="ltr">Preview Tree</h3><small dir="ltr">UX/UI / 1.0 / Arkomiko</small><p>Replaces the preview list with a folder tree. Drag a plugin to another folder and the structure changes at once. Clicking a folder collapses it. Only the folders of this run are shown, and Effects cannot be moved to Generators.</p><a class="download small" href="../mods/preview-tree.zip" download>Ներբեռնել</a></div><div class="mod reveal"><h3 dir="ltr">Status Indicators (experimentally)</h3><small dir="ltr">UX/UI / 1.0 / Arkomiko</small><p>Adds a color stripe to the list rows. Green: already organized. Gold: in a folder named Favorites. Blue: new and not organized yet (in the New folder or installed in the last 14 days).</p><a class="download small" href="../mods/status-indicators-experimentally.zip" download>Ներբեռնել</a></div></div>
+<!-- Как написать свой мод -->
+<section class="reveal">
+<h2>Մոդիֆիկացիաներ</h2>
+<p>Մոդը index.json և, եթե կոդ է պետք, mod.py պարունակող պանակ է։ Ձեր մոդերը դրեք FODB.exe-ի կողքի mods պանակում։ Մոդերն աշխատում են որպես ծրագրի մաս, ուստի տեղադրեք միայն վստահելիները։</p>
+<pre># mods/My mod/index.json
+{&quot;name&quot;: &quot;My mod&quot;, &quot;type&quot;: &quot;optimization&quot;, &quot;version&quot;: &quot;1.0&quot;, &quot;author&quot;: &quot;Me&quot;, &quot;entry&quot;: &quot;mod.py&quot;,
+ &quot;description&quot;: {&quot;EN-en&quot;: &quot;What it does&quot;}}
+
+# mods/My mod/mod.py
+def activate(api):
+    api.add_purpose_hook(lambda plugin: [&quot;reverb&quot;] if &quot;hall&quot; in plugin.name.casefold() else None)</pre>
+</section>
+</main>
+<!-- Подвал: авторы и правовая оговорка -->
+<footer><p class="author">By <a href="https://arkomiko.net">Arkomiko</a></p><p>Հիմնված է Magabes-ի և համահեղինակների FL Studio Automatic Plugin Organizer-ի վրա, MIT լիցենզիայով։</p><p>Անկախ նախագիծ, կապ չունի Image-Line-ի հետ։ FL Studio-ն Image-Line-ի ապրանքանիշն է։</p></footer>
+</body>
+</html>

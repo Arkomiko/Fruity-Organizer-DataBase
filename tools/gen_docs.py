@@ -1,4 +1,5 @@
 """Создаёт английский README и GiDo/<LANG>/ (README и анимированную графику) из docs_text.py."""
+import json
 import os
 import sys
 from xml.sax.saxutils import escape
@@ -184,23 +185,18 @@ def themes_svg(lang):
 '''
 
 
-def pill_svg(lang, active):
-    """Кнопка языка в виде SVG."""
-    width = max(70, 26 + len(lang["name"]) * (13 if not lang["name"].isascii() else 7.4))
-    fill, ink = (LIT, "#1A1D20") if active else (DIM, TEXT)
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width:.0f}" height="26" viewBox="0 0 {width:.0f} 26" role="img" aria-label="{escape(lang["name"])}">'
-            f'<rect width="{width:.0f}" height="26" rx="5" fill="{fill}"/>'
-            f'<text x="{width / 2:.1f}" y="17.5" text-anchor="middle" font-family="{FONT}" font-size="12.5" font-weight="600" fill="{ink}">{escape(lang["name"])}</text></svg>\n')
-
-
 def switcher(current, to_root):
-    """Строка переключения языков."""
-    links = []
+    """Выбор языка: свёрнутый список. Открыт только по щелчку и не занимает половину экрана."""
+    with open(os.path.join(ROOT, "language", current + ".json"), encoding="utf-8") as f:
+        word = json.load(f)["Язык"]
+    cells = []
     for code, lang in LANGUAGES.items():
-        suffix = "on" if code == current else "off"
         target = f"{to_root}README.md" if code == "EN-en" else f"{to_root}GiDo/{code}/README.md"
-        links.append(f'<a href="{target}"><img src="{to_root}GiDo/lang/{code}-{suffix}.svg" height="26" alt="{escape(lang["name"])}"></a>')
-    return "\n".join(links)
+        name = f'<img src="{to_root}GiDo/flags/{code}.svg" width="16" height="16" alt=""> {escape(lang["name"])}'
+        cells.append(f"<td><b>{name}</b></td>" if code == current else f'<td><a href="{target}">{name}</a></td>')
+    rows = "".join("<tr>" + "".join(cells[i:i + 5]) + "</tr>" for i in range(0, len(cells), 5))
+    return (f'<details><summary><b>{escape(word)}: {escape(LANGUAGES[current]["name"])}</b> ({len(LANGUAGES)})</summary>\n\n'
+            f"<table>{rows}</table>\n</details>")
 
 
 QUERY = '''purpose:reverb,delay                 reverb OR delay
@@ -220,9 +216,11 @@ def readme(code, lang, to_root, art):
     demo = "demo-ru.gif" if code in ("RU-ru", "UK-ua") else "demo-en.gif"
     body = f'''<p align="center"><img src="{art}banner.svg" alt="FODB" width="100%"></p>
 
-<p align="center">
+<div align="center">
+
 {switcher(code, to_root)}
-</p>
+
+</div>
 
 <p align="center"><a href="{REPO}/releases/latest"><b>⬇ {escape(lang["download"])}</b></a> &nbsp;|&nbsp; <a href="{SITE}{code}/wiki/index.html"><b>{escape(lang["wiki"])}</b></a> &nbsp;|&nbsp; <a href="{REPO}/blob/main/GiDo/ROADMAP.md"><b>Roadmap</b></a></p>
 
@@ -323,8 +321,6 @@ def main():
         write(os.path.join(folder, "workflow.svg"), workflow_svg(lang))
         write(os.path.join(folder, "themes.svg"), themes_svg(lang))
         write(os.path.join(folder, "README.md"), readme(code, lang, "../../", ""))
-        for suffix, active in (("on", True), ("off", False)):
-            write(os.path.join(ROOT, "GiDo", "lang", f"{code}-{suffix}.svg"), pill_svg(lang, active))
     write(os.path.join(ROOT, "README.md"), readme("EN-en", LANGUAGES["EN-en"], "", "GiDo/EN-en/"))
     print("languages:", len(LANGUAGES))
 

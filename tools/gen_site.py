@@ -5,7 +5,9 @@
 """
 import json
 import os
+import re
 import sys
+import zipfile
 from html import escape
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,9 +16,12 @@ sys.path.insert(0, os.path.join(ROOT, "src"))
 import hotkeys  # noqa: E402
 import rules  # noqa: E402
 from docs_text import LANGUAGES  # noqa: E402
+from flags import flag_svg  # noqa: E402
 from gen_docs import EXAMPLE, QUERY, RULES, TOKENS, write  # noqa: E402
+from ui_version import VERSION  # noqa: E402
 
 REPO = "https://github.com/Arkomiko/Fruity-Organizer-DataBase"
+PACK = "FODB-mods-pack.zip"
 # Страницы вики: адрес файла и заголовок (ключ из docs_text.py или строка интерфейса).
 WIKI = (("start", "quick"), ("layouts", "layouts"), ("filters", "filters"), ("rules", "advanced"), ("safety", "safety"),
         ("themes", "themes"), ("settings", "Настройки"), ("hotkeys", "Горячие клавиши"), ("mods", "Моды"), ("build", "build"))
@@ -55,6 +60,50 @@ SETTINGS = (
 )
 
 
+def mod_folders() -> list[tuple[str, dict]]:
+    """Папки модов проекта и их index.json."""
+    root = os.path.join(ROOT, "mods")
+    result = []
+    for name in sorted(os.listdir(root), key=str.casefold):
+        path = os.path.join(root, name, "index.json")
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                result.append((name, json.load(f)))
+    return result
+
+
+def zip_name(mod_name: str) -> str:
+    """Имя архива для адреса: без пробелов и скобок."""
+    return re.sub(r"[^a-z0-9]+", "-", mod_name.casefold()).strip("-") + ".zip"
+
+
+def add_mod(archive: zipfile.ZipFile, name: str) -> None:
+    """Кладёт папку мода в архив. Дата постоянная: иначе архив менялся бы при каждой сборке сайта."""
+    folder = os.path.join(ROOT, "mods", name)
+    for base, dirs, files in os.walk(folder):
+        dirs[:] = sorted(d for d in dirs if d != "__pycache__")
+        for file_name in sorted(files):
+            path = os.path.join(base, file_name)
+            inside = os.path.join(name, os.path.relpath(path, folder)).replace(os.sep, "/")
+            entry = zipfile.ZipInfo(inside, (2026, 1, 1, 0, 0, 0))
+            entry.compress_type = zipfile.ZIP_DEFLATED
+            with open(path, "rb") as f:
+                archive.writestr(entry, f.read())
+
+
+def write_mod_archives(out: str) -> None:
+    """Архив каждого мода и общий пак: их можно скачать с сайта."""
+    folder = os.path.join(out, "mods")
+    os.makedirs(folder, exist_ok=True)
+    mods = mod_folders()
+    for name, _info in mods:
+        with zipfile.ZipFile(os.path.join(folder, zip_name(name)), "w") as archive:
+            add_mod(archive, name)
+    with zipfile.ZipFile(os.path.join(folder, PACK), "w") as archive:
+        for name, _info in mods:
+            add_mod(archive, name)
+
+
 def table_of(code: str) -> dict:
     """Строки интерфейса на этом языке."""
     with open(os.path.join(ROOT, "language", code + ".json"), encoding="utf-8") as f:
@@ -85,13 +134,16 @@ class Site:
         folder = f"{prefix}{code or self.code}/"
         if slug is None:
             return folder + "index.html"
+        if slug == "section-mods":
+            return folder + "mods.html"
         return folder + ("wiki/index.html" if slug == "wiki" else f"wiki/{slug}.html")
 
     def shell(self, prefix: str, slug: str | None, heading: str, body: str) -> str:
         """Общая оболочка: шапка, выбор языка и подвал."""
         lang = self.lang
         direction = ' dir="rtl"' if lang.get("rtl") else ""
-        choices = "".join(f'<li><a href="{self.link(prefix, slug, code)}" lang="{other["html"]}">{escape(other["name"])}</a></li>'
+        language_script = self.language_script() if prefix == "" else ""
+        choices = "".join(f'<li><a href="{self.link(prefix, slug, code)}" lang="{other["html"]}" data-code="{code}"><img class="flag" src="{prefix}flags/{code}.svg" alt="" width="18" height="18">{escape(other["name"])}</a></li>'
                           for code, other in LANGUAGES.items())
         return f'''<!doctype html>
 <html lang="{lang["html"]}"{direction}>
@@ -100,7 +152,9 @@ class Site:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{heading} | FODB</title>
 <meta name="description" content="{self.text("intro")}">
-<!-- Значок вкладки браузера -->
+<!-- Тема, выбранная кнопкой, ставится до отрисовки, чтобы страница не мигала другим цветом -->
+<script>try{{const t=localStorage.getItem("fodb-theme");if(t)document.documentElement.dataset.theme=t}}catch(e){{}}</script>
+{language_script}<!-- Значок вкладки браузера -->
 <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="{prefix}favicon.ico">
 <link rel="stylesheet" href="{prefix}site.css">
@@ -112,11 +166,18 @@ class Site:
 <!-- Шапка: название, разделы и выбор языка -->
 <header><div class="bar">
 <a class="name" href="{self.link(prefix, None)}"><img src="{prefix}favicon.svg" alt="" width="24" height="24">FODB</a>
+<nav class="links">
 <a href="{self.link(prefix, None)}">{self.text("home")}</a>
+<a href="{self.link(prefix, "section-mods")}">{self.tr("Моды")}</a>
 <a href="{self.link(prefix, "wiki")}">{self.text("wiki")}</a>
 <a href="{REPO}/releases/latest">{self.text("download")}</a>
 <a href="{REPO}">{self.text("source")}</a>
-<details class="langs"><summary>{self.tr("Язык")}: {escape(lang["name"])}</summary><ul>{choices}</ul></details>
+</nav>
+<button class="theme" type="button" title="{self.tr("Тема")}" aria-label="{self.tr("Тема")}">
+<svg class="sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.500M8 13.500V15M1 8h1.500M13.500 8H15M3 3l1 1M12 12l1 1M3 13l1-1M12 4l1-1"/></svg>
+<svg class="moon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.500 10.500A6 6 0 0 1 5.500 2.500a6 6 0 1 0 8 8z"/></svg>
+</button>
+<details class="langs"><summary><img class="flag" src="{prefix}flags/{self.code}.svg" alt="" width="18" height="18"><span class="current">{escape(lang["name"])}</span></summary><ul>{choices}</ul></details>
 </div></header>
 <!-- Содержимое страницы -->
 <main>
@@ -128,12 +189,31 @@ class Site:
 </html>
 '''
 
+    @staticmethod
+    def language_script() -> str:
+        """Только для главного адреса сайта: ведёт на сохранённый язык или на язык браузера. Прямые ссылки не трогает."""
+        codes = {other["html"].lower(): code for code, other in LANGUAGES.items()}
+        return f'''<!-- Выбор языка: сначала сохранённый, затем первый подходящий из настроек браузера -->
+<script>(function(){{
+const codes={json.dumps(codes)};
+let saved=null;try{{saved=localStorage.getItem("fodb-language")}}catch(e){{}}
+let code=saved;
+if(!code){{for(const wanted of navigator.languages||[navigator.language||""]){{
+const name=wanted.toLowerCase(),base=name.split("-")[0];
+code=codes[name]||codes[Object.keys(codes).find(k=>k.split("-")[0]===base)];
+if(code)break;
+}}}}
+if(code)location.replace(code+"/index.html");
+}})()</script>
+'''
+
     def home(self, prefix: str) -> str:
         """Главная страница."""
         lang = self.lang
         demo = "demo-ru.gif" if self.code in ("RU-ru", "UK-ua", "BE-by", "KK-kz") else "demo-en.gif"
         features = "".join(f"<li>{self.text(f'f{i}')}</li>" for i in range(1, 9))
         steps = "".join(f"<li>{self.text(f'q{i}')}</li>" for i in range(1, 4))
+        news = "".join(f"<li>{self.text(f'n{i}')}</li>" for i in range(1, 6))
         pages = "".join(f'<li><a href="{self.link(prefix, slug)}">{self.title(key)}</a></li>' for slug, key in WIKI)
         body = f'''<!-- Первый экран: лозунг, кнопка и живой логотип -->
 <section class="hero">
@@ -146,6 +226,12 @@ class Site:
 {self.pads()}
 </section>
 <img class="shot reveal" src="{prefix}{demo}" alt="FODB">
+<!-- Что появилось в последних версиях -->
+<section class="reveal">
+<h2>{self.text("news")}<span class="tag" dir="ltr">v{VERSION}</span></h2>
+<ul class="cards">{news}</ul>
+<p class="note"><a href="{self.link(prefix, "section-mods")}">{self.tr("Моды")}</a></p>
+</section>
 <!-- Возможности программы -->
 <section class="reveal">
 <h2>{self.text("features")}</h2>
@@ -175,18 +261,39 @@ class Site:
             letters.append(f'<div class="letter">{cells}</div>')
         return f'<div class="pads" role="img" aria-label="FODB">{"".join(letters)}</div>'
 
-    def mods_page(self) -> str:
-        """Страница о модах: описание каждого мода берётся из его index.json."""
+    def mod_section(self, prefix: str) -> str:
+        """Раздел сайта «Моды»: описание, пак и карточка со скачиванием для каждого мода."""
         cards = ""
-        folder = os.path.join(ROOT, "mods")
-        for name in sorted(os.listdir(folder)):
-            path = os.path.join(folder, name, "index.json")
-            if os.path.exists(path):
-                with open(path, encoding="utf-8") as f:
-                    info = json.load(f)
-                about = info["description"].get(self.code) or info["description"]["EN-en"]
-                cards += f'<div class="mod"><h3 dir="ltr">{escape(info["name"])}</h3><small dir="ltr">{escape(info["type"])}</small><p>{escape(about)}</p></div>'
-        return (f'<p>{self.text("f8")}</p>{cards}<h2>{self.tr("Модификации")}</h2>'
+        for name, info in mod_folders():
+            about = info["description"].get(self.code) or info["description"]["EN-en"]
+            details = " / ".join(escape(str(info[key])) for key in ("type", "version", "author") if info.get(key))
+            cards += (f'<div class="mod reveal"><h3 dir="ltr">{escape(info["name"])}</h3><small dir="ltr">{details}</small><p>{escape(about)}</p>'
+                      f'<a class="download small" href="{prefix}mods/{zip_name(name)}" download>{self.text("mod_get")}</a></div>')
+        body = f'''<!-- Заголовок раздела и общий пак -->
+<section class="section-head">
+<h1>{self.tr("Моды")}</h1>
+<p class="lead">{self.text("f8")}</p>
+<a class="download" href="{prefix}mods/{PACK}" download>{self.text("mod_pack")}</a>
+<p class="note">{self.text("mod_install")}</p>
+</section>
+<!-- Каждый мод можно скачать отдельно -->
+<div class="mods-grid">{cards}</div>
+<!-- Как написать свой мод -->
+<section class="reveal">
+<h2>{self.tr("Модификации")}</h2>
+<p>{self.text("mods_how")}</p>
+<pre>{escape(MOD_EXAMPLE)}</pre>
+</section>'''
+        return self.shell(prefix, "section-mods", self.tr("Моды"), body)
+
+    def mods_page(self) -> str:
+        """Страница вики о модах: коротко и со ссылкой на раздел, где их можно скачать."""
+        cards = ""
+        for _name, info in mod_folders():
+            about = info["description"].get(self.code) or info["description"]["EN-en"]
+            cards += f'<div class="mod"><h3 dir="ltr">{escape(info["name"])}</h3><small dir="ltr">{escape(info["type"])}</small><p>{escape(about)}</p></div>'
+        return (f'<p><a class="download small" href="{self.link("../../", "section-mods")}">{self.text("mod_pack")}</a></p>'
+                + f'<p>{self.text("f8")}</p>{cards}<h2>{self.tr("Модификации")}</h2>'
                 f'<p>{self.text("mods_how")}</p><pre>{escape(MOD_EXAMPLE)}</pre>')
 
     def wiki_body(self, slug: str) -> str:
@@ -240,6 +347,7 @@ class Site:
         """Записывает все страницы этого языка."""
         folder = os.path.join(self.out, self.code)
         write(os.path.join(folder, "index.html"), self.home("../"))
+        write(os.path.join(folder, "mods.html"), self.mod_section("../"))
         write(os.path.join(folder, "wiki", "index.html"), self.wiki_page("../../", "wiki", None))
         for slug, key in WIKI:
             write(os.path.join(folder, "wiki", slug + ".html"), self.wiki_page("../../", slug, key))
@@ -250,6 +358,9 @@ def main(out: str = os.path.join(ROOT, "GiDo")) -> int:
     for name in ("site.css", "site.js"):  # оформление и скрипт лежат в tools/site, там их и правьте
         with open(os.path.join(ROOT, "tools", "site", name), encoding="utf-8") as f:
             write(os.path.join(out, name), f.read())
+    write_mod_archives(out)
+    for code in LANGUAGES:
+        write(os.path.join(out, "flags", code + ".svg"), flag_svg(code))
     for code in LANGUAGES:
         Site(code, out).build()
     write(os.path.join(out, "index.html"), Site("EN-en", out).home(""))
